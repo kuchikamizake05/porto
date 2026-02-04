@@ -63,7 +63,7 @@ export default function Home() {
       </div>
 
       {/* Hero / About Section */}
-      <section id="about" className="min-h-[60vh] flex flex-col justify-start pt-6 md:pt-8 scroll-mt-20 relative px-4 md:px-0 overflow-hidden">
+      <section id="about" className="min-h-[70vh] flex flex-col justify-start pt-20 md:pt-32 scroll-mt-20 relative px-4 md:px-0 overflow-hidden">
         {/* Viral UI Effects */}
         <Meteors number={15} />
         
@@ -94,7 +94,7 @@ export default function Home() {
               <div className="space-y-6">
                 <TypingAnimation 
                   text={profile.name} 
-                  className="text-5xl md:text-7xl font-bold tracking-tighter text-white leading-[1.1]"
+                  className="text-5xl md:text-7xl font-bold tracking-tighter text-foreground leading-[1.1]"
                 />
                 <motion.p 
                   initial={{ opacity: 0, y: 20 }}
