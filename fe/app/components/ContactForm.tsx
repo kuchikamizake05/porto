@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import { apiPost } from "../lib/api";
 
 export default function ContactForm() {
   const [name, setName] = useState("");
@@ -9,21 +10,16 @@ export default function ContactForm() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    const res = await fetch("http://localhost:8000/contact", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ name, message }),
-    });
-
-    if (res.ok) {
-      setStatus("Message sent successfully.");
-      setName("");
-      setMessage("");
-    } else {
-      setStatus("Failed to send message.");
+    try {
+        await apiPost("/contact", { name, message });
+        setStatus("Message sent successfully!");
+        setName("");
+        setMessage("");
+    } catch {
+        setStatus("Failed to send message.");
     }
-  };
-
+  }
+  
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
       <div>

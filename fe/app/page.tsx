@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { apiGet } from "./lib/api";
 import Link from "next/link";
 
 type Profile = {
@@ -13,9 +14,9 @@ export default function Home() {
   const [profile, setProfile] = useState<Profile | null>(null);
 
   useEffect(() => {
-    fetch("http://localhost:8000/profile")
-      .then((res) => res.json())
-      .then((data) => setProfile(data));
+    apiGet<Profile>("/profile")
+      .then(setProfile)
+      .catch(console.error);
   }, []);
 
 return (
