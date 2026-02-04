@@ -21,26 +21,28 @@ export default function ContactForm() {
   }
   
   return (
-    <form onSubmit={handleSubmit} className="space-y-4">
-      <div>
-        <label className="block text-sm font-medium mb-1">
-          Name
+    <form onSubmit={handleSubmit} className="space-y-8">
+      <div className="space-y-3">
+        <label className="text-[10px] font-bold text-blue-300 uppercase tracking-[0.2em] ml-1">
+          Full Name
         </label>
         <input
-          className="w-full border rounded-md px-3 py-2"
+          placeholder="e.g. Alexander Pierce"
+          className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 focus:ring-2 focus:ring-blue-500 focus:bg-white/10 transition-all outline-hidden text-white placeholder:text-gray-600 font-light"
           value={name}
           onChange={(e) => setName(e.target.value)}
           required
         />
       </div>
 
-      <div>
-        <label className="block text-sm font-medium mb-1">
-          Message
+      <div className="space-y-3">
+        <label className="text-[10px] font-bold text-blue-300 uppercase tracking-[0.2em] ml-1">
+          Project Brief
         </label>
         <textarea
-          className="w-full border rounded-md px-3 py-2"
-          rows={4}
+          placeholder="Describe your vision here..."
+          className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 focus:ring-2 focus:ring-blue-500 focus:bg-white/10 transition-all outline-hidden text-white placeholder:text-gray-600 font-light resize-none"
+          rows={5}
           value={message}
           onChange={(e) => setMessage(e.target.value)}
           required
@@ -49,13 +51,20 @@ export default function ContactForm() {
 
       <button
         type="submit"
-        className="px-4 py-2 rounded-md bg-black text-white hover:bg-gray-800"
+        className="w-full py-5 rounded-2xl bg-white text-black font-bold hover:bg-blue-400 hover:text-white transition-all hover:scale-[1.02] active:scale-95 shadow-2xl group flex items-center justify-center gap-3"
       >
-        Send Message
+        Initiate Project
+        <span className="group-hover:translate-x-1 transition-transform">🚀</span>
       </button>
 
       {status && (
-        <p className="text-sm text-gray-600">{status}</p>
+        <div className={`text-center p-4 rounded-2xl text-xs font-bold uppercase tracking-widest border ${
+          status.includes("successfully") 
+            ? "border-green-500/20 bg-green-500/10 text-green-400" 
+            : "border-red-500/20 bg-red-500/10 text-red-400"
+        }`}>
+          {status}
+        </div>
       )}
     </form>
   );
