@@ -19,7 +19,7 @@ export default function Navbar() {
         {/* Logo */}
         <Link href="/" className="group flex items-center gap-2">
           <div className="w-8 h-8 rounded-lg bg-blue-600 flex items-center justify-center text-white font-bold text-lg transform group-hover:rotate-12 transition-transform shadow-[0_0_20px_rgba(37,99,235,0.4)]">
-            P
+            K
           </div>
           <span className="text-lg font-bold tracking-tight text-white group-hover:text-blue-400 transition-colors">
             Kuchikamizake<span className="text-blue-500">.</span>
