@@ -4,14 +4,15 @@ import { useEffect, useState } from "react";
 import { apiGet } from "./lib/api";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { Github, Linkedin, Mail, ArrowRight, ChevronDown, ArrowDown } from "lucide-react";
+import { Github, Linkedin, Mail, ArrowRight, ArrowDown } from "lucide-react";
 import AboutSection from "./components/AboutSection";
 import TechStack from "./components/TechStack";
 import ProjectsSection from "./components/ProjectsSection";
 import ExperienceSection from "./components/ExperienceSection";
 import ContactSection from "./components/ContactSection";
 
-import Spotlight from "./components/core/Spotlight";
+import Meteors from "./components/core/Meteors";
+import TypingAnimation from "./components/core/TypingAnimation";
 import Magnetic from "./components/core/Magnetic";
 
 type Profile = {
@@ -62,7 +63,9 @@ export default function Home() {
       </div>
 
       {/* Hero / About Section */}
-      <section id="about" className="min-h-[60vh] flex flex-col justify-start pt-6 md:pt-8 scroll-mt-20 relative px-4 md:px-0">
+      <section id="about" className="min-h-[60vh] flex flex-col justify-start pt-6 md:pt-8 scroll-mt-20 relative px-4 md:px-0 overflow-hidden">
+        {/* Viral UI Effects */}
+        <Meteors number={15} />
         
         <motion.div 
           initial={{ opacity: 0, y: 20 }}

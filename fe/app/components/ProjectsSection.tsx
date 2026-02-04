@@ -69,14 +69,15 @@ export default function ProjectsSection() {
         </div>
 
         {loading ? (
-          <div className="grid md:grid-cols-2 gap-10">
-            {[1, 2].map((i) => (
-              <div key={i} className="rounded-[2.5rem] border border-white/5 bg-white/2 overflow-hidden animate-pulse">
-                <div className="aspect-video bg-white/5" />
-                <div className="p-8 space-y-4">
-                  <div className="h-6 bg-white/5 rounded-xl w-3/4" />
-                  <div className="h-12 bg-white/5 rounded-xl w-full" />
-                </div>
+          <div className="grid grid-cols-1 md:grid-cols-6 auto-rows-[250px] gap-6">
+            {[1, 2, 3].map((i) => (
+              <div 
+                key={i} 
+                className={`rounded-[2.5rem] border border-white/5 bg-white/2 overflow-hidden animate-pulse ${
+                  i === 1 ? "md:col-span-4 md:row-span-2" : "md:col-span-2 md:row-span-1"
+                }`}
+              >
+                <div className="w-full h-full bg-white/5" />
               </div>
             ))}
           </div>
@@ -85,10 +86,16 @@ export default function ProjectsSection() {
             <p className="text-gray-500 font-light text-lg italic tracking-wide">Gallery is currently empty.</p>
           </div>
         ) : (
-          <div className="overflow-hidden" ref={emblaRef}>
-            <div className="flex gap-6">
-              {projects.map((project) => (
-                <div key={project.id} className="flex-[0_0_100%] md:flex-[0_0_50%] lg:flex-[0_0_40%] min-w-0 px-2 transition-all">
+          <div className="grid grid-cols-1 md:grid-cols-6 auto-rows-[300px] gap-6">
+            {projects.map((project, idx) => {
+              // Bento grid logic: first project is large (4x2), others fill the gaps
+              let gridClasses = "md:col-span-2 md:row-span-1";
+              if (idx === 0) gridClasses = "md:col-span-4 md:row-span-2";
+              if (idx === 1) gridClasses = "md:col-span-2 md:row-span-2";
+              if (idx > 2) gridClasses = "md:col-span-3 md:row-span-1";
+
+              return (
+                <div key={project.id} className={`${gridClasses} transition-all duration-700`}>
                   <ProjectCard
                     title={project.title}
                     description={project.description}
@@ -97,8 +104,8 @@ export default function ProjectsSection() {
                     repoUrl={project.repoUrl}
                   />
                 </div>
-              ))}
-            </div>
+              );
+            })}
           </div>
         )}
       </div>
