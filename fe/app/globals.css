@@ -1,8 +1,10 @@
 @import "tailwindcss";
 
 :root {
-  --background: #050505;
-  --foreground: #FAFAFA;
+  --background: #020203;
+  --foreground: #fafafa;
+  --accent: #2563eb;
+  --accent-foreground: #ffffff;
 }
 
 @theme inline {
@@ -29,6 +31,25 @@ body {
   color: #fff;
 }
 
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--background);
+}
+
+::-webkit-scrollbar-thumb {
+  background: #1a1a1a;
+  border-radius: 5px;
+  border: 2px solid var(--background);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #262626;
+}
+
 /* Smooth gradient background decoration */
 .bg-mesh {
   position: fixed;
@@ -37,7 +58,22 @@ body {
   width: 100%;
   height: 100%;
   z-index: -1;
-  background: 
-    radial-gradient(circle at 0% 0%, rgba(37, 99, 235, 0.05) 0%, transparent 50%),
-    radial-gradient(circle at 100% 100%, rgba(79, 70, 229, 0.05) 0%, transparent 50%);
+  background:
+    radial-gradient(
+      circle at 0% 0%,
+      rgba(37, 99, 235, 0.03) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 100% 100%,
+      rgba(79, 70, 229, 0.03) 0%,
+      transparent 50%
+    );
+}
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.02);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
 }

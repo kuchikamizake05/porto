@@ -31,7 +31,7 @@ export default function RootLayout({
       >
         <div className="bg-mesh" />
         <Navbar />
-        <main className="max-w-4xl mx-auto px-6 py-8 flex-1 w-full relative z-0">
+        <main className="flex-1">
           {children}
         </main>
         <Footer />
