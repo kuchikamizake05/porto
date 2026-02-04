@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import ProjectCard from "../components/ProjectCard";
 
 type Project = {
   id: number;
@@ -19,16 +20,19 @@ export default function ProjectsPage() {
   }, []);
 
   return (
-    <main style={{ padding: 20 }}>
-      <h1>Projects</h1>
+    <section className="space-y-6">
+      <h1 className="text-2xl font-bold">Projects</h1>
 
-      {projects.map((project) => (
-        <div key={project.id} style={{ marginBottom: 16 }}>
-          <h2>{project.title}</h2>
-          <p>{project.description}</p>
-          <small>{project.tech.join(", ")}</small>
-        </div>
-      ))}
-    </main>
+      <div className="grid gap-4">
+        {projects.map((project) => (
+          <ProjectCard
+            key={project.id}
+            title={project.title}
+            description={project.description}
+            tech={project.tech}
+          />
+        ))}
+      </div>
+    </section>
   );
 }

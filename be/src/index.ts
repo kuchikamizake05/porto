@@ -39,3 +39,13 @@ app.get("/projects", (req, res) => {
     },
   ]);
 });
+
+app.post("/contact", (req, res) => {
+  const { name, message } = req.body;
+
+  console.log("📩 New contact:");
+  console.log("Name:", name);
+  console.log("Message:", message);
+
+  res.json({ success: true });
+});
