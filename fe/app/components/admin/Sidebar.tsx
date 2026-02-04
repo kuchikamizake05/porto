@@ -13,6 +13,11 @@ const navItems = [
 export default function AdminSidebar() {
   const pathname = usePathname();
 
+  const handleLogout = () => {
+    document.cookie = "admin_auth=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT";
+    window.location.href = "/";
+  };
+
   return (
     <aside className="fixed inset-y-0 left-0 w-72 bg-black border-r border-white/5 hidden lg:flex flex-col">
       <div className="p-8">
@@ -49,13 +54,13 @@ export default function AdminSidebar() {
       </nav>
 
       <div className="p-4 border-t border-white/5">
-        <Link 
-          href="/" 
-          className="flex items-center gap-3 px-4 py-4 rounded-2xl text-gray-500 hover:text-red-400 hover:bg-red-500/5 transition-all font-medium text-sm group"
+        <button 
+          onClick={handleLogout}
+          className="w-full flex items-center gap-3 px-4 py-4 rounded-2xl text-gray-400 hover:text-red-400 hover:bg-red-500/5 transition-all font-medium text-sm group"
         >
-          <span className="group-hover:-translate-x-1 transition-transform">←</span>
-          Exit Admin Mode
-        </Link>
+          <span className="group-hover:-translate-x-1 transition-transform">🚪</span>
+          Logout
+        </button>
       </div>
     </aside>
   );
