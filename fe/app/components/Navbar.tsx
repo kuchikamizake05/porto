@@ -59,7 +59,7 @@ export default function Navbar() {
             className="flex items-center gap-3 text-foreground/50 font-mono text-sm pointer-events-auto"
           >
             <Clock className="w-4 h-4" />
-            <span>
+            <span suppressHydrationWarning>
               {time.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
             </span>
           </motion.div>

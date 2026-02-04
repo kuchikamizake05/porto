@@ -32,16 +32,14 @@ export default function AboutSection() {
               intuitive, premium design.
             </p>
             
-            <Magnetic strength={0.2}>
-              <Link 
-                href="/about" 
-                className="relative inline-flex items-center gap-3 px-8 py-4 bg-white/5 hover:bg-white/10 border border-white/10 rounded-2xl text-white text-sm font-bold tracking-widest uppercase transition-all overflow-hidden group"
-              >
-                <div className="absolute inset-0 bg-white/10 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700 skew-x-12" />
-                <span className="relative z-10">More About Me</span>
-                <ArrowRight className="w-4 h-4 relative z-10 group-hover:translate-x-1 transition-transform" />
-              </Link>
-            </Magnetic>
+            <Link 
+              href="/about" 
+              className="relative inline-flex items-center gap-2 px-6 py-3 rounded-full bg-gradient-to-b from-white/20 to-white/10 border border-white/10 text-white font-bold text-base tracking-wide overflow-hidden group hover:border-blue-500/50 transition-colors"
+            >
+              <div className="absolute inset-0 bg-white/20 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700 skew-x-12" />
+              <span className="relative z-10">More About Me</span>
+              <ArrowRight className="w-4 h-4 relative z-10" />
+            </Link>
           </motion.div>
 
           <motion.div

@@ -90,24 +90,21 @@ export default function ProjectsSection() {
         )}
 
         {/* See More Button */}
-        {!loading && projects.length > 0 && (
+        {!loading && (
           <div className="mt-16 flex justify-center">
-            <Magnetic strength={0.2}>
-              <Link
-                href="/projects"
-                className="group relative px-8 py-4 bg-white/5 hover:bg-white/10 border border-white/10 rounded-2xl text-white text-sm font-bold tracking-widest uppercase transition-all flex items-center gap-3"
-              >
-                See All Projects
-                <div className="relative w-4 h-4">
-                  <div className="absolute inset-0 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4">
-                      <line x1="7" y1="17" x2="17" y2="7"></line>
-                      <polyline points="7 7 17 7 17 17"></polyline>
-                    </svg>
-                  </div>
-                </div>
-              </Link>
-            </Magnetic>
+            <Link
+              href="/projects"
+              className="relative h-[52px] px-8 rounded-full bg-white/20 border border-white/10 text-white font-bold text-base tracking-wide flex items-center gap-2 overflow-hidden group hover:border-blue-500/50 transition-colors"
+            >
+              <div className="absolute inset-0 bg-white/20 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700 skew-x-12" />
+              <span className="relative z-10">See All Projects</span>
+              <div className="relative w-4 h-4 z-10">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4">
+                  <line x1="7" y1="17" x2="17" y2="7"></line>
+                  <polyline points="7 7 17 7 17 17"></polyline>
+                </svg>
+              </div>
+            </Link>
           </div>
         )}
       </div>
