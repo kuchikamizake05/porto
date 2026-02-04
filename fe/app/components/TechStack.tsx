@@ -30,7 +30,7 @@ const logos = [
 
 export default function TechStack() {
   return (
-    <section className="py-16 relative">
+    <section className="py-8 relative">
       <div className="max-w-4xl mx-auto px-4 md:px-0 mb-12">
         <div className="flex items-center gap-4">
           <div className="h-px flex-1 bg-gradient-to-r from-transparent to-white/10" />

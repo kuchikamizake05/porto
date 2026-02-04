@@ -29,7 +29,7 @@ export default function ProjectCard({
       duration={20}
       color={["#2563eb", "#4f46e5", "#2563eb"]}
     >
-      <div className="bg-zinc-950/50 backdrop-blur-xl overflow-hidden flex flex-col h-full">
+      <div className="bg-white/5 backdrop-blur-xl border border-white/5 overflow-hidden flex flex-col h-full group/card">
         <div className="relative aspect-video bg-zinc-900 overflow-hidden">
           {imageUrl ? (
             <Image
@@ -39,7 +39,7 @@ export default function ProjectCard({
               className="object-cover group-hover:scale-110 transition-transform duration-700 ease-[0.16,1,0.3,1] brightness-[0.7] group-hover:brightness-100"
             />
           ) : (
-            <div className="w-full h-full bg-zinc-900 flex items-center justify-center">
+            <div className="w-full h-full bg-white/5 flex items-center justify-center">
               <span className="text-4xl group-hover:scale-110 transition-transform duration-500 opacity-20 filter grayscale group-hover:grayscale-0">🚀</span>
             </div>
           )}

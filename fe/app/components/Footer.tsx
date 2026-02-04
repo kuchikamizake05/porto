@@ -1,35 +1,43 @@
 import Link from "next/link";
+import { Github, Linkedin, Twitter, Mail } from "lucide-react";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
 
+  const social = [
+    { label: "GitHub", href: "https://github.com", icon: Github },
+    { label: "LinkedIn", href: "https://linkedin.com", icon: Linkedin },
+    { label: "Twitter", href: "https://twitter.com", icon: Twitter },
+    { label: "Email", href: "mailto:hello@example.com", icon: Mail },
+  ];
+
   return (
-    <footer className="py-12 relative z-10">
-      <div className="max-w-4xl mx-auto px-6">
-        <div className="h-px w-full bg-gradient-to-r from-transparent via-white/5 to-transparent mb-12" />
-        
-        <div className="flex flex-col md:flex-row items-center justify-between gap-8">
-          <div className="flex flex-col items-center md:items-start gap-2">
-            <Link href="/" className="text-xl font-bold tracking-tight text-white group flex items-center gap-1">
+    <footer className="relative z-10 pt-8 pb-24 bg-white dark:bg-zinc-950 border-t border-zinc-100 dark:border-white/5">
+      <div className="max-w-6xl mx-auto px-6 md:px-12">
+        <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+          
+          {/* Brand & Copyright */}
+          <div className="flex flex-col items-center md:items-start gap-1">
+            <Link href="/" className="text-xl font-bold tracking-tight text-zinc-900 dark:text-white group flex items-center gap-1">
               Faaid <span className="text-blue-500 group-hover:drop-shadow-[0_0_8px_rgba(59,130,246,0.5)] transition-all">Sakhaa</span>
             </Link>
-            <p className="text-[10px] text-gray-600 font-bold uppercase tracking-[0.4em]">
+            <p className="text-[11px] text-zinc-500 dark:text-zinc-400 font-bold uppercase tracking-widest">
               © {currentYear} • Digital Excellence
             </p>
           </div>
 
-          <div className="flex items-center gap-8">
-            {[
-              { label: "Github", href: "https://github.com" },
-              { label: "Linkedin", href: "https://linkedin.com" },
-              { label: "Email", href: "mailto:your@email.com" }
-            ].map((link, i) => (
+          {/* Social Links */}
+          <div className="flex items-center gap-6">
+            {social.map((item) => (
               <a 
-                key={i} 
-                href={link.href}
-                className="text-xs font-bold uppercase tracking-widest text-gray-500 hover:text-blue-400 transition-colors duration-300"
+                key={item.label}
+                href={item.href}
+                target="_blank"
+                rel="noreferrer"
+                className="text-zinc-400 hover:text-blue-500 transition-colors"
+                aria-label={item.label}
               >
-                {link.label}
+                <item.icon className="w-5 h-5" />
               </a>
             ))}
           </div>

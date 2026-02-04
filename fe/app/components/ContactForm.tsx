@@ -1,67 +1,102 @@
 "use client";
 import { useState } from "react";
 import { apiPost } from "../lib/api";
+import { Loader2, Send } from "lucide-react";
 
 export default function ContactForm() {
   const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
   const [status, setStatus] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setLoading(true);
 
     try {
-        await apiPost("/contact", { name, message });
+        await apiPost("/contact", { name, email, message });
         setStatus("Message sent successfully!");
         setName("");
+        setEmail("");
         setMessage("");
     } catch {
         setStatus("Failed to send message.");
+    } finally {
+        setLoading(false);
     }
   }
   
   return (
-    <form onSubmit={handleSubmit} className="space-y-8">
-      <div className="space-y-3">
-        <label className="text-[10px] font-bold text-blue-300 uppercase tracking-[0.2em] ml-1">
-          Full Name
-        </label>
-        <input
-          placeholder="e.g. Alexander Pierce"
-          className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 focus:ring-2 focus:ring-blue-500 focus:bg-white/10 transition-all outline-hidden text-white placeholder:text-gray-600 font-light"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          required
-        />
-      </div>
+    <form onSubmit={handleSubmit} className="space-y-6">
+      <div className="space-y-5">
+        
+        {/* Name Field */}
+        <div className="space-y-2">
+          <label className="text-[11px] font-bold text-zinc-500 uppercase tracking-widest ml-1">
+            Name
+          </label>
+          <input
+            placeholder="What should I call you?"
+            className="w-full h-[48px] bg-white/5 border border-white/10 rounded-xl px-4 focus:ring-1 focus:ring-blue-500 focus:border-blue-500 focus:bg-white/10 transition-all outline-hidden text-white placeholder:text-zinc-600 text-sm font-light"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            required
+          />
+        </div>
 
-      <div className="space-y-3">
-        <label className="text-[10px] font-bold text-blue-300 uppercase tracking-[0.2em] ml-1">
-          Project Brief
-        </label>
-        <textarea
-          placeholder="Describe your vision here..."
-          className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 focus:ring-2 focus:ring-blue-500 focus:bg-white/10 transition-all outline-hidden text-white placeholder:text-gray-600 font-light resize-none"
-          rows={5}
-          value={message}
-          onChange={(e) => setMessage(e.target.value)}
-          required
-        />
+        {/* Email Field */}
+        <div className="space-y-2">
+          <label className="text-[11px] font-bold text-zinc-500 uppercase tracking-widest ml-1">
+            Email
+          </label>
+          <input
+            type="email"
+            placeholder="Where can I reach you?"
+            className="w-full h-[48px] bg-white/5 border border-white/10 rounded-xl px-4 focus:ring-1 focus:ring-blue-500 focus:border-blue-500 focus:bg-white/10 transition-all outline-hidden text-white placeholder:text-zinc-600 text-sm font-light"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
+        </div>
+
+        {/* Message Field */}
+        <div className="space-y-2">
+          <label className="text-[11px] font-bold text-zinc-500 uppercase tracking-widest ml-1">
+            Message
+          </label>
+          <textarea
+            placeholder="Tell me about your project..."
+            className="w-full h-[120px] bg-white/5 border border-white/10 rounded-xl px-4 py-3 focus:ring-1 focus:ring-blue-500 focus:border-blue-500 focus:bg-white/10 transition-all outline-hidden text-white placeholder:text-zinc-600 text-sm font-light resize-none"
+            value={message}
+            onChange={(e) => setMessage(e.target.value)}
+            required
+          />
+        </div>
       </div>
 
       <button
         type="submit"
-        className="w-full py-5 rounded-2xl bg-white text-black font-bold hover:bg-blue-400 hover:text-white transition-all hover:scale-[1.02] active:scale-95 shadow-2xl group flex items-center justify-center gap-3"
+        disabled={loading}
+        className="relative w-full h-[52px] rounded-full bg-blue-600 hover:bg-blue-500 text-white font-bold tracking-wide transition-all shadow-[0_0_30px_rgba(37,99,235,0.15)] hover:shadow-[0_0_40px_rgba(37,99,235,0.3)] disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 group overflow-hidden"
       >
-        Initiate Project
-        <span className="group-hover:translate-x-1 transition-transform">🚀</span>
+        <div className="absolute inset-0 bg-white/20 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700 skew-x-12" />
+        
+        {loading ? (
+          <Loader2 className="w-5 h-5 animate-spin relative z-10" />
+        ) : (
+          <>
+            <span className="relative z-10">Send Message</span>
+            <Send className="w-4 h-4 relative z-10 group-hover:translate-x-1 transition-transform" />
+          </>
+        )}
       </button>
 
       {status && (
-        <div className={`text-center p-4 rounded-2xl text-xs font-bold uppercase tracking-widest border ${
+        <div className={`text-center p-3 rounded-xl text-xs font-bold uppercase tracking-widest border ${
           status.includes("successfully") 
-            ? "border-green-500/20 bg-green-500/10 text-green-400" 
-            : "border-red-500/20 bg-red-500/10 text-red-400"
+            ? "border-emerald-500/20 bg-emerald-500/10 text-emerald-400" 
+            : "border-rose-500/20 bg-rose-500/10 text-rose-400"
         }`}>
           {status}
         </div>

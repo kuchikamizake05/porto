@@ -8,10 +8,8 @@ import { Github, Linkedin, Mail, ArrowRight, ArrowDown } from "lucide-react";
 import AboutSection from "./components/AboutSection";
 import TechStack from "./components/TechStack";
 import ProjectsSection from "./components/ProjectsSection";
-import ExperienceSection from "./components/ExperienceSection";
 import ContactSection from "./components/ContactSection";
 
-import Meteors from "./components/core/Meteors";
 import TypingAnimation from "./components/core/TypingAnimation";
 import Magnetic from "./components/core/Magnetic";
 
@@ -65,7 +63,6 @@ export default function Home() {
       {/* Hero / About Section */}
       <section id="about" className="min-h-[70vh] flex flex-col justify-start pt-20 md:pt-32 scroll-mt-20 relative px-4 md:px-0 overflow-hidden">
         {/* Viral UI Effects */}
-        <Meteors number={15} />
         
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
@@ -100,7 +97,7 @@ export default function Home() {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.8, duration: 0.8 }}
-                  className="text-2xl md:text-4xl font-medium text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-300 to-blue-500"
+                  className="text-xl md:text-3xl font-medium text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-300 to-blue-500"
                 >
                   {profile.role}
                 </motion.p>
@@ -108,42 +105,23 @@ export default function Home() {
             )}
 
 
-            {/* CTA Buttons & Social */}
+            {/* CTA Button only */}
             <motion.div 
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 1.2, duration: 0.8 }}
-              className="flex flex-wrap items-center justify-center md:justify-start gap-8 pt-6"
+              className="flex items-center justify-center md:justify-start pt-0"
             >
               <Magnetic strength={0.2}>
                 <Link
-                  href="#projects"
-                  className="relative px-10 py-5 rounded-2xl bg-blue-600 text-white font-bold hover:bg-blue-500 transition-all shadow-[0_0_40px_rgba(37,99,235,0.2)] flex items-center gap-3 group overflow-hidden"
+                  href="/projects"
+                  className="relative h-[46px] px-6 rounded-xl bg-blue-600 text-white text-sm font-bold hover:bg-blue-500 transition-all shadow-[0_0_30px_rgba(37,99,235,0.15)] flex items-center gap-2 group overflow-hidden"
                 >
                   <div className="absolute inset-0 bg-white/20 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700 skew-x-12" />
                   View Projects
-                  <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </Link>
               </Magnetic>
-
-              <div className="flex items-center gap-4">
-                {[
-                  { icon: Github, href: "https://github.com", color: "hover:text-white hover:bg-white/10" },
-                  { icon: Linkedin, href: "https://linkedin.com", color: "hover:text-blue-400 hover:bg-blue-400/10" },
-                  { icon: Mail, href: "mailto:your@email.com", color: "hover:text-red-400 hover:bg-red-400/10" }
-                ].map((social, i) => (
-                  <Magnetic key={i} strength={0.3}>
-                    <a 
-                      href={social.href} 
-                      target="_blank" 
-                      rel="noopener noreferrer" 
-                      className={`p-4 transition-all duration-300 flex items-center justify-center ${social.color}`}
-                    >
-                      <social.icon className="w-6 h-6 transition-transform group-hover:scale-110" />
-                    </a>
-                  </Magnetic>
-                ))}
-              </div>
             </motion.div>
           </div>
 
@@ -166,6 +144,7 @@ export default function Home() {
 
       </section>
 
+
       {/* Custom Interactive Vertical Hover Scroll Button */}
       <motion.div
         initial={{ opacity: 0, y: 10 }}
@@ -176,7 +155,7 @@ export default function Home() {
       >
         <Link
           href="#about-me"
-          className="group relative w-16 h-16 rounded-full border-2 border-blue-500/30 bg-black/20 backdrop-blur-md overflow-hidden flex items-center justify-center transition-colors duration-500 hover:border-blue-500/60"
+          className="group relative w-12 h-12 rounded-full border-2 border-blue-500/30 bg-black/20 backdrop-blur-md overflow-hidden flex items-center justify-center transition-colors duration-500 hover:border-blue-500/60"
         >
           {/* Vertical Fill Backdrop - Top to Bottom */}
           <motion.div
@@ -186,17 +165,19 @@ export default function Home() {
             transition={{ duration: 0.4, ease: "easeOut" }}
           />
           
-          <ArrowDown className="w-6 h-6 text-blue-400 relative z-10 transition-transform duration-500 group-hover:scale-110" />
+          <ArrowDown className="w-5 h-5 text-blue-400 relative z-10 transition-transform duration-500 group-hover:scale-110" />
         </Link>
       </motion.div>
 
+
       {/* Sections with Reveal Animation */}
-      <div className="max-w-4xl mx-auto px-4 md:px-0 space-y-16">
+      <div className="max-w-4xl mx-auto px-4 md:px-0 space-y-0">
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.8 }}
+          className="mt-32"
         >
           <AboutSection />
         </motion.div>
@@ -218,15 +199,6 @@ export default function Home() {
           transition={{ duration: 0.8 }}
         >
           <ProjectsSection />
-        </motion.div>
-
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.8 }}
-        >
-          <ExperienceSection />
         </motion.div>
 
         <motion.div
