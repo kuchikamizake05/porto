@@ -9,7 +9,7 @@ export default function Footer() {
         <div className="flex flex-col md:flex-row items-center justify-between gap-10">
           <div className="space-y-3 text-center md:text-left">
             <Link href="/" className="text-2xl font-bold tracking-tight text-white group">
-              Porto<span className="text-blue-500 group-hover:text-blue-400 transition-colors">.</span>
+              Kuchikamizake<span className="text-blue-500 group-hover:text-blue-400 transition-colors">.</span>
             </Link>
             <p className="text-xs text-gray-500 font-medium uppercase tracking-[0.2em]">
               Crafting Digital Excellence

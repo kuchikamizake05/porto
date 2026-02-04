@@ -20,8 +20,8 @@ app.get("/", (req: Request, res: Response) => {
 
 app.get("/profile", (req: Request, res: Response) => {
   res.json({
-    name: "Nama Kamu",
-    role: "Informatics Student",
+    name: "Faaid Sakhaa",
+    role: "Information Engineering Student",
     stack: ["Next.js", "Express", "TypeScript"],
   });
 });

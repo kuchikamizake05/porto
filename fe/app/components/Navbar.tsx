@@ -22,7 +22,7 @@ export default function Navbar() {
             P
           </div>
           <span className="text-lg font-bold tracking-tight text-white group-hover:text-blue-400 transition-colors">
-            Porto<span className="text-blue-500">.</span>
+            Kuchikamizake<span className="text-blue-500">.</span>
           </span>
         </Link>
 
