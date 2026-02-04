@@ -17,24 +17,29 @@ export default function Home() {
   }, []);
 
   return (
-    <main style={{ padding: 20 }}>
-      <h1>My Portfolio</h1>
+  <main style={{ padding: 20 }}>
+    <h1>My Portfolio</h1>
 
-      {!profile && <p>Loading...</p>}
+    {!profile && <p>Loading...</p>}
 
-      {profile && (
-        <>
-          <h2>{profile.name}</h2>
-          <p>{profile.role}</p>
+    {profile && (
+      <>
+        <h2>{profile.name}</h2>
+        <p>{profile.role}</p>
 
-          <h3>Tech Stack</h3>
-          <ul>
-            {profile.stack.map((tech) => (
-              <li key={tech}>{tech}</li>
-            ))}
-          </ul>
-        </>
-      )}
-    </main>
-  );
+        <h3>Tech Stack</h3>
+        <ul>
+          {profile.stack.map((tech) => (
+            <li key={tech}>{tech}</li>
+          ))}
+        </ul>
+
+        <hr />
+
+        <a href="/projects">→ View My Projects</a>
+      </>
+    )}
+  </main>
+);
+
 }
