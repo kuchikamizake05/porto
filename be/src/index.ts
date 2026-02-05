@@ -33,7 +33,7 @@ app.use(express.json());
 app.get("/profile", (req: Request, res: Response) => {
   res.json({
     name: "Faaid Sakhaa",
-    role: "Information Engineering Student",
+    roles: ["Information Engineering Student", "Web Developer", "Cyber Security Enthusiast", "AI Enthusiast"],
     stack: ["Next.js", "Express", "TypeScript"],
   });
 });
