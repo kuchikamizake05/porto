@@ -30,30 +30,38 @@ export default function ProjectsSection() {
   }, []);
 
   return (
-    <section id="projects" className="py-12 scroll-mt-20 relative overflow-hidden [mask-image:linear-gradient(to_bottom,transparent,black_15%,black_85%,transparent)]">
-      {/* Dynamic Blending Aura */}
+    <section
+      id="projects"
+      className="py-12 scroll-mt-20 relative overflow-hidden"
+    >
+      {/* Aura */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-blue-600/[0.03] blur-[150px] rounded-full -z-10" />
-      
+
       <div className="w-full px-4 md:px-0">
-        <div className="mb-16 space-y-4">
+        {/* Header */}
+        <div className="mb-10 space-y-4">
           <div className="flex items-center gap-4">
-            <h2 className="text-4xl md:text-6xl font-extrabold text-foreground tracking-tight leading-none shrink-0">
-              Featured <span className="text-blue-500 font-medium italic">Work</span>
+            <h2 className="text-4xl md:text-5xl font-extrabold text-foreground tracking-tight leading-none shrink-0">
+              Featured
+              <span className="text-blue-500 font-bold italic">Work</span>
             </h2>
             <div className="h-px flex-1 bg-gradient-to-r from-white/10 to-transparent" />
           </div>
-          <p className="text-lg md:text-xl text-muted-foreground font-light max-w-lg">
+          <p className="text-lg md:text-xl text-muted-foreground font-lightg">
             A precision-focused selection of architectural digital experiences.
           </p>
         </div>
 
+        {/* Grid */}
         {loading ? (
           <div className="grid grid-cols-1 md:grid-cols-6 auto-rows-[280px] gap-6">
             {[1, 2, 3].map((i) => (
-              <div 
-                key={i} 
+              <div
+                key={i}
                 className={`rounded-[2.5rem] border border-white/5 bg-white/2 overflow-hidden animate-pulse ${
-                  i === 1 ? "md:col-span-4 md:row-span-2" : "md:col-span-2 md:row-span-1"
+                  i === 1
+                    ? "md:col-span-4 md:row-span-2"
+                    : "md:col-span-2 md:row-span-1"
                 }`}
               >
                 <div className="w-full h-full bg-white/5" />
@@ -62,12 +70,13 @@ export default function ProjectsSection() {
           </div>
         ) : projects.length === 0 ? (
           <div className="text-center py-20 rounded-[2.5rem] border border-dashed border-white/10 bg-white/2">
-            <p className="text-gray-500 font-light text-lg italic tracking-wide">Work is currently in progress.</p>
+            <p className="text-gray-500 font-light text-lg italic tracking-wide">
+              Work is currently in progress.
+            </p>
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-6 auto-rows-[320px] gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-6 auto-rows-[230px] gap-6">
             {projects.map((project, idx) => {
-              // High-end Bento grid logic for 4 projects
               let gridClasses = "md:col-span-2 md:row-span-1";
               if (idx === 0) gridClasses = "md:col-span-4 md:row-span-2";
               if (idx === 1) gridClasses = "md:col-span-2 md:row-span-2";
@@ -75,7 +84,10 @@ export default function ProjectsSection() {
               if (idx === 3) gridClasses = "md:col-span-3 md:row-span-1";
 
               return (
-                <div key={project.id} className={`${gridClasses} transition-all duration-700`}>
+                <div
+                  key={project.id}
+                  className={`${gridClasses} transition-all duration-700`}
+                >
                   <ProjectCard
                     title={project.title}
                     description={project.description}
@@ -89,21 +101,15 @@ export default function ProjectsSection() {
           </div>
         )}
 
-        {/* See More Button */}
+        {/* See More */}
         {!loading && (
-          <div className="mt-16 flex justify-center">
+          <div className="mt-10  flex justify-center">
             <Link
               href="/projects"
-              className="relative h-[52px] px-8 rounded-full bg-white/20 border border-white/10 text-white font-bold text-base tracking-wide flex items-center gap-2 overflow-hidden group hover:border-blue-500/50 transition-colors"
+              className="relative h-[52px] px-8 rounded-full bg-gradient-to-b from-white/20 to-white/10 border border-white/10 text-white font-bold text-base tracking-wide flex items-center gap-2 overflow-hidden group hover:bg-white/10 transition-colors"
             >
               <div className="absolute inset-0 bg-white/20 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700 skew-x-12" />
               <span className="relative z-10">See All Projects</span>
-              <div className="relative w-4 h-4 z-10">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4">
-                  <line x1="7" y1="17" x2="17" y2="7"></line>
-                  <polyline points="7 7 17 7 17 17"></polyline>
-                </svg>
-              </div>
             </Link>
           </div>
         )}

@@ -1,15 +1,20 @@
 "use client";
 
 import ContactForm from "./ContactForm";
-import { Mail, MapPin, Github, Linkedin, Twitter, ArrowRight } from "lucide-react";
+import {
+  Mail,
+  MapPin,
+  Github,
+  Linkedin,
+  Twitter,
+  ArrowRight,
+} from "lucide-react";
 
 export default function ContactSection() {
   return (
     <section id="contact" className="pt-12 pb-12 scroll-mt-24 px-4 md:px-0">
       <div className="max-w-6xl mx-auto">
-        
         <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-start">
-          
           {/* Left Column: Contact Info */}
           <div className="space-y-12">
             <div>
@@ -17,7 +22,8 @@ export default function ContactSection() {
                 Let's <span className="text-blue-500 italic">Connect</span>
               </h2>
               <p className="text-lg md:text-xl text-muted-foreground font-light leading-relaxed max-w-md">
-                Have a vision for your next project? Let's bridge the gap between concept and reality.
+                Have a vision for your next project? Let's bridge the gap
+                between concept and reality.
               </p>
             </div>
 
@@ -29,7 +35,9 @@ export default function ContactSection() {
                     <MapPin className="w-5 h-5 text-gray-400 group-hover:text-blue-400 transition-colors" />
                   </div>
                   <div>
-                    <span className="text-xs font-bold uppercase tracking-wider text-zinc-500 block mb-1">Base Location</span>
+                    <span className="text-xs font-bold uppercase tracking-wider text-zinc-500 block mb-1">
+                      Base Location
+                    </span>
                     <span className="text-zinc-200">Jakarta, Indonesia</span>
                   </div>
                 </div>
@@ -39,8 +47,13 @@ export default function ContactSection() {
                     <Mail className="w-5 h-5 text-gray-400 group-hover:text-blue-400 transition-colors" />
                   </div>
                   <div>
-                    <span className="text-xs font-bold uppercase tracking-wider text-zinc-500 block mb-1">Email Inquiry</span>
-                    <a href="mailto:hello@example.com" className="text-zinc-200 hover:text-blue-400 transition-colors">
+                    <span className="text-xs font-bold uppercase tracking-wider text-zinc-500 block mb-1">
+                      Email Inquiry
+                    </span>
+                    <a
+                      href="mailto:hello@example.com"
+                      className="text-zinc-200 hover:text-blue-400 transition-colors"
+                    >
                       hello@example.com
                     </a>
                   </div>
@@ -53,14 +66,26 @@ export default function ContactSection() {
               {/* Social Links */}
               <div className="flex flex-col gap-4">
                 {[
-                  { label: "Follow on GitHub", icon: Github, href: "https://github.com" },
-                  { label: "Connect on LinkedIn", icon: Linkedin, href: "https://linkedin.com" },
-                  { label: "Follow on Twitter", icon: Twitter, href: "https://twitter.com" }
+                  {
+                    label: "Follow on GitHub",
+                    icon: Github,
+                    href: "https://github.com",
+                  },
+                  {
+                    label: "Connect on LinkedIn",
+                    icon: Linkedin,
+                    href: "https://linkedin.com",
+                  },
+                  {
+                    label: "Follow on Twitter",
+                    icon: Twitter,
+                    href: "https://twitter.com",
+                  },
                 ].map((item) => (
-                  <a 
+                  <a
                     key={item.label}
                     href={item.href}
-                    target="_blank" 
+                    target="_blank"
                     rel="noreferrer"
                     className="flex items-center gap-3 text-zinc-500 hover:text-white transition-colors group w-fit"
                   >
@@ -75,18 +100,21 @@ export default function ContactSection() {
 
           {/* Right Column: Form Container */}
           <div className="relative">
-             {/* Glow Effect */}
-             <div className="absolute -inset-1 bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded-[24px] blur-xl opacity-50" />
-             
-             <div className="glass-card p-8 md:p-10 rounded-[24px] border border-white/5 relative bg-zinc-900/50 backdrop-blur-xl">
-                <div className="mb-8">
-                  <h3 className="text-xl font-medium text-white mb-2">Send me a message</h3>
-                  <p className="text-sm text-zinc-400">I usually respond within 24 hours.</p>
-                </div>
-                <ContactForm />
-             </div>
-          </div>
+            {/* Glow Effect */}
+            <div className="absolute -inset-1 bg-gradient-to-r from-blue-500/20 to-purple-500/10 rounded-[24px] blur-xl opacity-50" />
 
+            <div className="glass-card p-8 md:p-10 rounded-[24px] border border-white/5 relative bg-zinc-900/50 backdrop-blur-xl">
+              <div className="mb-5">
+                <h3 className="text-xl font-medium text-white mb-2">
+                  Send me a message
+                </h3>
+                <p className="text-sm text-zinc-400">
+                  I usually respond within 24 hours.
+                </p>
+              </div>
+              <ContactForm />
+            </div>
+          </div>
         </div>
       </div>
     </section>

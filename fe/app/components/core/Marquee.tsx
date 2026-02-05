@@ -15,7 +15,7 @@ export default function Marquee({
   className?: string;
 }) {
   return (
-    <div className={`overflow-hidden flex select-none ${className}`}>
+    <div className={`overflow-hidden w-full select-none ${className}`}>
       <motion.div
         animate={{
           x: direction === "left" ? ["0%", "-50%"] : ["-50%", "0%"],
@@ -25,9 +25,11 @@ export default function Marquee({
           repeat: Infinity,
           ease: "linear",
         }}
-        className="flex min-w-full shrink-0 gap-12 py-4"
+        className="flex w-max items-center gap-12 py-4 pl-24"
       >
-        {/* Render twice for seamless loop */}
+        {/* 🔥 SPACER */}
+        <div className="w-24 shrink-0" />
+
         {children}
         {children}
       </motion.div>

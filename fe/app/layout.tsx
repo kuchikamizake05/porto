@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import "devicon/devicon.min.css";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 
@@ -35,9 +36,7 @@ export default function RootLayout({
         <ThemeProvider>
           <div className="bg-mesh" />
           <Navbar />
-          <main className="flex-1">
-            {children}
-          </main>
+          <main className="flex-1">{children}</main>
           <Footer />
         </ThemeProvider>
       </body>

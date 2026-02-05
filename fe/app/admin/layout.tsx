@@ -13,17 +13,13 @@ export default function AdminLayout({
           <div className="flex items-center gap-2">
             <span className="text-gray-500 font-medium">Pages</span>
             <span className="text-gray-800">/</span>
-            <span className="text-white font-semibold tracking-tight">Dashboard</span>
+            <span className="text-white font-semibold tracking-tight">
+              Dashboard
+            </span>
           </div>
-          <div className="flex items-center gap-4">
-            <div className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-xs font-bold text-gray-400">
-              AD
-            </div>
-          </div>
+          <div className="flex items-center gap-4"></div>
         </header>
-        <div className="p-6 lg:p-12 max-w-6xl mx-auto">
-          {children}
-        </div>
+        <div className="p-6 lg:p-12 max-w-6xl mx-auto">{children}</div>
       </main>
     </div>
   );
