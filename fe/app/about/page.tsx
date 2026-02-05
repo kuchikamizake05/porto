@@ -11,6 +11,7 @@ import {
   Twitter,
   FileText,
   ArrowUpRight,
+  Phone,
 } from "lucide-react";
 import Link from "next/link";
 
@@ -66,11 +67,17 @@ export default function AboutPage() {
               {/* Intro Text */}
               <div className="space-y-4">
                 <h1 className="text-2xl md:text-4xl font-extrabold text-white tracking-tight">
-                  Hi, I'm <span className="text-blue-500"></span>
+                  Hi, I'm <span className="text-blue-400">Faaid Sakhaa</span>
                 </h1>
                 <p className="text-base md:text-lg text-zinc-400 font-light leading-relaxed max-w-xl">
-                  Digital Architect & Full-stack Engineer crafting premium web
-                  experiences that live on the edge of innovation.
+                  I am a developer with a strong focus on building
+                  <span className="text-white font-medium"> performant </span>
+                  and{" "}
+                  <span className="text-blue-400 font-medium">
+                    thoughtfully crafted
+                  </span>{" "}
+                  web experiences, combining solid engineering with refined
+                  visual details.
                 </p>
               </div>
             </div>
@@ -79,28 +86,29 @@ export default function AboutPage() {
             <div className="flex flex-wrap gap-4 mt-8 relative z-10">
               <a
                 href="/resume.pdf"
-                className="relative h-[46px] px-8 rounded-full border border-white/10 text-white font-bold text-xs md:text-sm tracking-wide flex items-center gap-2 overflow-hidden group/btn"
+                className="relative h-[46px] px-8 rounded-full border border-white/10 text-white font-bold text-xs md:text-sm tracking-wide flex items-center gap-4 overflow-hidden group/btn"
               >
                 <div className="absolute inset-0 bg-white translate-y-[101%] group-hover/btn:translate-y-0 transition-transform duration-300 ease-out" />
                 <FileText className="w-4 h-4 relative z-10 group-hover/btn:text-black transition-colors duration-300" />
                 <span className="relative z-10 group-hover/btn:text-black transition-colors duration-300">
-                  Resume / CV
+                  CV
                 </span>
               </a>
               <a
                 href="#contact"
-                className="relative h-[46px] px-8 rounded-full border border-white/10 text-white font-bold text-xs md:text-sm tracking-wide flex items-center gap-2 overflow-hidden group/btn"
+                className="relative h-[46px] px-8 rounded-full border border-white/10 text-white font-bold text-xs md:text-sm tracking-wide flex items-center gap-4 overflow-hidden group/btn"
               >
                 <div className="absolute inset-0 bg-white translate-y-[101%] group-hover/btn:translate-y-0 transition-transform duration-300 ease-out" />
+                <Phone className="w-4 h-4 relative z-10 group-hover/btn:text-black transition-colors duration-300" />
                 <span className="relative z-10 group-hover/btn:text-black transition-colors duration-300">
-                  Contact Me
+                  Contact
                 </span>
               </a>
             </div>
           </motion.div>
 
           {/* Social Grid (Col 12 on mobile, Col 4 on desktop) */}
-          <div className="col-span-12 lg:col-span-4 grid grid-cols-2 gap-6 h-full">
+          <div className="col-span-12 lg:col-span-4 grid grid-cols-4 md:grid-cols-2 gap-6 h-full">
             {socialActions.map((action, idx) => (
               <motion.a
                 key={action.label}

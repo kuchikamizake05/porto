@@ -26,16 +26,15 @@ export default function AboutSection() {
             transition={{ duration: 0.6 }}
             className="flex-1 space-y-8"
           >
-            <p className="text-xl md:text-2xl text-gray-400 leading-relaxed font-light">
-              I am a passionate developer focused on creating
-              <span className="text-white font-medium"> high-performance </span>
+            <p className="text-xl text-justify md:text-2xl text-gray-400 leading-relaxed font-light">
+              I am a developer with a strong focus on building
+              <span className="text-white font-medium"> performant </span>
               and{" "}
               <span className="text-blue-400 font-medium">
-                {" "}
-                visually stunning{" "}
-              </span>
-              web applications. I bridge the gap between complex structural
-              logic and intuitive, premium design.
+                thoughtfully crafted
+              </span>{" "}
+              web experiences, combining solid engineering with refined visual
+              details.
             </p>
 
             <Link
@@ -64,7 +63,7 @@ export default function AboutSection() {
                   height={200}
                   className="opacity-100"
                 />
-                <span className="text-2xl font-bold tracking-wide text-white">
+                <span className="text-3xl font-medium tracking-wide text-white">
                   Kuchikamizake<span className="text-blue-400">.</span>
                 </span>
               </div>

@@ -68,7 +68,7 @@ export default function ContactForm() {
       <button
         type="submit"
         disabled={loading}
-        className="relative w-full h-[45px] rounded-full bg-blue-600 hover:bg-blue-500 text-white font-bold tracking-wide transition-all shadow-[0_0_30px_rgba(37,99,235,0.15)] hover:shadow-[0_0_40px_rgba(37,99,235,0.3)] disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 group overflow-hidden"
+        className="relative w-full h-[45px] rounded-full bg-linear-to-b from-blue-500 to-indigo-700 hover:bg-linear-to-b from-blue-400 to-indigo-600 text-white font-bold tracking-wide transition-all shadow-[0_0_30px_rgba(37,99,235,0.15)] hover:shadow-[0_0_40px_rgba(37,99,235,0.3)] disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 group overflow-hidden"
       >
         <div className="absolute inset-0 bg-white/20 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700 skew-x-12" />
 

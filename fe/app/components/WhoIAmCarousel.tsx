@@ -12,46 +12,53 @@ const slides = [
     content: (
       <div className="space-y-4">
         <p className="text-zinc-300 font-light leading-relaxed text-lg">
-          As a <span className="text-white font-medium">Digital Architect</span>, I specialize in building high-end interactive experiences 
-          that merge technical precision with aesthetic excellence. 
+          As a <span className="text-white font-medium">Digital Architect</span>
+          , I specialize in building high-end interactive experiences that merge
+          technical precision with aesthetic excellence.
         </p>
         <p className="text-zinc-400 font-light leading-relaxed">
-          My background in Information Engineering provides the foundation for solving complex structural 
-          challenges, while my passion for design ensures every interface feels alive.
+          My background in Information Engineering provides the foundation for
+          solving complex structural challenges, while my passion for design
+          ensures every interface feels alive.
         </p>
       </div>
     ),
-    gradient: "from-blue-500/20 to-indigo-500/20"
+    gradient: "from-blue-500/20 to-indigo-500/20",
   },
   {
     id: "motto",
-    title: "My Philosophy",
+    title: "Motto",
     icon: Quote,
     content: (
       <div className="flex flex-col justify-center h-full">
         <blockquote className="text-2xl md:text-3xl font-light text-white italic leading-relaxed relative">
-          <span className="text-blue-500 absolute -top-4 -left-2 text-6xl opacity-30">"</span>
-          Great software isn't just about code—it's about how it makes the user feel. 
-          Every micro-interaction is an opportunity to create a moment of delight.
+          <span className="text-blue-500 absolute -top-4 -left-2 text-6xl opacity-30">
+            "
+          </span>
+          Great software isn't just about code—it's about how it makes the user
+          feel. Every micro-interaction is an opportunity to create a moment of
+          delight.
         </blockquote>
       </div>
     ),
-    gradient: "from-emerald-500/20 to-teal-500/20"
+    gradient: "from-emerald-500/20 to-teal-500/20",
   },
   {
     id: "goals",
-    title: "Future Goals",
+    title: "Goals",
     icon: Target,
     content: (
       <div className="space-y-6">
         <p className="text-zinc-300 text-lg">
-          I am driven by a relentless pursuit of <span className="text-white">innovation</span>. My ambition extends beyond just building websites; I aim to:
+          I am driven by a relentless pursuit of{" "}
+          <span className="text-white">innovation</span>. My ambition extends
+          beyond just building websites; I aim to:
         </p>
         <ul className="space-y-3">
           {[
             "Redefine web interactivity standards",
             "Contribute to open-source UI ecosystems",
-            "Bridge the gap between design and engineering"
+            "Bridge the gap between design and engineering",
           ].map((goal, i) => (
             <li key={i} className="flex items-center gap-3 text-zinc-400">
               <div className="w-1.5 h-1.5 rounded-full bg-blue-500" />
@@ -61,8 +68,8 @@ const slides = [
         </ul>
       </div>
     ),
-    gradient: "from-orange-500/20 to-rose-500/20"
-  }
+    gradient: "from-orange-500/20 to-rose-500/20",
+  },
 ];
 
 export default function WhoIAmCarousel() {
@@ -87,7 +94,7 @@ export default function WhoIAmCarousel() {
   return (
     <div className="glass-card rounded-[32px] border border-white/5 relative overflow-hidden h-full min-h-[320px] flex flex-col">
       {/* Animated Background Gradient */}
-      <motion.div 
+      <motion.div
         key={slide.id + "-bg"}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -107,13 +114,13 @@ export default function WhoIAmCarousel() {
         </div>
 
         <div className="flex gap-2">
-          <button 
+          <button
             onClick={() => paginate(-1)}
             className="p-2 rounded-full hover:bg-white/10 text-zinc-400 hover:text-white transition-colors"
           >
             <ChevronLeft className="w-5 h-5" />
           </button>
-          <button 
+          <button
             onClick={() => paginate(1)}
             className="p-2 rounded-full hover:bg-white/10 text-zinc-400 hover:text-white transition-colors"
           >
@@ -131,25 +138,25 @@ export default function WhoIAmCarousel() {
             variants={{
               enter: (direction: number) => ({
                 x: direction > 0 ? 50 : -50,
-                opacity: 0
+                opacity: 0,
               }),
               center: {
                 zIndex: 1,
                 x: 0,
-                opacity: 1
+                opacity: 1,
               },
               exit: (direction: number) => ({
                 zIndex: 0,
                 x: direction < 0 ? 50 : -50,
-                opacity: 0
-              })
+                opacity: 0,
+              }),
             }}
             initial="enter"
             animate="center"
             exit="exit"
             transition={{
               x: { type: "spring", stiffness: 300, damping: 30 },
-              opacity: { duration: 0.2 }
+              opacity: { duration: 0.2 },
             }}
             className="h-full flex flex-col justify-center"
           >
@@ -161,7 +168,7 @@ export default function WhoIAmCarousel() {
       {/* Progress Indicators */}
       <div className="absolute bottom-8 right-8 flex gap-2 z-10">
         {slides.map((_, idx) => (
-          <div 
+          <div
             key={idx}
             className={`h-1 rounded-full transition-all duration-300 ${
               idx === current ? "w-8 bg-white" : "w-2 bg-white/20"
