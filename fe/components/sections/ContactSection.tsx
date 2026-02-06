@@ -1,6 +1,6 @@
 "use client";
 
-import ContactForm from "./ContactForm";
+import ContactForm from "@/components/features/contact/ContactForm";
 import {
   Mail,
   MapPin,
@@ -12,11 +12,11 @@ import {
 
 export default function ContactSection() {
   return (
-    <section id="contact" className="pt-12 pb-12 scroll-mt-24 px-4 md:px-0">
+    <section id="contact" className="pt-8 scroll-mt-24 px-4 md:px-0">
       <div className="max-w-6xl mx-auto">
-        <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-start">
+        <div className="grid lg:grid-cols-2 gap-8 lg:gap-24 items-start">
           {/* Left Column: Contact Info */}
-          <div className="space-y-12">
+          <div className="space-y-8 md:space-y-10">
             <div>
               <h2 className="text-4xl md:text-6xl font-extrabold text-white mb-6 tracking-tight">
                 Let's <span className="text-blue-500 italic">Connect</span>
@@ -27,7 +27,7 @@ export default function ContactSection() {
               </p>
             </div>
 
-            <div className="space-y-8">
+            <div className="space-y-5 md:space-y-7">
               {/* Contact Details */}
               <div className="space-y-6">
                 <div className="flex items-center gap-4 group">
@@ -101,7 +101,7 @@ export default function ContactSection() {
           {/* Right Column: Form Container */}
           <div className="relative">
             {/* Glow Effect */}
-            <div className="absolute -inset-1 bg-gradient-to-r from-blue-500/20 to-purple-500/10 rounded-[24px] blur-xl opacity-50" />
+            <div className="absolute -inset-1 bg-blue-500/10 rounded-[24px] blur-xl opacity-50" />
 
             <div className="glass-card p-8 md:p-10 rounded-[24px] border border-white/5 relative bg-zinc-900/50 backdrop-blur-xl">
               <div className="mb-5">

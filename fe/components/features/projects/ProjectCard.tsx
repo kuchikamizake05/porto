@@ -1,5 +1,5 @@
 import Image from "next/image";
-import ShineBorder from "./core/ShineBorder";
+import ShineBorder from "../../ui/ShineBorder";
 
 type ProjectCardProps = {
   title: string;

@@ -14,8 +14,8 @@ import {
   Linkedin,
   Code,
 } from "lucide-react";
-import { useTheme } from "./core/ThemeProvider";
-import Magnetic from "./core/Magnetic";
+import { useTheme } from "../ui/ThemeProvider";
+import Magnetic from "../ui/Magnetic";
 import Image from "next/image";
 
 export default function Navbar() {

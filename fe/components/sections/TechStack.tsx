@@ -1,19 +1,19 @@
 "use client";
 
 import { motion } from "framer-motion";
-import Marquee from "./core/Marquee";
-import {
-  Atom, // React
-  Wind, // Tailwind
-  SquareCode, // Next.js/React
-  FileJson, // TypeScript
-  Server, // Node.js
-  Database, // SQL
-  Box, // Docker/Packaging
-  Flame, // Firebase
-  Braces, // C++/JS
-  Github, // Version Control
-} from "lucide-react";
+import Marquee from "@/components/ui/Marquee";
+// import {
+//   Atom, // React
+//   Wind, // Tailwind
+//   SquareCode, // Next.js/React
+//   FileJson, // TypeScript
+//   Server, // Node.js
+//   Database, // SQL
+//   Box, // Docker/Packaging
+//   Flame, // Firebase
+//   Braces, // C++/JS
+//   Github, // Version Control
+// } from "lucide-react";
 
 const logos = [
   { icon: "devicon-nextjs-original", color: "text-white" },
@@ -48,7 +48,7 @@ export default function TechStack() {
       <div className="max-w-4xl mx-auto px-4 md:px-0 mb-15">
         <div className="flex items-center gap-4">
           <div className="h-px flex-1 bg-gradient-to-r from-transparent to-white/10" />
-          <h2 className="text-xl font-bold uppercase tracking-[0.4em] text-blue-500/60 transition-colors hover:text-blue-400">
+          <h2 className="md:text-2xl text-xl font-extrabold text-center uppercase tracking-[0.4em] text-blue-500/60 transition-colors hover:text-blue-400">
             Professional Stack
           </h2>
           <div className="h-px flex-1 bg-gradient-to-l from-transparent to-white/10" />
@@ -82,7 +82,7 @@ export default function TechStack() {
                   className={`
     ${logo.icon}
     ${logo.color}
-    text-4xl
+    text-6xl
     transition-all duration-700
     group-hover:scale-125
     drop-shadow-[0_0_8px_rgba(37,99,235,0.2)]
@@ -121,7 +121,7 @@ export default function TechStack() {
                   className={`
     ${logo.icon}
     ${logo.color}
-    text-4xl
+    md:text-6xl text-4xl
     transition-all duration-700
     group-hover:scale-125
     drop-shadow-[0_0_8px_rgba(37,99,235,0.2)]

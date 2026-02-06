@@ -1,22 +1,33 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { apiGet } from "./lib/api";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { ArrowRight, ArrowDown } from "lucide-react";
-import AboutSection from "./components/AboutSection";
-import TechStack from "./components/TechStack";
-import ProjectsSection from "./components/ProjectsSection";
-import ContactSection from "./components/ContactSection";
+import AboutSection from "@/components/sections/AboutSection";
+import TechStack from "@/components/sections/TechStack";
+import ProjectsSection from "@/components/sections/ProjectsSection";
+import ContactSection from "@/components/sections/ContactSection";
 import Image from "next/image";
-import TypingAnimation from "./components/core/TypingAnimation";
-import Magnetic from "./components/core/Magnetic";
+import TypingAnimation from "@/components/ui/TypingAnimation";
+import Magnetic from "@/components/ui/Magnetic";
 
 type Profile = {
   name: string;
   roles: string[];
   stack: string[];
+};
+
+// Static profile data
+const PROFILE: Profile = {
+  name: "Faaid Sakhaa",
+  roles: [
+    "Information Engineering Student",
+    "Web Developer",
+    "Cyber Security Enthusiast",
+    "AI Enthusiast",
+  ],
+  stack: ["Next.js", "Express", "TypeScript"],
 };
 
 function AnimatedRole({
@@ -57,7 +68,7 @@ function AnimatedRole({
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6 }}
-      className="text-xl md:text-3xl font-medium text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-300 to-blue-500"
+      className="text-xl md:text-3xl font-medium text-transparent bg-clip-text bg-linear-to-r from-blue-400 via-indigo-300 to-blue-500"
     >
       {roles[index]}
     </motion.p>
@@ -65,11 +76,7 @@ function AnimatedRole({
 }
 
 export default function Home() {
-  const [profile, setProfile] = useState<Profile | null>(null);
-
-  useEffect(() => {
-    apiGet<Profile>("/profile").then(setProfile).catch(console.error);
-  }, []);
+  const profile = PROFILE; // Use static data directly
 
   return (
     <div className="space-y-16 pb-20 overflow-x-hidden relative">
@@ -133,18 +140,16 @@ export default function Home() {
             </motion.div>
 
             {/* Name & Title */}
-            {profile && (
-              <div className="space-y-6">
-                <TypingAnimation
-                  text={profile.name}
-                  className="text-5xl md:text-7xl font-bold tracking-tighter text-foreground leading-[1.1]"
-                />
-                <AnimatedRole
-                  roles={profile.roles}
-                  delay={profile.name.length * 80 + 300}
-                />
-              </div>
-            )}
+            <div className="space-y-6">
+              <TypingAnimation
+                text={profile.name}
+                className="text-5xl md:text-7xl font-bold tracking-tighter text-foreground leading-[1.1]"
+              />
+              <AnimatedRole
+                roles={profile.roles}
+                delay={profile.name.length * 80 + 300}
+              />
+            </div>
 
             {/* CTA Button only */}
             <motion.div
@@ -156,9 +161,9 @@ export default function Home() {
               <Magnetic strength={0.0}>
                 <Link
                   href="/projects"
-                  className="relative h-[46px] px-6 rounded-full bg-gradient-to-b from-blue-500  to-blue-700 text-white text-sm font-bold hover:bg-gradient-to-b hover:from-blue-400 hover:to-blue-600 transition-all shadow-[0_0_30px_rgba(37,99,235,0.15)] flex items-center gap-2 group overflow-hidden"
+                  className="relative h-[46px] px-6 rounded-full bg-linear-to-b from-blue-500  to-blue-700 text-white text-sm font-bold hover:bg-linear-to-b hover:from-blue-400 hover:to-blue-600 transition-all shadow-[0_0_30px_rgba(37,99,235,0.15)] flex items-center gap-2 group overflow-hidden"
                 >
-                  <div className="absolute inset-0 bg-white/20 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700 skew-x-12" />
+                  <div className="absolute inset-0 bg-white/20 translate-x-full group-hover:translate-x-full transition-transform duration-700 skew-x-12" />
                   View Projects
                   <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </Link>
@@ -178,10 +183,10 @@ export default function Home() {
               className="
     relative
     w-full
-    aspect-[19/20]
+    aspect-19/20
     rounded-t-full
     overflow-hidden
-    bg-gradient-to-b from-blue-400 to-blue-900
+    bg-linear-to-b from-blue-400 to-blue-900
     shadow-[0_20px_50px_rgba(0,0,0,0.25)]
   "
             >
@@ -224,7 +229,7 @@ export default function Home() {
       h-12 w-12
       group-hover:w-28
       rounded-full
-      border-1 border-blue-500
+      border border-blue-500
       bg-transparent
       overflow-hidden
       transition-all duration-500 ease-out

@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import { apiPost } from "../lib/api";
+import { apiPost } from "@/app/lib/api";
 import { Loader2, Send } from "lucide-react";
 
 export default function ContactForm() {
@@ -34,7 +34,7 @@ export default function ContactForm() {
         <div className="space-y-2">
           <input
             placeholder="Your name"
-            className="w-full h-[48px] bg-white/5 border border-white/10 rounded-xl px-4 focus:ring-1 focus:ring-blue-500 focus:border-blue-500 focus:bg-white/10 transition-all outline-hidden text-white placeholder:text-zinc-500 text-sm font-medium"
+            className="w-full h-[48px] bg-white/5 border border-white/10 rounded-xl px-4 focus:border-blue-500 focus:bg-white/10 transition-all outline-hidden text-white placeholder:text-zinc-500 text-sm font-medium"
             value={name}
             onChange={(e) => setName(e.target.value)}
             required
@@ -46,7 +46,7 @@ export default function ContactForm() {
           <input
             type="email"
             placeholder="Your email"
-            className="w-full h-[48px] bg-white/5 border border-white/10 rounded-xl px-4 focus:ring-1 focus:ring-blue-500 focus:border-blue-500 focus:bg-white/10 transition-all outline-hidden text-white placeholder:text-zinc-500 text-sm font-medium"
+            className="w-full h-[48px] bg-white/5 border border-white/10 rounded-xl px-4 focus:border-blue-500 focus:bg-white/10 transition-all outline-hidden text-white placeholder:text-zinc-500 text-sm font-medium"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
@@ -57,7 +57,7 @@ export default function ContactForm() {
         <div className="space-y-2">
           <textarea
             placeholder="Your message"
-            className="w-full h-[120px] bg-white/5 border border-white/10 rounded-xl px-4 py-3 focus:ring-1 focus:ring-blue-500 focus:border-blue-500 focus:bg-white/10 transition-all outline-hidden text-white placeholder:text-zinc-500 text-sm font-medium resize-none"
+            className="w-full h-[120px] bg-white/5 border border-white/10 rounded-xl px-4 py-3 focus:border-blue-500 focus:bg-white/10 transition-all outline-hidden text-white placeholder:text-zinc-500 text-sm font-medium resize-none"
             value={message}
             onChange={(e) => setMessage(e.target.value)}
             required

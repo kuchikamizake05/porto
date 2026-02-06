@@ -2,8 +2,8 @@
 
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { apiGet } from "../lib/api";
-import ProjectPageCard from "../components/ProjectPageCard";
+import { apiGet } from "@/app/lib/api";
+import ProjectPageCard from "@/components/features/projects/ProjectPageCard";
 
 type Project = {
   id: number;
@@ -38,7 +38,7 @@ export default function ProjectsPage() {
       setFilteredProjects(projects);
     } else {
       setFilteredProjects(
-        projects.filter((p) => p.category?.toUpperCase() === activeFilter)
+        projects.filter((p) => p.category?.toUpperCase() === activeFilter),
       );
     }
   }, [activeFilter, projects]);
@@ -48,7 +48,7 @@ export default function ProjectsPage() {
       <div className="max-w-7xl mx-auto px-6 md:px-12">
         {/* Section Header */}
         <div className="mb-10 flex flex-col items-center">
-          <motion.h1 
+          <motion.h1
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             className="text-4xl md:text-5xl font-extrabold text-white tracking-tight leading-none"
@@ -58,7 +58,7 @@ export default function ProjectsPage() {
         </div>
 
         {/* Filter Tabs */}
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
@@ -83,11 +83,14 @@ export default function ProjectsPage() {
         {loading ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {[1, 2, 3].map((i) => (
-              <div key={i} className="aspect-[16/10] glass-card rounded-[24px] animate-pulse" />
+              <div
+                key={i}
+                className="aspect-16/10 glass-card rounded-[24px] animate-pulse"
+              />
             ))}
           </div>
         ) : (
-          <motion.div 
+          <motion.div
             layout
             className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
           >

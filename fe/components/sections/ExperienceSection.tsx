@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { apiGet } from "../lib/api";
+import { apiGet } from "@/app/lib/api";
 
 type Experience = {
   id: number;
@@ -38,7 +38,10 @@ export default function ExperienceSection() {
   }, []);
 
   return (
-    <div ref={containerRef} className="glass-card rounded-[32px] p-8 border border-white/5 h-full flex flex-col">
+    <div
+      ref={containerRef}
+      className="glass-card rounded-[32px] p-8 border border-white/5 h-full flex flex-col"
+    >
       <div className="mb-8 flex items-center gap-3">
         <div className="h-2 w-2 rounded-full bg-blue-500 animate-pulse" />
         <h2 className="text-lg md:text-xl font-bold text-white uppercase tracking-[0.2em]">
@@ -68,8 +71,8 @@ export default function ExperienceSection() {
           />
 
           {experiences.map((exp, index) => (
-            <motion.div 
-              key={exp.id} 
+            <motion.div
+              key={exp.id}
               initial={{ opacity: 0, x: 10 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
@@ -78,7 +81,7 @@ export default function ExperienceSection() {
             >
               {/* Timeline Dot */}
               <div className="absolute -left-[5px] top-1.5 w-2.5 h-2.5 rounded-full border-2 border-[#020203] bg-zinc-600 group-hover:bg-blue-500 transition-colors z-10" />
-              
+
               <div className="space-y-2">
                 <div className="flex flex-col sm:flex-row sm:items-baseline gap-2">
                   <span className="text-[10px] font-bold text-blue-400 uppercase tracking-wider bg-blue-500/10 px-2 py-1 rounded-md w-fit">
@@ -88,7 +91,7 @@ export default function ExperienceSection() {
                     {exp.role}
                   </h3>
                 </div>
-                
+
                 <div className="flex items-center gap-2 text-zinc-500 text-xs font-semibold uppercase tracking-wider">
                   <span>{exp.company}</span>
                 </div>

@@ -1,8 +1,8 @@
 "use client";
 
 import { motion } from "framer-motion";
-import ExperienceSection from "../components/ExperienceSection";
-import WhoIAmCarousel from "../components/WhoIAmCarousel";
+import ExperienceSection from "@/components/sections/ExperienceSection";
+import WhoIAmCarousel from "@/components/features/about/WhoIAmCarousel";
 import Image from "next/image";
 import {
   Github,
