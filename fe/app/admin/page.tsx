@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function AdminDashboard() {
   return (
-    <div className="space-y-8">
+    <div className="space-y-8 pt-20 md:pt-0">
       <div className="space-y-2">
         <h1 className="text-3xl font-bold tracking-tight text-white">
           Dashboard

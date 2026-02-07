@@ -121,10 +121,10 @@ export default function Home() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-          className="max-w-4xl mx-auto w-full relative z-10 flex flex-col md:flex-row items-start gap-12"
+          className="max-w-4xl mx-auto w-full relative z-10 flex flex-col md:flex-row items-center md:items-start gap-12"
         >
           {/* Text Content */}
-          <div className="flex-1 space-y-10 order-2 md:order-1 text-center md:text-left flex flex-col items-center md:items-start md:pt-19">
+          <div className="flex-1 space-y-10 order-2 md:order-1 text-center md:text-left flex flex-col items-center md:items-start md:pt-19 w-full">
             {/* Greeting */}
             <motion.div
               initial={{ opacity: 0, scale: 0.9 }}
@@ -199,7 +199,7 @@ export default function Home() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 1, duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
-            className="relative w-64 md:w-80"
+            className="relative w-64 md:w-80 mx-auto md:mx-0"
           >
             {/* Arch Frame */}
             <div

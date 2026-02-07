@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import "devicon/devicon.min.css";
-import Navbar from "@/components/layout/Navbar";
-import Footer from "@/components/layout/Footer";
+import { ThemeProvider } from "@/components/ui/ThemeProvider";
+import LayoutWrapper from "@/components/layout/LayoutWrapper";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -14,9 +14,6 @@ const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
 });
-
-import Link from "next/link";
-import { ThemeProvider } from "@/components/ui/ThemeProvider";
 
 export const metadata: Metadata = {
   title: "Kuchikamizake | Portfolio",
@@ -35,9 +32,7 @@ export default function RootLayout({
       >
         <ThemeProvider>
           <div className="bg-mesh" />
-          <Navbar />
-          <main className="flex-1">{children}</main>
-          <Footer />
+          <LayoutWrapper>{children}</LayoutWrapper>
         </ThemeProvider>
       </body>
     </html>
