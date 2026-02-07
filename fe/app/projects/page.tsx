@@ -44,10 +44,10 @@ export default function ProjectsPage() {
   }, [activeFilter, projects]);
 
   return (
-    <div className="min-h-screen pt-32 pb-32 relative overflow-hidden bg-transparent">
-      <div className="max-w-7xl mx-auto px-6 md:px-12">
+    <div className="min-h-screen pt-12 pb-32 relative overflow-hidden bg-transparent">
+      <div className="max-w-[1100px] mx-auto px-6 md:px-10">
         {/* Section Header */}
-        <div className="mb-10 flex flex-col items-center">
+        <div className="mb-4 flex flex-col items-center">
           <motion.h1
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -62,7 +62,7 @@ export default function ProjectsPage() {
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
-          className="flex flex-wrap items-center justify-center gap-3 mb-16"
+          className="flex flex-wrap items-center justify-center gap-3 mb-5"
         >
           {CATEGORIES.map((cat) => (
             <button
@@ -81,7 +81,7 @@ export default function ProjectsPage() {
 
         {/* Project Grid */}
         {loading ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
             {[1, 2, 3].map((i) => (
               <div
                 key={i}
@@ -92,7 +92,7 @@ export default function ProjectsPage() {
         ) : (
           <motion.div
             layout
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4"
           >
             <AnimatePresence mode="popLayout">
               {filteredProjects.map((project) => (

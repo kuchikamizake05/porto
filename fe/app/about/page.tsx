@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import ExperienceSection from "@/components/sections/ExperienceSection";
+import EducationSection from "@/components/sections/EducationSection";
 import WhoIAmCarousel from "@/components/features/about/WhoIAmCarousel";
 import Image from "next/image";
 import {
@@ -48,7 +49,7 @@ export default function AboutPage() {
   ];
 
   return (
-    <div className="pt-32 pb-32">
+    <div className="pt-12 pb-32">
       <div className="max-w-4xl mx-auto px-6 md:px-8">
         <div className="grid grid-cols-12 gap-6">
           {/* --- TOP ROW --- */}
@@ -139,7 +140,18 @@ export default function AboutPage() {
             <WhoIAmCarousel />
           </motion.div>
 
-          {/* Experience Feed (Col 12 - Full Width) */}
+          {/* Education Feed */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.25 }}
+            className="col-span-12"
+          >
+            <EducationSection />
+          </motion.div>
+
+          {/* Experience Feed */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}

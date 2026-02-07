@@ -4,6 +4,7 @@ import cors from "cors";
 import projectsRoute from "./routes/projects.js";
 import contactRoute from "./routes/contact.js";
 import experiencesRoute from "./routes/experiences.js";
+import educationRoute from "./routes/education.js";
 
 const app = express();
 const PORT = process.env.PORT || 8000;
@@ -29,15 +30,6 @@ app.use(cors({
 
 app.use(express.json());
 
-// Profile endpoint - must be before other routes
-app.get("/profile", (req: Request, res: Response) => {
-  res.json({
-    name: "Faaid Sakhaa",
-    roles: ["Information Engineering Student", "Web Developer", "Cyber Security Enthusiast", "AI Enthusiast"],
-    stack: ["Next.js", "Express", "TypeScript"],
-  });
-});
-
 app.get("/", (req: Request, res: Response) => {
   res.json({ status: "backend alive" });
 });
@@ -46,6 +38,7 @@ app.get("/", (req: Request, res: Response) => {
 app.use("/projects", projectsRoute);
 app.use("/contact", contactRoute);
 app.use("/experiences", experiencesRoute);
+app.use("/education", educationRoute);
 
 app.listen(PORT, () => {
   console.log(`Backend running on http://localhost:${PORT}`);

@@ -11,19 +11,19 @@ const slides = [
     icon: User,
     content: (
       <div className="space-y-4">
-        <p className="text-zinc-300 font-light leading-relaxed text-lg">
+        <p className="text-zinc-300 font-light leading-relaxed text-xl">
           As a <span className="text-white font-medium">Digital Architect</span>
           , I specialize in building high-end interactive experiences that merge
           technical precision with aesthetic excellence.
         </p>
-        <p className="text-zinc-400 font-light leading-relaxed">
+        <p className="text-zinc-400 font-light leading-relaxed text-lg">
           My background in Information Engineering provides the foundation for
           solving complex structural challenges, while my passion for design
           ensures every interface feels alive.
         </p>
       </div>
     ),
-    gradient: "from-blue-500/20 to-indigo-500/20",
+    gradient: "from-blue-500/10 to-indigo-500/10",
   },
   {
     id: "motto",
@@ -31,8 +31,8 @@ const slides = [
     icon: Quote,
     content: (
       <div className="flex flex-col justify-center h-full">
-        <blockquote className="text-2xl md:text-3xl font-light text-white italic leading-relaxed relative">
-          <span className="text-blue-500 absolute -top-4 -left-2 text-6xl opacity-30">
+        <blockquote className="text-2xl md:text-2xl font-light text-white italic leading-relaxed relative">
+          <span className="text-white absolute font-bold -top-4 -left-2 text-xl opacity-30">
             "
           </span>
           Great software isn't just about code—it's about how it makes the user
@@ -41,7 +41,7 @@ const slides = [
         </blockquote>
       </div>
     ),
-    gradient: "from-emerald-500/20 to-teal-500/20",
+    gradient: "from-emerald-500/10 to-teal-500/10",
   },
   {
     id: "goals",
@@ -49,7 +49,7 @@ const slides = [
     icon: Target,
     content: (
       <div className="space-y-6">
-        <p className="text-zinc-300 text-lg">
+        <p className="text-zinc-300 text-xl">
           I am driven by a relentless pursuit of{" "}
           <span className="text-white">innovation</span>. My ambition extends
           beyond just building websites; I aim to:
@@ -61,14 +61,14 @@ const slides = [
             "Bridge the gap between design and engineering",
           ].map((goal, i) => (
             <li key={i} className="flex items-center gap-3 text-zinc-400">
-              <div className="w-1.5 h-1.5 rounded-full bg-blue-500" />
+              <div className="w-1.5 h-1.5 rounded-full bg-white" />
               {goal}
             </li>
           ))}
         </ul>
       </div>
     ),
-    gradient: "from-orange-500/20 to-rose-500/20",
+    gradient: "from-orange-500/10 to-rose-500/10",
   },
 ];
 

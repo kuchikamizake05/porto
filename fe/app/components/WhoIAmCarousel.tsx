@@ -99,7 +99,7 @@ export default function WhoIAmCarousel() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 1 }}
-        className={`absolute inset-0 bg-gradient-to-br ${slide.gradient} opacity-20 blur-[100px]`}
+        className={`absolute inset-0 bg-linear-to-br ${slide.gradient} opacity-20 blur-[100px]`}
       />
 
       {/* Header / Nav */}

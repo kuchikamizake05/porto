@@ -11,9 +11,9 @@ router.get("/", async (req, res) => {
 
 // POST new experience
 router.post("/", async (req, res) => {
-  const { company, role, duration, description } = req.body;
+  const { company, role, duration, description, logoUrl } = req.body;
   const newExperience = await prisma.experience.create({
-    data: { company, role, duration, description },
+    data: { company, role, duration, description, logoUrl },
   });
   res.json(newExperience);
 });
@@ -33,10 +33,10 @@ router.get("/:id", async (req, res) => {
 // UPDATE experience
 router.put("/:id", async (req, res) => {
   const { id } = req.params;
-  const { company, role, duration, description } = req.body;
+  const { company, role, duration, description, logoUrl } = req.body;
   const updatedExperience = await prisma.experience.update({
     where: { id: Number(id) },
-    data: { company, role, duration, description },
+    data: { company, role, duration, description, logoUrl },
   });
   res.json(updatedExperience);
 });

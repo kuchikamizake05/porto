@@ -15,7 +15,10 @@ type ExperienceFormProps = {
   isEdit?: boolean;
 };
 
-export default function ExperienceForm({ initialData, isEdit }: ExperienceFormProps) {
+export default function ExperienceForm({
+  initialData,
+  isEdit,
+}: ExperienceFormProps) {
   const router = useRouter();
   const [formData, setFormData] = useState({
     company: initialData?.company || "",
@@ -45,30 +48,44 @@ export default function ExperienceForm({ initialData, isEdit }: ExperienceFormPr
     }
   };
 
+  const inputClass =
+    "w-full px-5 py-3 rounded-xl bg-white/5 border border-white/10 text-white focus:border-rose-500/50 focus:ring-2 focus:ring-rose-500/20 outline-none transition-all placeholder:text-gray-600";
+
   return (
-    <form onSubmit={handleSubmit} className="bg-white/2 border border-white/5 rounded-2xl overflow-hidden backdrop-blur-md">
+    <form
+      onSubmit={handleSubmit}
+      className="bg-white/[0.02] border border-white/5 rounded-2xl overflow-hidden"
+    >
       <div className="p-8 space-y-6">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div className="space-y-3 text-sm">
-            <label className="block font-bold text-gray-400">Role / Job Title</label>
+            <label className="block font-bold text-gray-400">
+              Role / Job Title
+            </label>
             <input
               type="text"
               required
-              className="w-full px-5 py-3 rounded-xl bg-white/5 border border-white/10 text-white focus:ring-2 focus:ring-blue-500 outline-none transition-all"
+              className={inputClass}
               placeholder="e.g. Fullstack Developer"
               value={formData.role}
-              onChange={(e) => setFormData({ ...formData, role: e.target.value })}
+              onChange={(e) =>
+                setFormData({ ...formData, role: e.target.value })
+              }
             />
           </div>
           <div className="space-y-3 text-sm">
-            <label className="block font-bold text-gray-400">Company Name</label>
+            <label className="block font-bold text-gray-400">
+              Company Name
+            </label>
             <input
               type="text"
               required
-              className="w-full px-5 py-3 rounded-xl bg-white/5 border border-white/10 text-white focus:ring-2 focus:ring-blue-500 outline-none transition-all"
+              className={inputClass}
               placeholder="e.g. Acme Corp"
               value={formData.company}
-              onChange={(e) => setFormData({ ...formData, company: e.target.value })}
+              onChange={(e) =>
+                setFormData({ ...formData, company: e.target.value })
+              }
             />
           </div>
         </div>
@@ -78,10 +95,12 @@ export default function ExperienceForm({ initialData, isEdit }: ExperienceFormPr
           <input
             type="text"
             required
-            className="w-full px-5 py-3 rounded-xl bg-white/5 border border-white/10 text-white focus:ring-2 focus:ring-blue-500 outline-none transition-all"
+            className={inputClass}
             placeholder="e.g. Jan 2022 - Present"
             value={formData.duration}
-            onChange={(e) => setFormData({ ...formData, duration: e.target.value })}
+            onChange={(e) =>
+              setFormData({ ...formData, duration: e.target.value })
+            }
           />
         </div>
 
@@ -90,28 +109,37 @@ export default function ExperienceForm({ initialData, isEdit }: ExperienceFormPr
           <textarea
             required
             rows={5}
-            className="w-full px-5 py-3 rounded-xl bg-white/5 border border-white/10 text-white focus:ring-2 focus:ring-blue-500 outline-none transition-all resize-none font-light"
+            className={`${inputClass} resize-none font-light`}
             placeholder="What did you do there?"
             value={formData.description}
-            onChange={(e) => setFormData({ ...formData, description: e.target.value })}
+            onChange={(e) =>
+              setFormData({ ...formData, description: e.target.value })
+            }
           />
         </div>
       </div>
 
-      <div className="px-8 py-6 bg-white/2 border-t border-white/5 flex items-center justify-end gap-4">
+      <div className="px-8 py-6 bg-white/[0.02] border-t border-white/5 flex items-center justify-end gap-4">
         <button
           type="button"
           onClick={() => router.back()}
-          className="px-6 py-2.5 text-sm font-bold text-gray-400 hover:text-white transition-colors"
+          className="px-6 py-2.5 text-sm font-bold text-gray-500 hover:text-white transition-colors"
         >
           Cancel
         </button>
         <button
           type="submit"
           disabled={loading}
-          className="px-8 py-2.5 bg-blue-600 text-white rounded-xl text-sm font-bold hover:bg-blue-500 shadow-[0_0_20px_rgba(37,99,235,0.3)] transition-all disabled:opacity-50"
+          className="px-8 py-2.5 bg-rose-600 text-white rounded-xl text-sm font-bold hover:bg-rose-500 shadow-[0_0_25px_rgba(244,63,94,0.3)] transition-all disabled:opacity-50 relative overflow-hidden group"
         >
-          {loading ? "Saving..." : isEdit ? "Save Changes" : "Create Experience"}
+          <div className="absolute inset-0 bg-white/20 -translate-x-full group-hover:translate-x-full transition-transform duration-700 skew-x-12" />
+          <span className="relative z-10">
+            {loading
+              ? "Saving..."
+              : isEdit
+                ? "Save Changes"
+                : "Create Experience"}
+          </span>
         </button>
       </div>
     </form>

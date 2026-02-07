@@ -9,18 +9,18 @@ import TechStack from "@/components/sections/TechStack";
 import ProjectsSection from "@/components/sections/ProjectsSection";
 import ContactSection from "@/components/sections/ContactSection";
 import Image from "next/image";
-import TypingAnimation from "@/components/ui/TypingAnimation";
+import { TypingAnimation } from "@/components/ui/typing-animation";
 import Magnetic from "@/components/ui/Magnetic";
 
 type Profile = {
-  name: string;
+  name: string[];
   roles: string[];
   stack: string[];
 };
 
 // Static profile data
 const PROFILE: Profile = {
-  name: "Faaid Sakhaa",
+  name: ["Faaid Sakhaa", "Kuchikamizake."],
   roles: [
     "Information Engineering Student",
     "Web Developer",
@@ -118,18 +118,22 @@ export default function Home() {
         {/* Viral UI Effects */}
 
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-          className="max-w-4xl mx-auto w-full relative z-10 flex flex-col md:flex-row items-center gap-12"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+          className="max-w-4xl mx-auto w-full relative z-10 flex flex-col md:flex-row items-start gap-12"
         >
           {/* Text Content */}
-          <div className="flex-1 space-y-10 order-2 md:order-1 text-center md:text-left flex flex-col items-center md:items-start">
+          <div className="flex-1 space-y-10 order-2 md:order-1 text-center md:text-left flex flex-col items-center md:items-start md:pt-19">
             {/* Greeting */}
             <motion.div
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.2 }}
+              transition={{
+                delay: 2,
+                duration: 0.8,
+                ease: [0.22, 1, 0.36, 1],
+              }}
               className="inline-flex items-center gap-2 text-blue-400 text-[12px] font-bold uppercase tracking-[0.2em]"
             >
               <span className="relative flex h-2 w-2">
@@ -140,22 +144,41 @@ export default function Home() {
             </motion.div>
 
             {/* Name & Title */}
-            <div className="space-y-6">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{
+                delay: 0.6,
+                duration: 0.8,
+                ease: [0.22, 1, 0.36, 1],
+              }}
+              className="space-y-6"
+            >
               <TypingAnimation
-                text={profile.name}
+                words={profile.name}
+                typeSpeed={100}
+                deleteSpeed={50}
+                pauseDelay={2000}
+                delay={800} // Start typing after greeting is visible
+                cursorStyle="line"
+                loop
                 className="text-5xl md:text-7xl font-bold tracking-tighter text-foreground leading-[1.1]"
               />
               <AnimatedRole
                 roles={profile.roles}
-                delay={profile.name.length * 80 + 300}
+                delay={2200} // Typing ends at 2000ms (800 + 12*100)
               />
-            </div>
+            </motion.div>
 
             {/* CTA Button only */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 1.2, duration: 0.8 }}
+              transition={{
+                delay: 2.8, // Appears after role animation starts
+                duration: 0.8,
+                ease: [0.22, 1, 0.36, 1],
+              }}
               className="flex items-center justify-center md:justify-start"
             >
               <Magnetic strength={0.0}>
@@ -163,7 +186,7 @@ export default function Home() {
                   href="/projects"
                   className="relative h-[46px] px-6 rounded-full bg-linear-to-b from-blue-500  to-blue-700 text-white text-sm font-bold hover:bg-linear-to-b hover:from-blue-400 hover:to-blue-600 transition-all shadow-[0_0_30px_rgba(37,99,235,0.15)] flex items-center gap-2 group overflow-hidden"
                 >
-                  <div className="absolute inset-0 bg-white/20 translate-x-full group-hover:translate-x-full transition-transform duration-700 skew-x-12" />
+                  <div className="absolute inset-0 bg-white/20 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700 skew-x-12" />
                   View Projects
                   <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </Link>
@@ -175,7 +198,7 @@ export default function Home() {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.8, duration: 1 }}
+            transition={{ delay: 1, duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
             className="relative w-64 md:w-80"
           >
             {/* Arch Frame */}
@@ -219,10 +242,17 @@ export default function Home() {
         initial={{ opacity: 0, y: 10 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        transition={{ delay: 0.5, duration: 1 }}
-        className="flex justify-center -mt-8 md:-mt-12 md:mb-8 mb-0"
+        transition={{ delay: 2.25, duration: 1 }}
+        className="flex justify-center -mt-8 md:-mt-9 md:mb-8 mb-0"
       >
-        <Link href="#about-me" className="group relative block">
+        <div
+          onClick={() =>
+            document
+              .getElementById("about-me")
+              ?.scrollIntoView({ behavior: "smooth" })
+          }
+          className="group relative block cursor-pointer"
+        >
           <div
             className="
       relative
@@ -281,7 +311,7 @@ export default function Home() {
       "
             />
           </div>
-        </Link>
+        </div>
       </motion.div>
 
       {/* Sections with Reveal Animation */}

@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { apiGet } from "@/app/lib/api";
+import { BriefcaseBusiness } from "lucide-react";
 
 type Experience = {
   id: number;
@@ -9,10 +10,11 @@ type Experience = {
   role: string;
   duration: string;
   description: string;
+  logoUrl?: string;
 };
 
 import { useRef } from "react";
-import { motion, useScroll, useSpring, useTransform } from "framer-motion";
+import { motion, useScroll, useSpring } from "framer-motion";
 
 export default function ExperienceSection() {
   const [experiences, setExperiences] = useState<Experience[]>([]);
@@ -40,10 +42,12 @@ export default function ExperienceSection() {
   return (
     <div
       ref={containerRef}
-      className="glass-card rounded-[32px] p-8 border border-white/5 h-full flex flex-col"
+      className="glass-card rounded-[32px] px-8 pt-8 pb-4 border bg-linear-to-br from-blue-500/5 to-blue-500/2 border-white/5 h-full flex flex-col"
     >
-      <div className="mb-8 flex items-center gap-3">
-        <div className="h-2 w-2 rounded-full bg-blue-500 animate-pulse" />
+      <div className="mb-4 flex items-center gap-3">
+        <div className="p-2 rounded-xl bg-white/5 border border-white/10">
+          <BriefcaseBusiness className="w-5 h-5 text-white" />
+        </div>
         <h2 className="text-lg md:text-xl font-bold text-white uppercase tracking-[0.2em]">
           Experience
         </h2>
@@ -52,56 +56,98 @@ export default function ExperienceSection() {
       {loading ? (
         <div className="space-y-8">
           {[1, 2, 3].map((i) => (
-            <div key={i} className="animate-pulse flex gap-4">
-              <div className="w-16 h-4 bg-white/5 rounded-lg shrink-0" />
-              <div className="flex-1 space-y-2">
-                <div className="h-6 bg-white/5 rounded-lg w-1/2" />
-                <div className="h-16 bg-white/5 rounded-xl w-full" />
-              </div>
+            <div key={i} className="animate-pulse flex gap-6 px-12">
+              <div className="w-24 h-4 bg-white/5 rounded-lg shrink-0 mt-4" />
+              <div className="flex-1 h-32 bg-white/5 rounded-3xl" />
             </div>
           ))}
         </div>
       ) : (
-        <div className="relative pl-4 space-y-12">
-          {/* Animated Timeline Line */}
-          <div className="absolute left-0 top-2 bottom-2 w-px bg-white/5" />
-          <motion.div
-            style={{ scaleY }}
-            className="absolute left-0 top-2 bottom-2 w-px bg-blue-500 origin-top shadow-[0_0_15px_rgba(37,99,235,0.5)]"
-          />
-
-          {experiences.map((exp, index) => (
-            <motion.div
-              key={exp.id}
-              initial={{ opacity: 0, x: 10 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.1, duration: 0.5 }}
-              className="relative pl-8 group"
-            >
-              {/* Timeline Dot */}
-              <div className="absolute -left-[5px] top-1.5 w-2.5 h-2.5 rounded-full border-2 border-[#020203] bg-zinc-600 group-hover:bg-blue-500 transition-colors z-10" />
-
-              <div className="space-y-2">
-                <div className="flex flex-col sm:flex-row sm:items-baseline gap-2">
-                  <span className="text-[10px] font-bold text-blue-400 uppercase tracking-wider bg-blue-500/10 px-2 py-1 rounded-md w-fit">
-                    {exp.duration}
-                  </span>
-                  <h3 className="text-lg font-bold text-white group-hover:text-blue-400 transition-colors">
-                    {exp.role}
-                  </h3>
+        <div className="relative">
+          <div className="flex flex-col">
+            {experiences.map((exp, index) => (
+              <motion.div
+                key={exp.id}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1, duration: 0.5 }}
+                className="flex flex-col md:flex-row gap-4 md:gap-14 relative group py-4"
+              >
+                {/* Date Column */}
+                <div className="md:w-24 shrink-0 text-sm font-medium text-rose-400/80 text-center self-center leading-relaxed">
+                  {exp.duration.split("-").map((d, i) => (
+                    <div key={i}>
+                      {d.trim()}
+                      {i === 0 && experiences.length > 1 && " -"}
+                    </div>
+                  ))}
                 </div>
 
-                <div className="flex items-center gap-2 text-zinc-500 text-xs font-semibold uppercase tracking-wider">
-                  <span>{exp.company}</span>
+                {/* Timeline Column (Dot & Line) */}
+                <div className="hidden md:flex flex-col items-center absolute left-[113px] top-0 bottom-0 pointer-events-none">
+                  {/* Unified Static Line */}
+                  <div
+                    className={`w-[1px] absolute bg-white/10 
+                    ${
+                      index === 0
+                        ? "top-1/2 bottom-0"
+                        : index === experiences.length - 1
+                          ? "top-0 bottom-1/2"
+                          : "top-0 bottom-0"
+                    }`}
+                  />
+
+                  {/* Solid Highlight Line (Static) */}
+                  <div
+                    className={`w-[1px] absolute bg-rose-500 shadow-[0_0_8px_rgba(244,63,94,0.4)]
+                    ${
+                      index === 0
+                        ? "top-1/2 bottom-0"
+                        : index === experiences.length - 1
+                          ? "top-0 bottom-1/2"
+                          : "top-0 bottom-0"
+                    }`}
+                  />
+
+                  {/* Dot */}
+                  <div className="flex items-center justify-center relative z-10 shrink-0 h-full">
+                    <div className="w-3 h-3 rounded-full bg-zinc-900 border-2 border-rose-500 shadow-[0_0_10px_rgba(244,63,94,0.4)]" />
+                  </div>
                 </div>
 
-                <p className="text-zinc-400 text-sm leading-relaxed font-light">
-                  {exp.description}
-                </p>
-              </div>
-            </motion.div>
-          ))}
+                {/* Content Card */}
+                <div className="flex-1 glass-card bg-zinc-900/40 p-6 rounded-[24px] border border-white/10 group-hover:border-rose-500 transition-all duration-300 flex items-center gap-5">
+                  {/* Logo - No Container box, just the image cropped */}
+                  <div className="w-12 h-12 rounded-[5px] overflow-hidden shrink-0 transition-all duration-300 shadow-xl">
+                    {exp.logoUrl ? (
+                      <img
+                        src={exp.logoUrl}
+                        alt={exp.company}
+                        className="w-full h-full object-cover"
+                      />
+                    ) : (
+                      <div className="w-full h-full bg-zinc-800 flex items-center justify-center">
+                        <BriefcaseBusiness className="w-6 h-6 text-zinc-500" />
+                      </div>
+                    )}
+                  </div>
+
+                  <div className="space-y-1">
+                    <h3 className="text-lg font-bold text-white transition-colors">
+                      {exp.role}
+                    </h3>
+                    <div className="text-rose-400/80 text-sm font-medium">
+                      {exp.company}
+                    </div>
+                    <p className="text-zinc-400 text-sm leading-relaxed mt-2 font-light">
+                      {exp.description}
+                    </p>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
         </div>
       )}
     </div>
