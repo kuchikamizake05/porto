@@ -1,7 +1,22 @@
+# Dependencies
 node_modules/
-.env
+
+# Prisma
+.prisma/
 *.db
 dev.db
-.prisma/
+src/generated/
+
+# Build
 dist/
-node_modules/
+
+# IDEs
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+
+# Env
+.env
+.env.local
