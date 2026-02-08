@@ -2,7 +2,7 @@
 
 import { useEffect, useState, use } from "react";
 import { apiGet } from "../../../../lib/api";
-import ProjectForm from "../../../../components/admin/ProjectForm";
+import ProjectForm from "../../../components/ProjectForm";
 
 type Project = {
   id: number;
@@ -11,9 +11,14 @@ type Project = {
   tech: string;
   imageUrl?: string;
   repoUrl?: string;
+  siteUrl?: string;
 };
 
-export default function EditProjectPage({ params }: { params: Promise<{ id: string }> }) {
+export default function EditProjectPage({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) {
   const { id } = use(params);
   const [project, setProject] = useState<Project | null>(null);
   const [loading, setLoading] = useState(true);
@@ -34,8 +39,12 @@ export default function EditProjectPage({ params }: { params: Promise<{ id: stri
   return (
     <div className="space-y-10">
       <div className="space-y-1">
-        <h1 className="text-4xl font-bold tracking-tight text-white">Edit Project</h1>
-        <p className="text-gray-400 font-light text-sm">Update the information for &ldquo;{project.title}&rdquo;.</p>
+        <h1 className="text-4xl font-bold tracking-tight text-white">
+          Edit Project
+        </h1>
+        <p className="text-gray-400 font-light text-sm">
+          Update the information for &ldquo;{project.title}&rdquo;.
+        </p>
       </div>
       <ProjectForm isEdit initialData={project} />
     </div>

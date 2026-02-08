@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { Github, Twitter, Facebook } from "lucide-react";
+import { Instagram, Twitter, Facebook } from "lucide-react";
+import { FaSpotify, FaXTwitter } from "react-icons/fa6";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -16,19 +17,34 @@ export default function Footer() {
               Kuchikamizake<span className="text-blue-500">.</span>
             </h3>
             <p className="text-base text-zinc-400 leading-relaxed max-w-sm">
-              Let's make everything better!
+              Let's make everything better with me!
             </p>
 
             {/* SOCIAL */}
             <div className="flex justify-center md:justify-start items-center gap-6 pt-2">
-              <a href="#" className="hover:text-white transition-colors">
-                <Github className="w-6 h-6" />
+              <a
+                href="https://twitter.com/kuchizukeee"
+                className="hover:text-sky-400 transition-colors"
+              >
+                <FaXTwitter className="w-6 h-6" />
               </a>
-              <a href="#" className="hover:text-sky-400 transition-colors">
-                <Twitter className="w-6 h-6" />
-              </a>
-              <a href="#" className="hover:text-blue-500 transition-colors">
+              <a
+                href="https://www.facebook.com/kuchikamizakee"
+                className="hover:text-blue-500 transition-colors"
+              >
                 <Facebook className="w-6 h-6" />
+              </a>
+              <a
+                href="https://www.instagram.com/fsid.jp"
+                className="hover:text-blue-500 transition-colors"
+              >
+                <Instagram className="w-6 h-6" />
+              </a>
+              <a
+                href="https://sptfy.in/suckho"
+                className="hover:text-blue-500 transition-colors"
+              >
+                <FaSpotify className="w-6 h-6" />
               </a>
             </div>
           </div>
@@ -38,7 +54,7 @@ export default function Footer() {
             <h4 className="text-white text-xl font-semibold">Quick Links</h4>
             <ul className="space-y-3 text-base text-zinc-400">
               <li>
-                <Link href="#" className="hover:text-white">
+                <Link href="/" className="hover:text-white">
                   Home
                 </Link>
               </li>
@@ -65,17 +81,34 @@ export default function Footer() {
             <h4 className="text-white text-xl font-semibold">Contact</h4>
             <ul className="space-y-3 text-base text-zinc-400">
               <li>
-                <Link href="#" className="hover:text-white">
+                <Link
+                  href="mailto:faaidsakhaa@gmail.com"
+                  className="hover:text-white"
+                >
                   Email
                 </Link>
               </li>
               <li>
-                <Link href="#" className="hover:text-white">
-                  Phone
+                <Link
+                  href="https://wa.me/628972100220"
+                  className="hover:text-white"
+                >
+                  WhatsApp
                 </Link>
               </li>
               <li>
-                <Link href="#" className="hover:text-white">
+                <Link
+                  href="https://t.me/kuchizukeeee"
+                  className="hover:text-white"
+                >
+                  Telegram
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="https://maps.app.goo.gl/NjPT18XC4bYPfEfPA"
+                  className="hover:text-white"
+                >
                   Address
                 </Link>
               </li>
@@ -87,23 +120,35 @@ export default function Footer() {
             <h4 className="text-white text-xl font-semibold">Socials</h4>
             <ul className="space-y-3 text-base text-zinc-400">
               <li>
-                <Link href="#" className="hover:text-white">
-                  Github
-                </Link>
-              </li>
-              <li>
-                <Link href="#" className="hover:text-white">
+                <Link
+                  href="https://twitter.com/kuchizukeee"
+                  className="hover:text-white"
+                >
                   Twitter
                 </Link>
               </li>
               <li>
-                <Link href="#" className="hover:text-white">
+                <Link
+                  href="https://www.facebook.com/kuchikamizakee"
+                  className="hover:text-white"
+                >
                   Facebook
                 </Link>
               </li>
               <li>
-                <Link href="#" className="hover:text-white">
+                <Link
+                  href="https://www.instagram.com/fsid.jp"
+                  className="hover:text-white"
+                >
                   Instagram
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="https://sptfy.in/suckho"
+                  className="hover:text-white"
+                >
+                  Spotify
                 </Link>
               </li>
             </ul>

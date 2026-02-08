@@ -13,6 +13,9 @@ model Project {
   title       String
   description String
   tech        String
+  imageUrl    String?
+  repoUrl     String?
+  siteUrl     String?
   createdAt   DateTime @default(now())
 }
 

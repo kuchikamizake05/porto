@@ -11,6 +11,7 @@ type ExperienceFormProps = {
     role: string;
     duration: string;
     description: string;
+    logoUrl?: string;
   };
   isEdit?: boolean;
 };
@@ -25,6 +26,7 @@ export default function ExperienceForm({
     role: initialData?.role || "",
     duration: initialData?.duration || "",
     description: initialData?.description || "",
+    logoUrl: initialData?.logoUrl || "",
   });
   const [loading, setLoading] = useState(false);
 
@@ -90,18 +92,34 @@ export default function ExperienceForm({
           </div>
         </div>
 
-        <div className="space-y-3 text-sm">
-          <label className="block font-bold text-gray-400">Duration</label>
-          <input
-            type="text"
-            required
-            className={inputClass}
-            placeholder="e.g. Jan 2022 - Present"
-            value={formData.duration}
-            onChange={(e) =>
-              setFormData({ ...formData, duration: e.target.value })
-            }
-          />
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="space-y-3 text-sm">
+            <label className="block font-bold text-gray-400">Duration</label>
+            <input
+              type="text"
+              required
+              className={inputClass}
+              placeholder="e.g. Jan 2022 - Present"
+              value={formData.duration}
+              onChange={(e) =>
+                setFormData({ ...formData, duration: e.target.value })
+              }
+            />
+          </div>
+          <div className="space-y-3 text-sm">
+            <label className="block font-bold text-gray-400">
+              Company Logo URL
+            </label>
+            <input
+              type="text"
+              className={inputClass}
+              placeholder="e.g. https://example.com/logo.png"
+              value={formData.logoUrl}
+              onChange={(e) =>
+                setFormData({ ...formData, logoUrl: e.target.value })
+              }
+            />
+          </div>
         </div>
 
         <div className="space-y-3 text-sm">

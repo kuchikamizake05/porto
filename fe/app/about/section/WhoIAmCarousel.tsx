@@ -12,14 +12,17 @@ const slides = [
     content: (
       <div className="space-y-4">
         <p className="text-zinc-300 font-light leading-relaxed md:text-lg text-base">
-          As a <span className="text-white font-medium">Digital Architect</span>
-          , I specialize in building high-end interactive experiences that merge
-          technical precision with aesthetic excellence.
+          As an{" "}
+          <span className="text-white font-medium">
+            IT student and software engineer
+          </span>
+          , I focus on building reliable and secure digital systems, combining
+          clean engineering practices with thoughtful implementation.
         </p>
         <p className="text-zinc-400 font-light leading-relaxed text-medium">
-          My background in Information Engineering provides the foundation for
-          solving complex structural challenges, while my passion for design
-          ensures every interface feels alive.
+          With a strong interest in cybersecurity, I enjoy understanding how
+          systems work under the hood and designing solutions that are both
+          functional and resilient.
         </p>
       </div>
     ),
@@ -50,15 +53,14 @@ const slides = [
     content: (
       <div className="space-y-6">
         <p className="text-zinc-300 md:text-lg text-base">
-          I am driven by a relentless pursuit of{" "}
-          <span className="text-white">innovation</span>. My ambition extends
-          beyond just building websites; I aim to:
+          I am driven by continuous learning and a strong curiosity about how
+          systems work. My goals include:
         </p>
         <ul className="space-y-3">
           {[
-            "Redefine web interactivity standards",
-            "Contribute to open-source UI ecosystems",
-            "Bridge the gap between design and engineering",
+            "Build secure and well-engineered web applications",
+            "Deepen expertise in cybersecurity and CTF challenges",
+            "Understand systems at both application and infrastructure levels",
           ].map((goal, i) => (
             <li key={i} className="flex items-center gap-3 text-zinc-400">
               <div className="w-1.5 h-1.5 rounded-full bg-white" />

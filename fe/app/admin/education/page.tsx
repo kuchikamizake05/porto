@@ -4,43 +4,42 @@ import { useEffect, useState } from "react";
 import { apiGet, apiDelete } from "../../lib/api";
 import Link from "next/link";
 
-type Project = {
+type Education = {
   id: number;
-  title: string;
+  school: string;
+  degree: string;
+  duration: string;
   description: string;
-  tech: string;
-  imageUrl?: string;
-  repoUrl?: string;
-  siteUrl?: string;
 };
 
-export default function AdminProjectsPage() {
-  const [projects, setProjects] = useState<Project[]>([]);
+export default function AdminEducationPage() {
+  const [educations, setEducations] = useState<Education[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetchProjects();
+    fetchEducations();
   }, []);
 
-  const fetchProjects = async () => {
+  const fetchEducations = async () => {
     try {
-      const data = await apiGet<Project[]>("/projects");
-      setProjects(data);
+      const data = await apiGet<Education[]>("/education");
+      setEducations(data);
     } catch (error) {
-      console.error("Failed to fetch projects", error);
+      console.error("Failed to fetch educations", error);
     } finally {
       setLoading(false);
     }
   };
 
   const handleDelete = async (id: number) => {
-    if (!confirm("Are you sure you want to delete this project?")) return;
+    if (!confirm("Are you sure you want to delete this education entry?"))
+      return;
 
     try {
-      await apiDelete(`/projects/${id}`);
-      setProjects(projects.filter((p) => p.id !== id));
+      await apiDelete(`/education/${id}`);
+      setEducations(educations.filter((e) => e.id !== id));
     } catch (error) {
-      alert("Failed to delete project");
+      alert("Failed to delete education");
       console.error(error);
     }
   };
@@ -50,19 +49,19 @@ export default function AdminProjectsPage() {
       <div className="flex items-center justify-between">
         <div className="space-y-2">
           <h1 className="text-4xl font-bold tracking-tight text-white">
-            Manage Projects
+            Manage Education
           </h1>
           <p className="text-gray-500 font-light text-sm">
-            Create and organize your architectural works.
+            Document your academic background and certifications.
           </p>
         </div>
         <Link
-          href="/admin/projects/new"
+          href="/admin/education/new"
           className="px-6 py-3 bg-blue-600 text-white rounded-xl hover:bg-blue-500 shadow-[0_0_25px_rgba(37,99,235,0.25)] transition-all text-sm font-bold flex items-center gap-2 relative overflow-hidden group"
         >
           <div className="absolute inset-0 bg-white/20 -translate-x-full group-hover:translate-x-full transition-transform duration-700 skew-x-12" />
           <span className="relative z-10 text-lg">+</span>
-          <span className="relative z-10">Add Project</span>
+          <span className="relative z-10">Add Education</span>
         </Link>
       </div>
 
@@ -71,10 +70,10 @@ export default function AdminProjectsPage() {
           <thead>
             <tr className="bg-white/3 border-b border-white/5">
               <th className="px-8 py-5 text-xs font-bold uppercase tracking-wider text-gray-400">
-                Project Name
+                School & Degree
               </th>
               <th className="px-8 py-5 text-xs font-bold uppercase tracking-wider text-gray-400">
-                Tech Stack
+                Duration
               </th>
               <th className="px-8 py-5 text-xs font-bold uppercase tracking-wider text-gray-400 text-right">
                 Actions
@@ -86,64 +85,51 @@ export default function AdminProjectsPage() {
               [1, 2, 3].map((i) => (
                 <tr key={i} className="animate-pulse">
                   <td className="px-8 py-6">
-                    <div className="h-5 bg-white/5 rounded-lg w-48" />
+                    <div className="h-5 bg-white/5 rounded-lg w-48 mb-2" />
+                    <div className="h-4 bg-white/5 rounded-lg w-32" />
                   </td>
                   <td className="px-8 py-6">
-                    <div className="h-5 bg-white/5 rounded-lg w-64" />
+                    <div className="h-5 bg-white/5 rounded-lg w-24" />
                   </td>
                   <td className="px-8 py-6">
                     <div className="h-5 bg-white/5 rounded-lg w-24 ml-auto" />
                   </td>
                 </tr>
               ))
-            ) : projects.length === 0 ? (
+            ) : educations.length === 0 ? (
               <tr>
                 <td colSpan={3} className="px-8 py-20 text-center">
-                  <div className="space-y-3">
-                    <p className="text-gray-500 font-light">
-                      No projects found. Start by adding one!
-                    </p>
-                  </div>
+                  <p className="text-gray-500 font-light">
+                    No education entries found. Add your academic journey!
+                  </p>
                 </td>
               </tr>
             ) : (
-              projects.map((project) => (
+              educations.map((edu) => (
                 <tr
-                  key={project.id}
+                  key={edu.id}
                   className="hover:bg-white/1 transition-colors group"
                 >
                   <td className="px-8 py-6">
-                    <span className="font-bold text-white group-hover:text-blue-400 transition-colors">
-                      {project.title}
-                    </span>
+                    <p className="font-bold text-white group-hover:text-blue-400 transition-colors">
+                      {edu.school}
+                    </p>
+                    <p className="text-blue-500/80 text-sm font-medium">
+                      {edu.degree}
+                    </p>
                   </td>
-                  <td className="px-8 py-6">
-                    <div className="flex flex-wrap gap-2 text-xs font-medium">
-                      {project.tech
-                        .split(",")
-                        .slice(0, 4)
-                        .map((t, idx) => (
-                          <span
-                            key={idx}
-                            className="bg-white/5 text-gray-400 px-3 py-1 rounded-full border border-white/5"
-                          >
-                            {t.trim()}
-                          </span>
-                        ))}
-                      {project.tech.split(",").length > 4 && (
-                        <span className="text-gray-600">...</span>
-                      )}
-                    </div>
+                  <td className="px-8 py-6 text-gray-400 text-sm font-light">
+                    {edu.duration}
                   </td>
                   <td className="px-8 py-6 text-right space-x-4">
                     <Link
-                      href={`/admin/projects/edit/${project.id}`}
+                      href={`/admin/education/edit/${edu.id}`}
                       className="text-sm font-bold text-blue-400 hover:text-blue-300 transition-colors"
                     >
                       Edit
                     </Link>
                     <button
-                      onClick={() => handleDelete(project.id)}
+                      onClick={() => handleDelete(edu.id)}
                       className="text-sm font-bold text-gray-500 hover:text-red-500 transition-colors"
                     >
                       Delete

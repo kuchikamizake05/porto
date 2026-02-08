@@ -10,14 +10,14 @@ export default function AboutSection() {
   return (
     <section
       id="about-me"
-      className="py-0 scroll-mt-24 mb-20 relative overflow-hidden"
+      className="pb-5 scroll-mt-24 mb-20 relative overflow-hidden"
     >
       {/* BACKGROUND TEXT */}
-      {/* <div className="absolute -top-10 left-1/2 -translate-x-1/2 select-none pointer-events-none -z-10 opacity-5">
-        <span className="text-[12rem] md:text-[20rem] font-black text-white tracking-tighter uppercase whitespace-nowrap">
+      <div className="absolute md:-top-30 left-1/2 -translate-x-1/2 select-none pointer-events-none -z-10 opacity-2">
+        <span className="text-[15rem] md:text-[25rem] font-black text-white tracking-tighter uppercase whitespace-nowrap">
           About
         </span>
-      </div> */}
+      </div>
 
       <div className="max-w-4xl mx-auto px-4 md:px-0 relative">
         <div className="mb-5 flex items-center gap-6">
@@ -37,14 +37,14 @@ export default function AboutSection() {
             className="flex-1 space-y-8 order-2 md:order-1"
           >
             <p className="text-xl text-justify md:text-2xl text-gray-400 leading-relaxed font-light">
-              I am a developer with a strong focus on building
-              <span className="text-white font-medium"> performant </span>
+              I am an IT student and software engineer focused on
+              <span className="text-white font-medium">
+                {" "}
+                software development{" "}
+              </span>
               and{" "}
-              <span className="text-blue-400 font-medium">
-                thoughtfully crafted
-              </span>{" "}
-              web experiences, combining solid engineering with refined visual
-              details.
+              <span className="text-blue-400 font-medium">cybersecurity</span>,
+              building secure and well-engineered web applications.
             </p>
 
             <div className="flex justify-center md:justify-start">

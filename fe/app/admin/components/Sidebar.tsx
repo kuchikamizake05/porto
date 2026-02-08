@@ -8,6 +8,7 @@ const navItems = [
   { name: "Dashboard", href: "/admin", icon: "📊" },
   { name: "Projects", href: "/admin/projects", icon: "🚀" },
   { name: "Experience", href: "/admin/experience", icon: "💼" },
+  { name: "Education", href: "/admin/education", icon: "🎓" },
   { name: "Back to Site", href: "/", icon: "🏠" },
 ];
 

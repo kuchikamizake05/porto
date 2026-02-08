@@ -49,10 +49,10 @@ const logos = [
 
 export default function TechStack() {
   return (
-    <section className="py-8 relative overflow-hidden">
+    <section className="md:pt-8 py-5 relative overflow-hidden">
       {/* BACKGROUND TEXT */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 select-none pointer-events-none -z-10 opacity-2">
-        <span className="text-[12rem] md:text-[25rem] font-black text-white tracking-tighter uppercase whitespace-nowrap">
+        <span className="text-[15rem] md:text-[25rem] font-black text-white tracking-tighter uppercase whitespace-nowrap">
           Stack
         </span>
       </div>
@@ -70,7 +70,7 @@ export default function TechStack() {
       <div className="relative">
         <Marquee
           speed={30}
-          className="py-8 hover:[animation-play-state:paused]"
+          className="md:py-8 pt-0 hover:[animation-play-state:paused]"
         >
           {logos.map((logo, idx) => (
             <motion.div

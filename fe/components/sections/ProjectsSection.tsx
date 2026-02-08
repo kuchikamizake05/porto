@@ -12,6 +12,7 @@ type Project = {
   tech: string;
   imageUrl?: string;
   repoUrl?: string;
+  siteUrl?: string;
 };
 
 export default function ProjectsSection() {
@@ -51,7 +52,7 @@ export default function ProjectsSection() {
             <div className="h-px flex-1 bg-linear-to-r from-white/10 to-transparent" />
           </div>
           <p className="text-lg md:text-xl text-muted-foreground font-light">
-            A precision-focused selection of architectural digital experiences.
+            Explore my projects, crafted with care and intent.
           </p>
         </div>
 

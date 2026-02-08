@@ -12,6 +12,7 @@ type Project = {
   tech: string;
   imageUrl?: string;
   repoUrl?: string;
+  siteUrl?: string;
   category?: string; // Assume category exists or we derive it
 };
 
@@ -110,6 +111,7 @@ export default function ProjectsPage() {
                     tech={project.tech}
                     imageUrl={project.imageUrl}
                     repoUrl={project.repoUrl}
+                    siteUrl={project.siteUrl}
                   />
                 </motion.div>
               ))}

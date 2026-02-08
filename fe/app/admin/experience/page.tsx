@@ -10,6 +10,7 @@ type Experience = {
   role: string;
   duration: string;
   description: string;
+  logoUrl?: string;
 };
 
 export default function AdminExperiencePage() {
@@ -111,12 +112,27 @@ export default function AdminExperiencePage() {
                   className="hover:bg-white/1 transition-colors group"
                 >
                   <td className="px-8 py-6">
-                    <p className="font-bold text-white group-hover:text-blue-400 transition-colors">
-                      {exp.role}
-                    </p>
-                    <p className="text-blue-500/80 text-sm font-medium">
-                      {exp.company}
-                    </p>
+                    <div className="flex items-center gap-4">
+                      <div className="w-10 h-10 rounded-lg bg-white/5 border border-white/10 overflow-hidden shrink-0 flex items-center justify-center">
+                        {exp.logoUrl ? (
+                          <img
+                            src={exp.logoUrl}
+                            alt={exp.company}
+                            className="w-full h-full object-cover"
+                          />
+                        ) : (
+                          <span className="text-xl">💼</span>
+                        )}
+                      </div>
+                      <div>
+                        <p className="font-bold text-white group-hover:text-blue-400 transition-colors">
+                          {exp.role}
+                        </p>
+                        <p className="text-blue-500/80 text-sm font-medium">
+                          {exp.company}
+                        </p>
+                      </div>
+                    </div>
                   </td>
                   <td className="px-8 py-6 text-gray-400 text-sm font-light">
                     {exp.duration}

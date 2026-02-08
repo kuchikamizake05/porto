@@ -12,6 +12,7 @@ type ProjectFormProps = {
     tech: string;
     imageUrl?: string;
     repoUrl?: string;
+    siteUrl?: string;
   };
   isEdit?: boolean;
 };
@@ -24,6 +25,7 @@ export default function ProjectForm({ initialData, isEdit }: ProjectFormProps) {
     tech: initialData?.tech || "",
     imageUrl: initialData?.imageUrl || "",
     repoUrl: initialData?.repoUrl || "",
+    siteUrl: initialData?.siteUrl || "",
   });
   const [loading, setLoading] = useState(false);
 
@@ -98,7 +100,7 @@ export default function ProjectForm({ initialData, isEdit }: ProjectFormProps) {
           />
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <div className="space-y-3 text-sm">
             <label className="block font-bold text-gray-400">
               Image URL (optional)
@@ -124,6 +126,20 @@ export default function ProjectForm({ initialData, isEdit }: ProjectFormProps) {
               value={formData.repoUrl}
               onChange={(e) =>
                 setFormData({ ...formData, repoUrl: e.target.value })
+              }
+            />
+          </div>
+          <div className="space-y-3 text-sm">
+            <label className="block font-bold text-gray-400">
+              Live Site URL (optional)
+            </label>
+            <input
+              type="url"
+              className={inputClass}
+              placeholder="https://..."
+              value={formData.siteUrl}
+              onChange={(e) =>
+                setFormData({ ...formData, siteUrl: e.target.value })
               }
             />
           </div>

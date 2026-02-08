@@ -9,9 +9,9 @@ router.get("/", async (req, res) => {
 });
 
 router.post("/", async (req, res) => {
-    const { title, description, tech, imageUrl, repoUrl } = req.body;
+    const { title, description, tech, imageUrl, repoUrl, siteUrl } = req.body;
     const newProject = await prisma.project.create({
-        data: { title, description, tech, imageUrl, repoUrl },
+        data: { title, description, tech, imageUrl, repoUrl, siteUrl },
     });
     res.json(newProject);
 });
@@ -31,10 +31,10 @@ router.get("/:id", async (req, res) => {
 // UPDATE project
 router.put("/:id", async (req, res) => {
     const { id } = req.params;
-    const { title, description, tech, imageUrl, repoUrl } = req.body;
+    const { title, description, tech, imageUrl, repoUrl, siteUrl } = req.body;
     const updatedProject = await prisma.project.update({
         where: { id: Number(id) },
-        data: { title, description, tech, imageUrl, repoUrl },
+        data: { title, description, tech, imageUrl, repoUrl, siteUrl },
     });
     res.json(updatedProject);
 });

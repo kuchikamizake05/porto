@@ -1,14 +1,8 @@
 "use client";
 
 import ContactForm from "@/components/features/contact/ContactForm";
-import {
-  Mail,
-  MapPin,
-  Github,
-  Linkedin,
-  Twitter,
-  ArrowRight,
-} from "lucide-react";
+import { Mail, MapPin, Github, Linkedin, ArrowRight } from "lucide-react";
+import { FaXTwitter } from "react-icons/fa6";
 
 export default function ContactSection() {
   return (
@@ -48,7 +42,7 @@ export default function ContactSection() {
                     <span className="text-xs font-bold uppercase tracking-wider text-zinc-500 block mb-1">
                       Base Location
                     </span>
-                    <span className="text-zinc-200">Jakarta, Indonesia</span>
+                    <span className="text-zinc-200">Yogyakarta, Indonesia</span>
                   </div>
                 </div>
 
@@ -61,10 +55,10 @@ export default function ContactSection() {
                       Email Inquiry
                     </span>
                     <a
-                      href="mailto:hello@example.com"
+                      href="mailto:faaidsakhaa@gmail.com"
                       className="text-zinc-200 hover:text-blue-400 transition-colors"
                     >
-                      hello@example.com
+                      faaidsakhaa@gmail.com
                     </a>
                   </div>
                 </div>
@@ -79,17 +73,17 @@ export default function ContactSection() {
                   {
                     label: "Follow on GitHub",
                     icon: Github,
-                    href: "https://github.com",
+                    href: "https://github.com/kuchikamizake05",
                   },
                   {
                     label: "Connect on LinkedIn",
                     icon: Linkedin,
-                    href: "https://linkedin.com",
+                    href: "https://linkedin.com/in/faaid-sakhaa",
                   },
                   {
-                    label: "Follow on Twitter",
-                    icon: Twitter,
-                    href: "https://twitter.com",
+                    label: "Follow on X",
+                    icon: FaXTwitter,
+                    href: "https://twitter.com/kuchizukeee",
                   },
                 ].map((item) => (
                   <a
