@@ -1,8 +1,9 @@
-import prismaModule from "./generated/prisma/index.js";
+import { createRequire } from "module";
 import { PrismaLibSql } from "@prisma/adapter-libsql";
 import "dotenv/config";
 
-const PrismaClient = prismaModule.PrismaClient;
+const require = createRequire(import.meta.url);
+const { PrismaClient } = require("./generated/prisma/index.js");
 
 const adapter = new PrismaLibSql({
   url: process.env.DATABASE_URL || "file:./dev.db",
