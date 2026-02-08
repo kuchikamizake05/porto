@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { apiGet } from "@/app/lib/api";
-import ProjectPageCard from "@/components/features/projects/ProjectPageCard";
+import ProjectPageCard from "@/app/projects/components/ProjectPageCard";
 
 type Project = {
   id: number;

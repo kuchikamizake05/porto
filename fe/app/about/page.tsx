@@ -1,9 +1,9 @@
 "use client";
 
 import { motion } from "framer-motion";
-import ExperienceSection from "@/components/sections/ExperienceSection";
-import EducationSection from "@/components/sections/EducationSection";
-import WhoIAmCarousel from "@/components/features/about/WhoIAmCarousel";
+import ExperienceSection from "@/app/about/section/ExperienceSection";
+import EducationSection from "@/app/about/section/EducationSection";
+import WhoIAmCarousel from "@/app/about/section/WhoIAmCarousel";
 import Image from "next/image";
 import {
   Github,
@@ -23,33 +23,33 @@ export default function AboutPage() {
       icon: Github,
       href: "https://github.com",
       className:
-        "bg-white/5 border border-white/10 text-zinc-400 hover:bg-black hover:text-white hover:border-black/50 hover:shadow-[0_0_30px_rgba(0,0,0,0.5)]",
+        "bg-white/5 border border-white/10 text-zinc-400 hover:bg-black hover:text-white hover:border-white/25",
     },
     {
       label: "LinkedIn",
       icon: Linkedin,
       href: "https://linkedin.com",
       className:
-        "bg-white/5 border border-white/10 text-zinc-400 hover:bg-[#0077b5] hover:text-white hover:border-[#0077b5]/50 hover:shadow-[0_0_30px_rgba(0,119,181,0.5)]",
+        "bg-white/5 border border-white/10 text-zinc-400 hover:bg-[#0077b5] hover:text-white hover:border-[#0077b5]/50",
     },
     {
       label: "Twitter",
       icon: Twitter,
       href: "https://twitter.com",
       className:
-        "bg-white/5 border border-white/10 text-zinc-400 hover:bg-[#1DA1F2] hover:text-white hover:border-[#1DA1F2]/50 hover:shadow-[0_0_30px_rgba(29,161,242,0.5)]",
+        "bg-white/5 border border-white/10 text-zinc-400 hover:bg-[#1DA1F2] hover:text-white hover:border-[#1DA1F2]/50",
     },
     {
       label: "Email",
       icon: Mail,
       href: "mailto:hello@example.com",
       className:
-        "bg-white/5 border border-white/10 text-zinc-400 hover:bg-orange-500 hover:text-white hover:border-orange-500/50 hover:shadow-[0_0_30px_rgba(249,115,22,0.5)]",
+        "bg-white/5 border border-white/10 text-zinc-400 hover:bg-orange-500 hover:text-white hover:border-orange-500/50",
     },
   ];
 
   return (
-    <div className="pt-12 pb-32">
+    <div className="py-24 md:py-12">
       <div className="max-w-4xl mx-auto px-6 md:px-8">
         <div className="grid grid-cols-12 gap-6">
           {/* --- TOP ROW --- */}
@@ -84,25 +84,15 @@ export default function AboutPage() {
             </div>
 
             {/* Action Buttons */}
-            <div className="flex flex-wrap gap-4 mt-8 relative z-10">
+            <div className="flex flex-wrap gap-4 mt-5 relative z-10">
               <a
                 href="/resume.pdf"
-                className="relative h-[46px] px-8 rounded-full border border-white/10 text-white font-bold text-xs md:text-sm tracking-wide flex items-center gap-4 overflow-hidden group/btn"
+                className="relative h-[46px] px-8 rounded-2xl border border-white/10 text-white font-bold text-xs md:text-sm tracking-wide flex items-center gap-4 overflow-hidden group/btn bg-linear-to-b from-white/10 to-white/5"
               >
                 <div className="absolute inset-0 bg-white translate-y-[101%] group-hover/btn:translate-y-0 transition-transform duration-300 ease-out" />
                 <FileText className="w-4 h-4 relative z-10 group-hover/btn:text-black transition-colors duration-300" />
                 <span className="relative z-10 group-hover/btn:text-black transition-colors duration-300">
-                  CV
-                </span>
-              </a>
-              <a
-                href="#contact"
-                className="relative h-[46px] px-8 rounded-full border border-white/10 text-white font-bold text-xs md:text-sm tracking-wide flex items-center gap-4 overflow-hidden group/btn"
-              >
-                <div className="absolute inset-0 bg-white translate-y-[101%] group-hover/btn:translate-y-0 transition-transform duration-300 ease-out" />
-                <Phone className="w-4 h-4 relative z-10 group-hover/btn:text-black transition-colors duration-300" />
-                <span className="relative z-10 group-hover/btn:text-black transition-colors duration-300">
-                  Contact
+                  Download Curriculum Vitae
                 </span>
               </a>
             </div>
@@ -119,10 +109,13 @@ export default function AboutPage() {
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
                 whileHover={{ scale: 1.05 }}
-                transition={{ duration: 0.2, ease: "easeOut" }}
+                transition={{
+                  duration: 0.01,
+                  ease: "easeOut",
+                }}
                 className={`rounded-[32px] flex flex-col items-center justify-center transition-all duration-300 ${action.className} aspect-square w-full shadow-lg group relative overflow-hidden`}
               >
-                <action.icon className="w-10 h-10 md:w-12 md:h-12 transition-transform duration-500 group-hover:scale-110" />
+                <action.icon className="w-7 h-7 md:w-12 md:h-12 transition-transform duration-500 group-hover:scale-110" />
               </motion.a>
             ))}
           </div>

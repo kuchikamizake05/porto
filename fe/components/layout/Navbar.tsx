@@ -26,12 +26,14 @@ export default function Navbar() {
   const socialItems = [
     { href: "https://github.com", icon: Github, label: "GitHub" },
     { href: "https://linkedin.com", icon: Linkedin, label: "LinkedIn" },
-    {
-      href: "mailto:your@email.com",
-      icon: Mail,
-      label: "Email",
-    },
   ];
+
+  const scrollToContact = () => {
+    const contactSection = document.getElementById("contact");
+    if (contactSection) {
+      contactSection.scrollIntoView({ behavior: "smooth" });
+    }
+  };
 
   return (
     <>
@@ -58,11 +60,10 @@ export default function Navbar() {
           <motion.div
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
-            className="flex items-center gap-3 text-foreground/50 font-mono text-sm pointer-events-auto"
+            className="flex items-center text-foreground/75 font-mono text-sm pointer-events-auto"
           >
-            <Clock className="w-4 h-4" />
             <span suppressHydrationWarning>
-              {time.toLocaleTimeString("id-ID", {
+              {time.toLocaleTimeString("en-GB", {
                 hour: "2-digit",
                 minute: "2-digit",
                 second: "2-digit",
@@ -135,6 +136,17 @@ export default function Navbar() {
                 </a>
               </Magnetic>
             ))}
+            <Magnetic strength={0.05}>
+              <button
+                onClick={scrollToContact}
+                className="relative w-8 h-8 flex items-center justify-center rounded-full transition-all duration-300 group text-foreground/50 hover:text-foreground"
+              >
+                <Mail className="w-[18px] h-[18px] relative z-10 transition-transform duration-300 group-hover:scale-110" />
+                <div className="absolute -top-10 left-1/2 -translate-x-1/2 px-2 py-1 bg-foreground text-background text-[9px] font-bold rounded-lg opacity-0 group-hover:opacity-100 transition-all duration-300 pointer-events-none uppercase tracking-widest leading-none translate-y-2 group-hover:translate-y-0 shadow-lg border border-border/50">
+                  Email
+                </div>
+              </button>
+            </Magnetic>
           </div>
         </motion.nav>
       </div>

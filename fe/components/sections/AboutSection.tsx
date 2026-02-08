@@ -8,8 +8,18 @@ import Image from "next/image";
 
 export default function AboutSection() {
   return (
-    <section id="about-me" className="py-0 scroll-mt-24 mb-20">
-      <div className="max-w-4xl mx-auto px-4 md:px-0">
+    <section
+      id="about-me"
+      className="py-0 scroll-mt-24 mb-20 relative overflow-hidden"
+    >
+      {/* BACKGROUND TEXT */}
+      {/* <div className="absolute -top-10 left-1/2 -translate-x-1/2 select-none pointer-events-none -z-10 opacity-5">
+        <span className="text-[12rem] md:text-[20rem] font-black text-white tracking-tighter uppercase whitespace-nowrap">
+          About
+        </span>
+      </div> */}
+
+      <div className="max-w-4xl mx-auto px-4 md:px-0 relative">
         <div className="mb-5 flex items-center gap-6">
           <div className="h-px flex-1 bg-linear-to-r from-transparent to-white/20" />
           <h2 className="text-4xl md:text-5xl font-bold text-white tracking-tight shrink-0">

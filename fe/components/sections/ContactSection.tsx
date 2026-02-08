@@ -12,8 +12,18 @@ import {
 
 export default function ContactSection() {
   return (
-    <section id="contact" className="pt-8 scroll-mt-24 px-4 md:px-0">
-      <div className="max-w-6xl mx-auto">
+    <section
+      id="contact"
+      className="scroll-mt-24 px-4 md:px-0 relative overflow-hidden"
+    >
+      {/* BACKGROUND TEXT
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 select-none pointer-events-none -z-10 opacity-2">
+        <span className="text-[12rem] md:text-[25rem] font-black text-white tracking-tighter uppercase whitespace-nowrap">
+          Talk
+        </span>
+      </div> */}
+
+      <div className="max-w-4xl mx-auto px-4 md:px-0 relative">
         <div className="grid lg:grid-cols-2 gap-8 lg:gap-24 items-start">
           {/* Left Column: Contact Info */}
           <div className="space-y-8 md:space-y-10">

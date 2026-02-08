@@ -7,6 +7,7 @@ import { ArrowRight, ArrowDown } from "lucide-react";
 import AboutSection from "@/components/sections/AboutSection";
 import TechStack from "@/components/sections/TechStack";
 import ProjectsSection from "@/components/sections/ProjectsSection";
+import MarqueeSection from "@/components/sections/MarqueeSection";
 import ContactSection from "@/components/sections/ContactSection";
 import Image from "next/image";
 import { TypingAnimation } from "@/components/ui/typing-animation";
@@ -80,36 +81,6 @@ export default function Home() {
 
   return (
     <div className="space-y-16 pb-20 overflow-x-hidden relative">
-      {/* Immersive Background Blobs */}
-      <div className="fixed inset-0 pointer-events-none -z-20 overflow-hidden">
-        <motion.div
-          animate={{
-            x: [0, 100, 0],
-            y: [0, 50, 0],
-            scale: [1, 1.2, 1],
-          }}
-          transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-          className="absolute -top-[10%] -right-[10%] w-[600px] h-[600px] bg-blue-600/10 rounded-full blur-[120px]"
-        />
-        <motion.div
-          animate={{
-            x: [0, -80, 0],
-            y: [0, 100, 0],
-            scale: [1, 1.1, 1],
-          }}
-          transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
-          className="absolute top-[20%] -left-[10%] w-[500px] h-[500px] bg-indigo-600/10 rounded-full blur-[120px]"
-        />
-        <motion.div
-          animate={{
-            x: [0, 50, 0],
-            y: [0, -100, 0],
-          }}
-          transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
-          className="absolute bottom-[10%] left-[20%] w-[400px] h-[400px] bg-blue-500/5 rounded-full blur-[100px]"
-        />
-      </div>
-
       {/* Hero / About Section */}
       <section
         id="about"
@@ -175,7 +146,7 @@ export default function Home() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{
-                delay: 2.8, // Appears after role animation starts
+                delay: 2.5, // Appears after role animation starts
                 duration: 0.8,
                 ease: [0.22, 1, 0.36, 1],
               }}
@@ -315,44 +286,45 @@ export default function Home() {
       </motion.div>
 
       {/* Sections with Reveal Animation */}
-      <div className="max-w-4xl mx-auto px-4 md:px-0 space-y-0">
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.8 }}
-          className="mt-32"
-        >
-          <AboutSection />
-        </motion.div>
+      <motion.div
+        initial={{ opacity: 0, y: 40 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-100px" }}
+        transition={{ duration: 0.8 }}
+        className="mt-32"
+      >
+        <AboutSection />
+      </motion.div>
 
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 1 }}
-        >
-          <TechStack />
-        </motion.div>
+      <motion.div
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 1 }}
+      >
+        <TechStack />
+      </motion.div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.8 }}
-        >
-          <ProjectsSection />
-        </motion.div>
+      <motion.div
+        initial={{ opacity: 0, y: 40 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-100px" }}
+        transition={{ duration: 0.8 }}
+      >
+        <ProjectsSection />
+      </motion.div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.8 }}
-        >
-          <ContactSection />
-        </motion.div>
-      </div>
+      {/* Full Width Marquee - Outside Container */}
+      <MarqueeSection />
+
+      <motion.div
+        initial={{ opacity: 0, y: 40 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-100px" }}
+        transition={{ duration: 0.8 }}
+      >
+        <ContactSection />
+      </motion.div>
     </div>
   );
 }

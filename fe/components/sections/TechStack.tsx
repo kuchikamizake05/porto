@@ -44,8 +44,15 @@ const logos = [
 
 export default function TechStack() {
   return (
-    <section className="py-8 relative">
-      <div className="max-w-4xl mx-auto px-4 md:px-0 mb-15">
+    <section className="py-8 relative overflow-hidden">
+      {/* BACKGROUND TEXT */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 select-none pointer-events-none -z-10 opacity-2">
+        <span className="text-[12rem] md:text-[25rem] font-black text-white tracking-tighter uppercase whitespace-nowrap">
+          Stack
+        </span>
+      </div>
+
+      <div className="max-w-4xl mx-auto px-4 md:px-0 mb-15 relative">
         <div className="flex items-center gap-4">
           <div className="h-px flex-1 bg-gradient-to-r from-transparent to-white/10" />
           <h2 className="md:text-2xl text-xl font-bold text-center uppercase tracking-[0.4em] text-blue-500/60 transition-colors hover:text-blue-400">

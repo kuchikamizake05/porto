@@ -75,7 +75,7 @@ export default function ExperienceSection() {
                 className="flex flex-col md:flex-row gap-4 md:gap-14 relative group py-4"
               >
                 {/* Date Column */}
-                <div className="md:w-24 shrink-0 text-sm font-medium text-rose-400/80 text-center self-center leading-relaxed">
+                <div className="md:w-24 shrink-0 text-sm font-medium text-blue-400/80 text-center self-center leading-relaxed">
                   {exp.duration.split("-").map((d, i) => (
                     <div key={i}>
                       {d.trim()}
@@ -100,7 +100,7 @@ export default function ExperienceSection() {
 
                   {/* Solid Highlight Line (Static) */}
                   <div
-                    className={`w-[1px] absolute bg-rose-500 shadow-[0_0_8px_rgba(244,63,94,0.4)]
+                    className={`w-[1px] absolute bg-blue-400/80 shadow-[0_0_8px_rgba(244,63,94,0.4)]
                     ${
                       index === 0
                         ? "top-1/2 bottom-0"
@@ -112,12 +112,12 @@ export default function ExperienceSection() {
 
                   {/* Dot */}
                   <div className="flex items-center justify-center relative z-10 shrink-0 h-full">
-                    <div className="w-3 h-3 rounded-full bg-zinc-900 border-2 border-rose-500 shadow-[0_0_10px_rgba(244,63,94,0.4)]" />
+                    <div className="w-3 h-3 rounded-full bg-zinc-900 border-2 border-blue-400/80 shadow-[0_0_10px_rgba(244,63,94,0.4)]" />
                   </div>
                 </div>
 
                 {/* Content Card */}
-                <div className="flex-1 glass-card bg-zinc-900/40 p-6 rounded-[24px] border border-white/10 group-hover:border-rose-500 transition-all duration-300 flex items-center gap-5">
+                <div className="flex-1 glass-card bg-zinc-900/40 p-6 rounded-[24px] border border-white/10 group-hover:border-blue-400/80 transition-all duration-300 flex items-center gap-5">
                   {/* Logo - No Container box, just the image cropped */}
                   <div className="w-12 h-12 rounded-[5px] overflow-hidden shrink-0 transition-all duration-300 shadow-xl">
                     {exp.logoUrl ? (
@@ -137,7 +137,7 @@ export default function ExperienceSection() {
                     <h3 className="text-lg font-bold text-white transition-colors">
                       {exp.role}
                     </h3>
-                    <div className="text-rose-400/80 text-sm font-medium">
+                    <div className="text-blue-400/80 text-sm font-medium">
                       {exp.company}
                     </div>
                     <p className="text-zinc-400 text-sm leading-relaxed mt-2 font-light">

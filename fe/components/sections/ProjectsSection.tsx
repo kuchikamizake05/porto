@@ -31,20 +31,24 @@ export default function ProjectsSection() {
   return (
     <section
       id="projects"
-      className="py-12 scroll-mt-20 relative overflow-hidden"
+      className="pt-12 scroll-mt-20 relative overflow-hidden"
     >
-      {/* Aura */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-blue-600/[0.03] blur-[150px] rounded-full -z-10" />
+      {/* BACKGROUND TEXT */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 select-none pointer-events-none -z-10 opacity-2">
+        <span className="text-[12rem] md:text-[25rem] font-black text-white tracking-tighter uppercase whitespace-nowrap">
+          Works
+        </span>
+      </div>
 
-      <div className="w-full px-4 md:px-0">
+      <div className="max-w-4xl mx-auto px-4 md:px-0 relative">
         {/* Header */}
-        <div className="mb-10 space-y-4">
+        <div className="mb-4 space-y-4">
           <div className="flex items-center gap-4">
-            <h2 className="text-4xl md:text-5xl font-extrabold text-foreground tracking-tight leading-none shrink-0">
+            <h2 className="text-4xl md:text-5xl font-extrabold text-white tracking-tight leading-none shrink-0">
               Featured
               <span className="text-blue-500 font-bold italic">Work</span>
             </h2>
-            <div className="h-px flex-1 bg-gradient-to-r from-white/10 to-transparent" />
+            <div className="h-px flex-1 bg-linear-to-r from-white/10 to-transparent" />
           </div>
           <p className="text-lg md:text-xl text-muted-foreground font-light">
             A precision-focused selection of architectural digital experiences.
@@ -77,10 +81,10 @@ export default function ProjectsSection() {
                 href={project.repoUrl || "#"}
                 target={project.repoUrl ? "_blank" : undefined}
                 rel={project.repoUrl ? "noopener noreferrer" : undefined}
-                className="group block border-b-3 border-white/10 py-7 px-6 relative overflow-hidden transition-all duration-500 hover:border-blue-500/30"
+                className="group block border-b-3 border-white/15 py-7 px-6 relative overflow-hidden transition-all duration-500 hover:border-blue-500/30"
               >
                 {/* Background Color Change on Hover */}
-                <div className="absolute inset-0 bg-gradient-to-r from-blue-600/0 via-blue-600/5 to-blue-600/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                <div className="absolute inset-0 bg-linear-to-r from-blue-600/0 via-blue-600/8 to-blue-600/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
                 {/* Project Image - Full size with zoom effect on hover */}
                 {project.imageUrl && (
@@ -97,7 +101,7 @@ export default function ProjectsSection() {
                       }}
                     />
                     {/* Gradient mask: dark on left (protect text), transparent on right (show image) */}
-                    <div className="absolute inset-0 bg-gradient-to-r from-black via-black/90 to-black/60" />
+                    <div className="absolute inset-0 bg-linear-to-r from-black via-black/90 to-black/60" />
                   </div>
                 )}
 
@@ -139,9 +143,9 @@ export default function ProjectsSection() {
           <div className="mt-10 flex justify-center">
             <Link
               href="/projects"
-              className="relative h-[52px] px-8 rounded-full bg-gradient-to-b from-white/20 to-white/10 border border-white/10 text-white font-bold text-base tracking-wide flex items-center gap-2 overflow-hidden group hover:bg-white/10 transition-colors"
+              className="relative h-[52px] px-8 rounded-full bg-linear-to-b from-white/20 to-white/10 border border-white/10 text-white font-bold text-base tracking-wide flex items-center gap-2 overflow-hidden group hover:bg-white/10 transition-colors"
             >
-              <div className="absolute inset-0 bg-white/20 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700 skew-x-12" />
+              <div className="absolute inset-0 bg-white/20 -translate-x-full group-hover:translate-x-full transition-transform duration-700 skew-x-12" />
               <span className="relative z-10">See All Projects</span>
             </Link>
           </div>
