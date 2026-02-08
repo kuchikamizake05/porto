@@ -1,8 +1,37 @@
+# Dependencies
 node_modules/
-.env
-*.db
+
+# Next.js
 .next/
+out/
+
+# Prisma
 .prisma/
+*.db
+
+# Build
 dist/
+build/
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
 nul
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+
+# Env
+.env
+.env.local
+
+# Misc
 DEPLOYMENT.md
