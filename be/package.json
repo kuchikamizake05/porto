@@ -5,8 +5,8 @@
   "main": "dist/index.js",
   "scripts": {
     "dev": "tsx watch src/index.ts",
-    "build": "rm -rf dist && prisma generate && tsc",
-    "start": "node dist/index.js",
+    "build": "rm -rf dist && prisma generate && tsc && echo 'BUILD COMPLETE. CONTENTS OF DIST:' && ls -R dist",
+    "start": "node ./dist/index.js",
     "postinstall": "prisma generate"
   },
   "prisma": {
