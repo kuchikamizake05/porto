@@ -79,6 +79,20 @@ function AnimatedRole({
 export default function Home() {
   const profile = PROFILE; // Use static data directly
 
+  useEffect(() => {
+    const shouldScroll = sessionStorage.getItem("scrollToContact");
+    if (shouldScroll === "true") {
+      sessionStorage.removeItem("scrollToContact");
+      // Small delay to ensure the page layout is fully calculated
+      setTimeout(() => {
+        const contactSection = document.getElementById("contact");
+        if (contactSection) {
+          contactSection.scrollIntoView({ behavior: "smooth" });
+        }
+      }, 500);
+    }
+  }, []);
+
   return (
     <div className="space-y-16 pb-20 overflow-x-hidden relative">
       {/* Hero / About Section */}
@@ -111,7 +125,19 @@ export default function Home() {
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
               </span>
-              Long life learner
+              <motion.span
+                animate={{
+                  backgroundPosition: ["-200% 0", "200% 0"],
+                }}
+                transition={{
+                  duration: 10,
+                  repeat: Infinity,
+                  ease: "linear",
+                }}
+                className="bg-clip-text text-transparent bg-linear-to-r from-blue-500 via-blue-300 to-blue-500 bg-size-[200%_100%]"
+              >
+                Long life learner
+              </motion.span>
             </motion.div>
 
             {/* Name & Title */}

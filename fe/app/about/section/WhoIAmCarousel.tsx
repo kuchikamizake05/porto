@@ -11,12 +11,12 @@ const slides = [
     icon: User,
     content: (
       <div className="space-y-4">
-        <p className="text-zinc-300 font-light leading-relaxed text-xl">
+        <p className="text-zinc-300 font-light leading-relaxed md:text-lg text-base">
           As a <span className="text-white font-medium">Digital Architect</span>
           , I specialize in building high-end interactive experiences that merge
           technical precision with aesthetic excellence.
         </p>
-        <p className="text-zinc-400 font-light leading-relaxed text-lg">
+        <p className="text-zinc-400 font-light leading-relaxed text-medium">
           My background in Information Engineering provides the foundation for
           solving complex structural challenges, while my passion for design
           ensures every interface feels alive.
@@ -31,7 +31,7 @@ const slides = [
     icon: Quote,
     content: (
       <div className="flex flex-col justify-center h-full">
-        <blockquote className="text-2xl md:text-2xl font-light text-white italic leading-relaxed relative">
+        <blockquote className="text-xl md:text-2xl font-light text-white italic leading-relaxed relative">
           <span className="text-white absolute font-bold -top-4 -left-2 text-xl opacity-30">
             "
           </span>
@@ -49,7 +49,7 @@ const slides = [
     icon: Target,
     content: (
       <div className="space-y-6">
-        <p className="text-zinc-300 text-xl">
+        <p className="text-zinc-300 md:text-lg text-base">
           I am driven by a relentless pursuit of{" "}
           <span className="text-white">innovation</span>. My ambition extends
           beyond just building websites; I aim to:
@@ -108,7 +108,7 @@ export default function WhoIAmCarousel() {
           <div className="p-2 rounded-xl bg-white/5 border border-white/10">
             <slide.icon className="w-5 h-5 text-white" />
           </div>
-          <h2 className="text-xl font-bold text-white uppercase tracking-widest">
+          <h2 className="text-lg font-bold uppercase text-white tracking-widest">
             {slide.title}
           </h2>
         </div>

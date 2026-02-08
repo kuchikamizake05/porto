@@ -2,13 +2,14 @@
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 import { motion } from "framer-motion";
 import { User, Home, Clock, Github, Linkedin, Code, Mail } from "lucide-react";
 import Magnetic from "../ui/Magnetic";
 import Image from "next/image";
 
 export default function Navbar() {
+  const router = useRouter();
   const pathname = usePathname();
   const [time, setTime] = useState(new Date());
 
@@ -18,7 +19,7 @@ export default function Navbar() {
   }, []);
 
   const navItems = [
-    { href: "/#", icon: Home, label: "Home" },
+    { href: "/", icon: Home, label: "Home" },
     { href: "/about", icon: User, label: "About" },
     { href: "/projects", icon: Code, label: "Projects" },
   ];
@@ -32,6 +33,9 @@ export default function Navbar() {
     const contactSection = document.getElementById("contact");
     if (contactSection) {
       contactSection.scrollIntoView({ behavior: "smooth" });
+    } else {
+      sessionStorage.setItem("scrollToContact", "true");
+      router.push("/");
     }
   };
 

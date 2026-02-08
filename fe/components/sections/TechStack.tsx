@@ -16,17 +16,22 @@ import Marquee from "@/components/ui/Marquee";
 // } from "lucide-react";
 
 const logos = [
-  { icon: "devicon-nextjs-original", color: "text-white" },
   { icon: "devicon-python-plain", color: "text-blue-500" },
   { icon: "devicon-tailwindcss-plain", color: "text-sky-400" },
   { icon: "devicon-typescript-plain", color: "text-blue-600" },
   { icon: "devicon-nodejs-plain", color: "text-green-500" },
   { icon: "devicon-mysql-plain", color: "text-indigo-500" },
   { icon: "devicon-docker-plain", color: "text-blue-400" },
-  { icon: "devicon-firebase-plain", color: "text-orange-500" },
-  { icon: "devicon-cplusplus-plain", color: "text-yellow-500" },
+  { icon: "devicon-supabase-plain", color: "text-green-500" },
+  { icon: "devicon-cplusplus-plain", color: "text-blue-500" },
   { icon: "devicon-javascript-plain", color: "text-yellow-400" },
   { icon: "devicon-github-original", color: "text-white" },
+  { icon: "devicon-react-original", color: "text-blue-500" },
+  { icon: "devicon-mongodb-plain", color: "text-green-500" },
+  { icon: "devicon-amazonwebservices-plain", color: "text-white" },
+  { icon: "devicon-git-plain", color: "text-red-500" },
+  { icon: "devicon-nextjs-plain", color: "text-white" },
+  { icon: "devicon-googlecloud-plain", color: "text-white" },
 ];
 
 // const logos = [
@@ -55,7 +60,7 @@ export default function TechStack() {
       <div className="max-w-4xl mx-auto px-4 md:px-0 mb-15 relative">
         <div className="flex items-center gap-4">
           <div className="h-px flex-1 bg-gradient-to-r from-transparent to-white/10" />
-          <h2 className="md:text-2xl text-xl font-bold text-center uppercase tracking-[0.4em] text-blue-500/60 transition-colors hover:text-blue-400">
+          <h2 className="md:text-2xl text-xl font-extrabold text-center uppercase tracking-[0.4em] text-blue-500/80 transition-colors hover:text-blue-400">
             Professional Stack
           </h2>
           <div className="h-px flex-1 bg-gradient-to-l from-transparent to-white/10" />
@@ -89,7 +94,7 @@ export default function TechStack() {
                   className={`
     ${logo.icon}
     ${logo.color}
-    text-6xl
+    text-7xl
     transition-all duration-700
     group-hover:scale-125
     drop-shadow-[0_0_8px_rgba(37,99,235,0.2)]
@@ -102,7 +107,7 @@ export default function TechStack() {
         </Marquee>
 
         <Marquee
-          speed={25}
+          speed={30}
           direction="right"
           className="py-8 hover:[animation-play-state:paused]"
         >
@@ -128,7 +133,7 @@ export default function TechStack() {
                   className={`
     ${logo.icon}
     ${logo.color}
-    md:text-6xl text-4xl
+    text-7xl
     transition-all duration-700
     group-hover:scale-125
     drop-shadow-[0_0_8px_rgba(37,99,235,0.2)]

@@ -25,9 +25,9 @@ export default function ProjectPageCard({
 
   return (
     <motion.div
-      whileHover={{ y: -8 }}
-      transition={{ duration: 0.3, ease: "easeOut" }}
-      className="glass-card rounded-[16px] p-5 flex flex-col h-full border border-white/5 hover:border-blue-500/20 hover:shadow-[0_0_50px_rgba(37,99,235,0.05)] transition-all duration-500 group"
+      whileHover={{ y: -3 }}
+      transition={{ duration: 0.01, ease: "easeOut" }}
+      className="glass-card rounded-[16px] p-5 flex flex-col h-full border border-white/10 hover:border-blue-500/30 hover:shadow-[0_0_50px_rgba(37,99,235,0.05)] transition-all duration-500 group"
     >
       {/* Thumbnail */}
       <div className="relative aspect-[16/10] w-full overflow-hidden rounded-[16px] bg-white/5">
@@ -61,7 +61,7 @@ export default function ProjectPageCard({
           {techArray.slice(0, 3).map((t) => (
             <span
               key={t}
-              className="px-3 py-1 bg-white/[0.03] text-zinc-500 rounded-lg text-[9px] font-bold uppercase tracking-wider border border-white/5"
+              className="px-3 py-1 bg-linear-to-b from-white/10 to-white/5 text-zinc-500 rounded-lg text-[9px] font-bold uppercase tracking-wider border border-white/8"
             >
               {t}
             </span>
@@ -72,13 +72,13 @@ export default function ProjectPageCard({
         <div className="flex items-center gap-2 mt-auto pt-4">
           <a
             href={siteUrl || "#"}
-            className="flex-1 h-[35px] flex items-center justify-center bg-blue-600 text-white rounded-xl text-[8px] font-bold uppercase tracking-wider transition-all hover:bg-blue-500 shadow-[0_0_20px_rgba(37,99,235,0.2)]"
+            className="flex-1 h-[35px] flex items-center justify-center bg-linear-to-b from-blue-500/90 to-blue-700/90 text-white rounded-xl text-[8px] font-bold uppercase tracking-wider transition-all hover:bg-blue-200 shadow-[0_0_20px_rgba(37,99,235,0.2)]"
           >
             Visit Site
           </a>
           <a
             href={repoUrl || "#"}
-            className="flex-[1.2] h-[35px] flex items-center justify-center bg-white/5 border border-white/10 text-white rounded-xl text-[8px] font-bold uppercase tracking-wider transition-all hover:bg-white/10"
+            className="flex-[1.2] h-[35px] flex items-center justify-center bg-linear-to-b from-white/10 to-white/5 border border-white/5 text-white rounded-xl text-[8px] font-bold uppercase tracking-wider transition-all hover:bg-white/5"
           >
             Source Code
           </a>

@@ -34,7 +34,7 @@ export default function ContactForm() {
         <div className="space-y-2">
           <input
             placeholder="Your name"
-            className="w-full h-[48px] bg-white/5 border border-white/10 rounded-xl px-4 focus:border-blue-500 focus:bg-white/10 transition-all outline-hidden text-white placeholder:text-zinc-500 text-sm font-medium"
+            className="w-full h-[48px] bg-white/5 border border-white/10 rounded-xl px-4 focus:border-zinc-500/50 focus:bg-white/10 transition-all outline-hidden text-white placeholder:text-zinc-500 text-sm font-medium"
             value={name}
             onChange={(e) => setName(e.target.value)}
             required
@@ -46,7 +46,7 @@ export default function ContactForm() {
           <input
             type="email"
             placeholder="Your email"
-            className="w-full h-[48px] bg-white/5 border border-white/10 rounded-xl px-4 focus:border-blue-500 focus:bg-white/10 transition-all outline-hidden text-white placeholder:text-zinc-500 text-sm font-medium"
+            className="w-full h-[48px] bg-white/5 border border-white/10 rounded-xl px-4  focus:bg-white/10 focus:border-zinc-500/50 transition-all outline-hidden text-white placeholder:text-zinc-500 text-sm font-medium"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
@@ -57,7 +57,7 @@ export default function ContactForm() {
         <div className="space-y-2">
           <textarea
             placeholder="Your message"
-            className="w-full h-[120px] bg-white/5 border border-white/10 rounded-xl px-4 py-3 focus:border-blue-500 focus:bg-white/10 transition-all outline-hidden text-white placeholder:text-zinc-500 text-sm font-medium resize-none"
+            className="w-full h-[120px] bg-white/5 border border-white/10 rounded-xl px-4 py-3 focus:bg-white/10 focus:border-zinc-500/50 transition-all outline-hidden text-white placeholder:text-zinc-500 text-sm font-medium resize-none"
             value={message}
             onChange={(e) => setMessage(e.target.value)}
             required
@@ -68,7 +68,7 @@ export default function ContactForm() {
       <button
         type="submit"
         disabled={loading}
-        className="relative w-full h-[45px] rounded-full bg-linear-to-b from-blue-500 to-indigo-700 hover:bg-linear-to-b from-blue-400 to-indigo-600 text-white font-bold tracking-wide transition-all shadow-[0_0_30px_rgba(37,99,235,0.15)] hover:shadow-[0_0_40px_rgba(37,99,235,0.3)] disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 group overflow-hidden"
+        className="relative w-full h-[45px] rounded-full bg-linear-to-b from-blue-500 to-blue-700 hover:bg-linear-to-b from-blue-400 to-blue-600 text-white font-bold tracking-wide transition-all shadow-[0_0_30px_rgba(37,99,235,0.15)] hover:shadow-[0_0_40px_rgba(37,99,235,0.3)] disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 group overflow-hidden"
       >
         <div className="absolute inset-0 bg-white/20 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700 skew-x-12" />
 

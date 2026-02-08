@@ -23,28 +23,28 @@ export default function AboutPage() {
       icon: Github,
       href: "https://github.com",
       className:
-        "bg-white/5 border border-white/10 text-zinc-400 hover:bg-black hover:text-white hover:border-white/25",
+        "bg-white/5 border border-white/5 text-zinc-400 hover:bg-black hover:text-white hover:border-white/5",
     },
     {
       label: "LinkedIn",
       icon: Linkedin,
       href: "https://linkedin.com",
       className:
-        "bg-white/5 border border-white/10 text-zinc-400 hover:bg-[#0077b5] hover:text-white hover:border-[#0077b5]/50",
+        "bg-white/5 border border-white/5 text-zinc-400 hover:bg-[#0077b5] hover:text-white hover:border-[#0077b5]/50",
     },
     {
       label: "Twitter",
       icon: Twitter,
       href: "https://twitter.com",
       className:
-        "bg-white/5 border border-white/10 text-zinc-400 hover:bg-[#1DA1F2] hover:text-white hover:border-[#1DA1F2]/50",
+        "bg-white/5 border border-white/5 text-zinc-400 hover:bg-[#1DA1F2] hover:text-white hover:border-[#1DA1F2]/50",
     },
     {
       label: "Email",
       icon: Mail,
       href: "mailto:hello@example.com",
       className:
-        "bg-white/5 border border-white/10 text-zinc-400 hover:bg-orange-500 hover:text-white hover:border-orange-500/50",
+        "bg-white/5 border border-white/5 text-zinc-400 hover:bg-orange-500 hover:text-white hover:border-orange-500/50",
     },
   ];
 
@@ -59,7 +59,7 @@ export default function AboutPage() {
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.5 }}
-            className="col-span-12 lg:col-span-8 glass-card rounded-[32px] p-6 md:p-8 flex flex-col justify-between h-full border border-white/5 relative overflow-hidden group"
+            className="col-span-12 lg:col-span-8 glass-card rounded-[32px] p-6 md:p-7 flex flex-col justify-between h-full border border-white/5 relative overflow-hidden group"
           >
             {/* Soft background glow */}
             <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-blue-600/10 blur-[120px] rounded-full -z-10" />
@@ -67,8 +67,11 @@ export default function AboutPage() {
             <div className="space-y-6 relative z-10">
               {/* Intro Text */}
               <div className="space-y-4">
-                <h1 className="text-2xl md:text-4xl font-extrabold text-white tracking-tight">
-                  Hi, I'm <span className="text-blue-400">Faaid Sakhaa</span>
+                <h1 className="text-3xl md:text-4xl italic font-light text-zinc-400 tracking-tight">
+                  Hi, I'm{" "}
+                  <span className="font-extrabold not-italic text-white">
+                    Faaid <span className="text-blue-500">Sakhaa</span>
+                  </span>
                 </h1>
                 <p className="text-base md:text-lg text-zinc-400 font-light leading-relaxed max-w-xl">
                   I am a developer with a strong focus on building
@@ -84,10 +87,10 @@ export default function AboutPage() {
             </div>
 
             {/* Action Buttons */}
-            <div className="flex flex-wrap gap-4 mt-5 relative z-10">
+            <div className="flex flex-wrap gap-4 mt-5 md:mt-4 relative z-10">
               <a
                 href="/resume.pdf"
-                className="relative h-[46px] px-8 rounded-2xl border border-white/10 text-white font-bold text-xs md:text-sm tracking-wide flex items-center gap-4 overflow-hidden group/btn bg-linear-to-b from-white/10 to-white/5"
+                className="relative h-[46px] px-8 rounded-2xl border border-white/5 text-white font-bold text-sm md:text-sm tracking-wide flex items-center gap-4 overflow-hidden group/btn bg-linear-to-b from-white/10 to-white/5"
               >
                 <div className="absolute inset-0 bg-white translate-y-[101%] group-hover/btn:translate-y-0 transition-transform duration-300 ease-out" />
                 <FileText className="w-4 h-4 relative z-10 group-hover/btn:text-black transition-colors duration-300" />
@@ -99,7 +102,7 @@ export default function AboutPage() {
           </motion.div>
 
           {/* Social Grid (Col 12 on mobile, Col 4 on desktop) */}
-          <div className="col-span-12 lg:col-span-4 grid grid-cols-4 md:grid-cols-2 gap-6 h-full">
+          <div className="col-span-12 lg:col-span-4 grid grid-cols-4 md:grid-cols-2 gap-4 md:gap-6 h-full">
             {socialActions.map((action, idx) => (
               <motion.a
                 key={action.label}
@@ -113,7 +116,7 @@ export default function AboutPage() {
                   duration: 0.01,
                   ease: "easeOut",
                 }}
-                className={`rounded-[32px] flex flex-col items-center justify-center transition-all duration-300 ${action.className} aspect-square w-full shadow-lg group relative overflow-hidden`}
+                className={`rounded-[24px] md:rounded-[32px] flex flex-col items-center justify-center transition-all duration-300 ${action.className} aspect-square w-full shadow-lg group relative overflow-hidden bg-linear-to-b from-white/5 to-transparent`}
               >
                 <action.icon className="w-7 h-7 md:w-12 md:h-12 transition-transform duration-500 group-hover:scale-110" />
               </motion.a>

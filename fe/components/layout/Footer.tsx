@@ -36,7 +36,7 @@ export default function Footer() {
           {/* UTAMA */}
           <div className="space-y-4">
             <h4 className="text-white text-xl font-semibold">Quick Links</h4>
-            <ul className="space-y-3 text-base">
+            <ul className="space-y-3 text-base text-zinc-400">
               <li>
                 <Link href="#" className="hover:text-white">
                   Home
@@ -63,7 +63,7 @@ export default function Footer() {
           {/* KOMUNITAS */}
           <div className="space-y-4">
             <h4 className="text-white text-xl font-semibold">Contact</h4>
-            <ul className="space-y-3 text-base">
+            <ul className="space-y-3 text-base text-zinc-400">
               <li>
                 <Link href="#" className="hover:text-white">
                   Email
@@ -85,7 +85,7 @@ export default function Footer() {
           {/* RESOURCES */}
           <div className="space-y-4">
             <h4 className="text-white text-xl font-semibold">Socials</h4>
-            <ul className="space-y-3 text-base">
+            <ul className="space-y-3 text-base text-zinc-400">
               <li>
                 <Link href="#" className="hover:text-white">
                   Github

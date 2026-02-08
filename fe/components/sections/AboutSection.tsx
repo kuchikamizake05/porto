@@ -65,7 +65,7 @@ export default function AboutSection() {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="w-full md:w-80 order-1 md:order-2"
           >
-            <div className=" p-0  space-y-6">
+            <div className="space-y-6">
               {/* LOGO + NAME */}
               <div className="flex flex-col items-center gap-1 p-6 md:p-4 lg:p-0">
                 <div className="w-32 md:w-48 lg:w-50">
@@ -77,7 +77,7 @@ export default function AboutSection() {
                     className="w-full h-auto opacity-100"
                   />
                 </div>
-                <span className=" text-2xl md:text-2xl font-medium tracking-wide text-white">
+                <span className="md:text-2xl font-medium tracking-wide text-white">
                   Kuchikamizake<span className="text-blue-400">.</span>
                 </span>
               </div>
