@@ -12,8 +12,8 @@ RUN npm ci
 # Copy source and config files
 COPY . .
 
-# Generate Prisma client, compile TypeScript, and copy Prisma package.json
-RUN npx prisma generate && npx tsc && cp src/generated/prisma/package.json dist/generated/prisma/package.json
+# Generate Prisma client, compile TypeScript, and copy generated Prisma client as-is
+RUN npx prisma generate && npx tsc && cp -r src/generated dist/generated
 
 # ---- Production Stage ----
 FROM node:22-slim
