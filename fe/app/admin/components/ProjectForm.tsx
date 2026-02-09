@@ -10,6 +10,7 @@ type ProjectFormProps = {
     title: string;
     description: string;
     tech: string;
+    category?: string;
     imageUrl?: string;
     repoUrl?: string;
     siteUrl?: string;
@@ -23,6 +24,7 @@ export default function ProjectForm({ initialData, isEdit }: ProjectFormProps) {
     title: initialData?.title || "",
     description: initialData?.description || "",
     tech: initialData?.tech || "",
+    category: initialData?.category || "WEBSITE",
     imageUrl: initialData?.imageUrl || "",
     repoUrl: initialData?.repoUrl || "",
     siteUrl: initialData?.siteUrl || "",
@@ -101,6 +103,21 @@ export default function ProjectForm({ initialData, isEdit }: ProjectFormProps) {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="space-y-3 text-sm">
+            <label className="block font-bold text-gray-400">Category</label>
+            <select
+              className={inputClass}
+              value={formData.category}
+              onChange={(e) =>
+                setFormData({ ...formData, category: e.target.value })
+              }
+            >
+              <option value="WEBAPP">WEBAPP</option>
+              <option value="WEBSITE">WEBSITE</option>
+              <option value="UI/UX">UI/UX</option>
+              <option value="GRAPHIC">GRAPHIC</option>
+            </select>
+          </div>
           <div className="space-y-3 text-sm">
             <label className="block font-bold text-gray-400">
               Image URL (optional)
