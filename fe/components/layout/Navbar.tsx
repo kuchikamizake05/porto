@@ -25,8 +25,16 @@ export default function Navbar() {
   ];
 
   const socialItems = [
-    { href: "https://github.com", icon: Github, label: "GitHub" },
-    { href: "https://linkedin.com", icon: Linkedin, label: "LinkedIn" },
+    {
+      href: "https://github.com/kuchikamizake05",
+      icon: Github,
+      label: "GitHub",
+    },
+    {
+      href: "https://linkedin.com/in/faaid-sakhaa",
+      icon: Linkedin,
+      label: "LinkedIn",
+    },
   ];
 
   const scrollToContact = () => {
