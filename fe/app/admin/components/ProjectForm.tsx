@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { apiPost, apiPut } from "../../lib/api";
+import { motion } from "framer-motion";
 
 type ProjectFormProps = {
   initialData?: {
@@ -57,7 +58,7 @@ export default function ProjectForm({ initialData, isEdit }: ProjectFormProps) {
   return (
     <form
       onSubmit={handleSubmit}
-      className="bg-white/[0.02] border border-white/5 rounded-2xl overflow-hidden"
+      className="bg-white/2 border border-white/5 rounded-2xl overflow-hidden"
     >
       <div className="p-8 space-y-6">
         <div className="space-y-3 text-sm">
@@ -102,22 +103,36 @@ export default function ProjectForm({ initialData, isEdit }: ProjectFormProps) {
           />
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div className="space-y-3 text-sm">
-            <label className="block font-bold text-gray-400">Category</label>
-            <select
-              className={inputClass}
-              value={formData.category}
-              onChange={(e) =>
-                setFormData({ ...formData, category: e.target.value })
-              }
-            >
-              <option value="WEBAPP">WEBAPP</option>
-              <option value="WEBSITE">WEBSITE</option>
-              <option value="UI/UX">UI/UX</option>
-              <option value="GRAPHIC">GRAPHIC</option>
-            </select>
+        <div className="space-y-4">
+          <label className="block text-sm font-bold text-gray-400">
+            Project Category
+          </label>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+            {["WEBAPP", "WEBSITE", "UI/UX", "GRAPHIC"].map((cat) => (
+              <button
+                key={cat}
+                type="button"
+                onClick={() => setFormData({ ...formData, category: cat })}
+                className={`relative px-4 py-3 rounded-xl text-[10px] font-bold tracking-widest border transition-all duration-300 ${
+                  formData.category === cat
+                    ? "bg-blue-600/10 border-blue-500 text-blue-400 shadow-[0_0_20px_rgba(37,99,235,0.1)]"
+                    : "bg-white/5 border-white/10 text-gray-500 hover:border-white/20 hover:text-gray-300"
+                }`}
+              >
+                {formData.category === cat && (
+                  <motion.div
+                    layoutId="activeCategory"
+                    className="absolute inset-0 border-2 border-blue-500 rounded-xl"
+                    transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
+                  />
+                )}
+                <span className="relative z-10">{cat}</span>
+              </button>
+            ))}
           </div>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <div className="space-y-3 text-sm">
             <label className="block font-bold text-gray-400">
               Image URL (optional)
@@ -163,7 +178,7 @@ export default function ProjectForm({ initialData, isEdit }: ProjectFormProps) {
         </div>
       </div>
 
-      <div className="px-8 py-6 bg-white/[0.02] border-t border-white/5 flex items-center justify-end gap-4">
+      <div className="px-8 py-6 bg-white/2 border-t border-white/5 flex items-center justify-end gap-4">
         <button
           type="button"
           onClick={() => router.back()}
