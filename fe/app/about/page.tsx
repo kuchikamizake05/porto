@@ -89,13 +89,13 @@ export default function AboutPage() {
             {/* Action Buttons */}
             <div className="flex flex-wrap gap-4 mt-5 md:mt-4 relative z-10">
               <a
-                href="/resume.pdf"
+                href="https://docs.google.com/document/d/1Univan3qBfnbOra76fo93O1Zp722AIEr/edit?usp=sharing&ouid=116298138350179963444&rtpof=true&sd=true"
                 className="relative h-[46px] px-8 rounded-2xl border border-white/5 text-white font-bold text-sm md:text-sm tracking-wide flex items-center gap-4 overflow-hidden group/btn bg-linear-to-b from-white/10 to-white/5"
               >
                 <div className="absolute inset-0 bg-white translate-y-[101%] group-hover/btn:translate-y-0 transition-transform duration-300 ease-out" />
                 <FileText className="w-4 h-4 relative z-10 group-hover/btn:text-black transition-colors duration-300" />
                 <span className="relative z-10 group-hover/btn:text-black transition-colors duration-300">
-                  Download Curriculum Vitae
+                  Curriculum Vitae
                 </span>
               </a>
             </div>
