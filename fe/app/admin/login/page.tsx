@@ -13,8 +13,9 @@ export default function LoginPage() {
 
     if (password === "admin123") {
       // Set cookie with proper attributes for production (HTTPS)
-      document.cookie = "admin_auth=true; path=/; SameSite=Lax; Secure; max-age=86400";
-    
+      document.cookie =
+        "admin_auth=true; path=/; SameSite=Lax; Secure; max-age=86400";
+
       // Use window.location for full page rload to ensure cookie is set
       window.location.href = "/admin";
     } else {
@@ -63,7 +64,7 @@ export default function LoginPage() {
 
             <button
               type="submit"
-              className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-3 sm:py-3.5 rounded-xl transition-all shadow-[0_0_25px_rgba(37,99,235,0.3)] relative overflow-hidden group"
+              className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-3 sm:py-3.5 rounded-xl transition-all shadow-[0_0_25px_rgba(37,99,235,0.3)] relative overflow-hidden group hover:cursor-pointer"
             >
               <div className="absolute inset-0 bg-white/20 -translate-x-full group-hover:translate-x-full transition-transform duration-700 skew-x-12" />
               <span className="relative z-10">Masuk</span>
