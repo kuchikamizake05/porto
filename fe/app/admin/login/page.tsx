@@ -14,7 +14,9 @@ export default function LoginPage() {
     if (password === "admin123") {
       // Set cookie with proper attributes for production (HTTPS)
       document.cookie = "admin_auth=true; path=/; SameSite=Lax; Secure; max-age=86400";
-      router.push("/admin");
+    
+      // Use window.location for full page rload to ensure cookie is set
+      window.location.href = "/admin";
     } else {
       setError("Password salah!");
     }
