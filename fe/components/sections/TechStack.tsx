@@ -49,7 +49,7 @@ const logos = [
 
 export default function TechStack() {
   return (
-    <section className="md:pt-8 py-5 relative overflow-hidden">
+    <section className="md:pt-12 py-5 relative overflow-hidden">
       {/* BACKGROUND TEXT */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 select-none pointer-events-none -z-10 opacity-2">
         <span className="text-[15rem] md:text-[25rem] font-black text-white tracking-tighter uppercase whitespace-nowrap">
