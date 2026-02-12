@@ -69,7 +69,7 @@ function AnimatedRole({
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6 }}
-      className="text-xl md:text-3xl font-medium text-transparent bg-clip-text bg-linear-to-r from-blue-400 via-indigo-300 to-blue-500"
+      className="text-xl md:text-3xl font-medium text-transparent bg-clip-text bg-linear-to-r from-blue-400 via-blue-300 to-blue-500"
     >
       {roles[index]}
     </motion.p>
