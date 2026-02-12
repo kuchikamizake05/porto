@@ -38,3 +38,6 @@ DEPLOYMENT.md
 
 # Backend folder (archived, migrated to Next.js API routes)
 be
+
+# VSCode settings (personal preferences)
+.vscode
