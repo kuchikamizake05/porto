@@ -1,38 +1,17 @@
 # Portfolio Website
 
-Portfolio website built with Next.js (frontend) and Express.js (backend).
+Modern portfolio website built with Next.js and deployed on Vercel.
 
 ## 🚀 Tech Stack
 
-### Frontend
 - **Framework:** Next.js 16 (React 19)
 - **Styling:** Tailwind CSS v4
 - **Animations:** Framer Motion
-- **Icons:** Lucide React
+- **Database:** Turso (libSQL)
+- **ORM:** Prisma
 - **Language:** TypeScript
 
-### Backend
-- **Framework:** Express.js
-- **Database:** SQLite with Prisma ORM
-- **Language:** TypeScript
-- **CORS:** Enabled for cross-origin requests
-
-## 📦 Project Structure
-
-```
-porto/
-├── fe/          # Frontend (Next.js)
-├── be/          # Backend (Express.js)
-└── README.md
-```
-
-## 🛠️ Local Development
-
-### Prerequisites
-- Node.js 20+ 
-- npm or yarn
-
-### Frontend Setup
+## 📦 Quick Start
 
 ```bash
 cd fe
@@ -40,71 +19,34 @@ npm install
 npm run dev
 ```
 
-Frontend will run on `http://localhost:3000`
+Visit `http://localhost:3000`
 
-### Backend Setup
+## 🔧 Environment Variables
 
-```bash
-cd be
-npm install
-npm run dev
-```
-
-Backend will run on `http://localhost:8000`
-
-### Environment Variables
-
-Create a `.env` file in the `be` directory:
+Create `.env` in the `fe/` directory:
 
 ```env
-DATABASE_URL="file:./dev.db"
+DATABASE_URL=your_turso_database_url
+DATABASE_AUTH_TOKEN=your_turso_auth_token
 ```
 
-## 🚀 Production Build
+## 📝 API Routes
 
-### Frontend
-```bash
-cd fe
-npm run build
-npm start
-```
+All API routes are serverless functions in `fe/app/api/`:
 
-### Backend
-```bash
-cd be
-npm run build
-npm start
-```
-
-## 📝 API Endpoints
-
-- `GET /` - Health check
-- `GET /profile` - Get profile information
-- `GET /projects` - Get all projects
-- `GET /experiences` - Get work experiences
-- `POST /contact` - Submit contact form
+- `GET /api/health` - Health check
+- `GET /api/projects` - Get all projects
+- `GET /api/experiences` - Get work experiences
+- `GET /api/education` - Get education history
+- `POST /api/contact` - Submit contact form
 
 ## 🌐 Deployment
 
-### Recommended Platforms
+Deployed on **Vercel** with automatic deployments from GitHub.
 
-**Frontend (Next.js):**
-- Vercel (recommended)
-- Netlify
-- Railway
-
-**Backend (Express):**
-- Railway
-- Render
-- Fly.io
-- Heroku
-
-### Environment Variables for Production
-
-Make sure to set these in your deployment platform:
-- `DATABASE_URL` - Production database URL
-- `NODE_ENV=production`
-- `PORT` - Backend port (usually auto-assigned)
+**Environment variables needed:**
+- `DATABASE_URL`
+- `DATABASE_AUTH_TOKEN`
 
 ## 👤 Author
 
@@ -114,4 +56,4 @@ Make sure to set these in your deployment platform:
 
 ## 📄 License
 
-This project is open source and available under the MIT License.
+MIT License
