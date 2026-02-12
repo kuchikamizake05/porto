@@ -1,7 +1,0 @@
-node_modules
-dist
-*.md
-.env
-.env.*
-.git
-.gitignore
