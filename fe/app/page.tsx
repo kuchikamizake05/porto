@@ -183,7 +183,7 @@ export default function Home() {
                   href="/projects"
                   className="relative h-[46px] px-6 rounded-full bg-linear-to-b from-blue-500  to-blue-700 text-white text-sm font-bold hover:bg-linear-to-b hover:from-blue-400 hover:to-blue-600 transition-all shadow-[0_0_30px_rgba(37,99,235,0.15)] flex items-center gap-2 group overflow-hidden"
                 >
-                  <div className="absolute inset-0 bg-white/20 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700 skew-x-12" />
+                  <div className="absolute inset-0 bg-white/20 translate-x-[-100%] group-hover:translate-x-full transition-transform duration-700 skew-x-12" />
                   View Projects
                   <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </Link>

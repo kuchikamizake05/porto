@@ -56,7 +56,7 @@ export default function ExperienceForm({
   return (
     <form
       onSubmit={handleSubmit}
-      className="bg-white/[0.02] border border-white/5 rounded-2xl overflow-hidden"
+      className="bg-white/2 border border-white/5 rounded-2xl overflow-hidden"
     >
       <div className="p-8 space-y-6">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -137,7 +137,7 @@ export default function ExperienceForm({
         </div>
       </div>
 
-      <div className="px-8 py-6 bg-white/[0.02] border-t border-white/5 flex items-center justify-end gap-4">
+      <div className="px-8 py-6 bg-white/2 border-t border-white/5 flex items-center justify-end gap-4">
         <button
           type="button"
           onClick={() => router.back()}

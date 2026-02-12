@@ -46,7 +46,7 @@ export default function AdminSidebar() {
               href={item.href}
               className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-300 group relative overflow-hidden ${
                 isActive
-                  ? "bg-gradient-to-r from-blue-600 to-blue-700 text-white shadow-[0_0_30px_rgba(37,99,235,0.25)] font-semibold"
+                  ? "bg-linear-to-r from-blue-600 to-blue-700 text-white shadow-[0_0_30px_rgba(37,99,235,0.25)] font-semibold"
                   : "text-gray-500 hover:text-white hover:bg-white/5"
               }`}
             >

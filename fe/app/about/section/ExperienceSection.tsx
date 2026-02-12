@@ -88,7 +88,7 @@ export default function ExperienceSection() {
                 <div className="hidden md:flex flex-col items-center absolute left-[113px] top-0 bottom-0 pointer-events-none">
                   {/* Unified Static Line */}
                   <div
-                    className={`w-[1px] absolute bg-white/10 
+                    className={`w-1px absolute bg-white/10 
                     ${
                       index === 0
                         ? "top-1/2 bottom-0"
@@ -100,7 +100,7 @@ export default function ExperienceSection() {
 
                   {/* Solid Highlight Line (Static) */}
                   <div
-                    className={`w-[1px] absolute bg-blue-400/80 shadow-[0_0_8px_rgba(244,63,94,0.4)]
+                    className={`w-1px absolute bg-blue-400/80 shadow-[0_0_8px_rgba(244,63,94,0.4)]
                     ${
                       index === 0
                         ? "top-1/2 bottom-0"

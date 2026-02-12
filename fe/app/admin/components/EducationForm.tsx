@@ -162,7 +162,7 @@ export default function EducationForm({ id }: EducationFormProps) {
             <button
               type="submit"
               disabled={loading}
-              className="flex-1 py-5 bg-gradient-to-r from-blue-600 to-indigo-700 text-white rounded-2xl font-bold tracking-widest uppercase text-sm hover:from-blue-500 hover:to-indigo-600 shadow-[0_10px_40px_rgba(37,99,235,0.2)] disabled:opacity-50 transition-all flex items-center justify-center gap-3 relative overflow-hidden group"
+              className="flex-1 py-5 bg-linear-to-r from-blue-600 to-indigo-700 text-white rounded-2xl font-bold tracking-widest uppercase text-sm hover:from-blue-500 hover:to-indigo-600 shadow-[0_10px_40px_rgba(37,99,235,0.2)] disabled:opacity-50 transition-all flex items-center justify-center gap-3 relative overflow-hidden group"
             >
               <div className="absolute inset-0 bg-white/10 -translate-x-full group-hover:translate-x-full transition-transform duration-700 skew-x-12" />
               {loading
