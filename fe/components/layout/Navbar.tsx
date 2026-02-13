@@ -92,7 +92,7 @@ export default function Navbar() {
           initial={{ y: 20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-          className="pointer-events-auto h-[48px] px-4 py-1 rounded-full border border-white/15 flex items-center gap-2 shadow-[0px_15px_40px_rgba(0,0,0,0.2)] bg-black/70 backdrop-blur-[20px]"
+          className="pointer-events-auto h-[48px] px-4 py-1 rounded-full border border-white/15 flex items-center gap-2 shadow-[0px_15px_40px_rgba(0,0,0,0.2)] bg-transparent/20 backdrop-blur-[20px]"
         >
           {/* Navigation */}
           <div className="flex items-center gap-2">
