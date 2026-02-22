@@ -22,7 +22,7 @@ export default function ContactSection() {
           {/* Left Column: Contact Info */}
           <div className="space-y-8 md:space-y-10">
             <div>
-              <h2 className="text-4xl md:text-6xl font-extrabold text-white mb-6 tracking-tight">
+              <h2 className="text-4xl md:text-5xl font-extrabold text-white mb-6 tracking-tight">
                 Let's <span className="text-blue-500 italic">Connect</span>
               </h2>
               <p className="text-lg md:text-xl text-muted-foreground font-light leading-relaxed max-w-md">

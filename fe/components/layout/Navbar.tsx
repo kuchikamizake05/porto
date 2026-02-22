@@ -50,7 +50,7 @@ export default function Navbar() {
   return (
     <>
       {/* Top Header Bar */}
-      <div className="fixed top-0 left-0 w-full z-[60] px-8 py-8 pointer-events-none">
+      <div className="fixed top-0 left-0 w-full z-20 px-8 py-8 pointer-events-none">
         <div className="max-w-7xl mx-auto flex justify-between items-center">
           <Link href="/" className="pointer-events-auto">
             <motion.div
