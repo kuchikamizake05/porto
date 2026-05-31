@@ -19,12 +19,16 @@ const slides = [
           where{" "}
           <span className="text-blue-400 font-semibold italic">
             development
-          </span>{" "}
-          meets{" "}
+          </span>
+          ,{" "}
           <span className="text-emerald-400 font-semibold italic">
             security
           </span>
-          . I build reliable, well-engineered digital systems with clean
+          , and{" "}
+          <span className="text-purple-400 font-semibold italic">
+            AI/ML
+          </span>{" "}
+          converge. I build reliable, well-engineered digital systems with clean
           interfaces and a security-first mindset.
         </p>
         <p className="text-zinc-400 font-light leading-relaxed text-base">

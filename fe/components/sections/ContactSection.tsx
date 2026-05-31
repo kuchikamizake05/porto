@@ -508,14 +508,14 @@ export default function ContactSection() {
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true, amount: 0.35 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
-            style={{ minHeight: 520 }}
-            className="relative hidden min-h-[520px] items-center justify-center overflow-hidden lg:flex"
+            style={{ minHeight: 300 }}
+            className="relative flex min-h-[300px] -mt-6 -mb-4 items-center justify-center overflow-hidden lg:min-h-[520px] lg:mt-0 lg:mb-0"
             data-contact-globe
           >
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(37,99,235,0.2),transparent_58%)]" />
             <div
-              className="relative w-full max-w-[620px] lg:-translate-x-6"
-              style={{ height: 560 }}
+              className="relative w-full max-w-[400px] mx-auto lg:max-w-[620px] lg:-translate-x-6"
+              style={{ height: 300 }}
               data-globe-root
             >
               <World globeConfig={globeConfig} data={globeData} />

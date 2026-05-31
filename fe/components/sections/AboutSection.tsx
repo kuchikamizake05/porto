@@ -53,9 +53,11 @@ export default function AboutSection() {
                 IT student &amp; software engineer
               </span>{" "}
               at the intersection of{" "}
-              <span className="text-blue-400 font-bold italic">development</span>{" "}
-              and{" "}
+              <span className="text-blue-400 font-bold italic">development</span>
+              ,{" "}
               <span className="text-emerald-400 font-bold italic">cybersecurity</span>
+              , and{" "}
+              <span className="text-purple-400 font-bold italic">AI/ML</span>
               . I build secure, reliable web apps — clean interfaces, maintainable
               systems,{" "}
               <span className="text-white font-semibold italic">security-first</span>
