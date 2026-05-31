@@ -62,15 +62,15 @@ export default function Home() {
             raysOrigin="top-center"
             raysColor="#60a5fa"
             raysSpeed={0.8}
-            lightSpread={0.7}
-            rayLength={3}
+            lightSpread={2}
+            rayLength={1}
             followMouse={true}
-            mouseInfluence={0.15}
+            mouseInfluence={0.1}
             noiseAmount={0.02}
-            distortion={0.3}
+            distortion={0}
             pulsating={false}
-            fadeDistance={1.2}
-            saturation={1}
+            fadeDistance={1}
+            saturation={2}
           />
         </div>
 
