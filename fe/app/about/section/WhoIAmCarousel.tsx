@@ -11,18 +11,25 @@ const slides = [
     icon: User,
     content: (
       <div className="space-y-4">
-        <p className="text-zinc-300 font-light leading-relaxed md:text-lg text-base">
-          As an{" "}
-          <span className="text-white font-medium">
-            IT student and software engineer
+        <p className="text-zinc-300 font-light leading-relaxed md:text-xl text-lg">
+          I'm an{" "}
+          <span className="text-white font-bold italic">
+            IT student &amp; software engineer
+          </span>{" "}
+          where{" "}
+          <span className="text-blue-400 font-semibold italic">
+            development
+          </span>{" "}
+          meets{" "}
+          <span className="text-emerald-400 font-semibold italic">
+            security
           </span>
-          , I focus on building reliable and secure digital systems, combining
-          clean engineering practices with thoughtful implementation.
+          . I build reliable, well-engineered digital systems with clean
+          interfaces and a security-first mindset.
         </p>
-        <p className="text-zinc-400 font-light leading-relaxed text-medium">
-          With a strong interest in cybersecurity, I enjoy understanding how
-          systems work under the hood and designing solutions that are both
-          functional and resilient.
+        <p className="text-zinc-400 font-light leading-relaxed text-base">
+          Curious about how systems work under the hood, I design solutions
+          that are both functional and resilient.
         </p>
       </div>
     ),

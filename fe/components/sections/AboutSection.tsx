@@ -2,12 +2,8 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
-import ScrollReveal from "@/components/ScrollReveal";
 import CircularGallery from "@/components/ui/circular-gallery";
 import { ShimmerButton } from "@/components/ui/shimmer-button";
-
-const aboutText =
-  "I am an IT student and software engineer focused on software development and cybersecurity. I enjoy building secure, reliable, and well-engineered web applications, combining clean interfaces with maintainable systems and a security-first mindset.";
 
 const focusAreas = [
   "Software Development",
@@ -45,15 +41,26 @@ export default function AboutSection() {
             transition={{ duration: 0.6 }}
             className="w-full max-w-3xl space-y-4 text-center"
           >
-            <ScrollReveal
-              baseOpacity={0.1}
-              enableBlur
-              baseRotation={0}
-              blurStrength={4}
-              textClassName="text-lg md:text-xl font-normal text-white/80"
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="text-xl md:text-2xl leading-relaxed text-white/80"
             >
-              {aboutText}
-            </ScrollReveal>
+              I'm an{" "}
+              <span className="text-white font-bold italic">
+                IT student &amp; software engineer
+              </span>{" "}
+              at the intersection of{" "}
+              <span className="text-blue-400 font-bold italic">development</span>{" "}
+              and{" "}
+              <span className="text-emerald-400 font-bold italic">cybersecurity</span>
+              . I build secure, reliable web apps — clean interfaces, maintainable
+              systems,{" "}
+              <span className="text-white font-semibold italic">security-first</span>
+              . Always.
+            </motion.div>
 
             <div
               className="mx-auto mb-8 mt-6 flex max-w-3xl flex-wrap items-center justify-center gap-3 md:mb-10 md:gap-4"

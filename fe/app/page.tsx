@@ -12,6 +12,7 @@ import ProfileCard from "@/components/ProfileCard";
 import { TypingAnimation } from "@/components/ui/typing-animation";
 import RotatingText from "@/components/ui/rotating-text";
 import Text3DFlip from "@/components/ui/text-3d-flip";
+import LightRays from "@/components/LightRays";
 
 type Profile = {
   name: string[];
@@ -56,6 +57,22 @@ export default function Home() {
         className="min-h-[70vh] flex flex-col justify-start pt-20 md:pt-25 scroll-mt-20 relative px-4 md:px-0 overflow-hidden"
       >
         {/* Viral UI Effects */}
+        <div className="absolute inset-0 z-0 opacity-70">
+          <LightRays
+            raysOrigin="top-center"
+            raysColor="#60a5fa"
+            raysSpeed={0.8}
+            lightSpread={0.7}
+            rayLength={3}
+            followMouse={true}
+            mouseInfluence={0.15}
+            noiseAmount={0.02}
+            distortion={0.3}
+            pulsating={false}
+            fadeDistance={1.2}
+            saturation={1}
+          />
+        </div>
 
         <motion.div
           initial={{ opacity: 0 }}
