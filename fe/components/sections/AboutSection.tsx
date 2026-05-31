@@ -1,9 +1,8 @@
 "use client";
 
-import { useState } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { TextReveal } from "@/components/ui/text-reveal";
+import ScrollReveal from "@/components/ScrollReveal";
 import CircularGallery from "@/components/ui/circular-gallery";
 import { ShimmerButton } from "@/components/ui/shimmer-button";
 
@@ -17,8 +16,6 @@ const focusAreas = [
 ];
 
 export default function AboutSection() {
-  const [isTextRevealed, setIsTextRevealed] = useState(false);
-
   return (
     <section
       id="about-me"
@@ -48,19 +45,18 @@ export default function AboutSection() {
             transition={{ duration: 0.6 }}
             className="w-full max-w-3xl space-y-4 text-center"
           >
-            <TextReveal onRevealComplete={setIsTextRevealed}>
+            <ScrollReveal
+              baseOpacity={0.1}
+              enableBlur
+              baseRotation={0}
+              blurStrength={4}
+              textClassName="text-lg md:text-xl font-normal text-white/80"
+            >
               {aboutText}
-            </TextReveal>
+            </ScrollReveal>
 
-            <motion.div
-              initial={false}
-              animate={
-                isTextRevealed
-                  ? { opacity: 1, y: 0, pointerEvents: "auto" }
-                  : { opacity: 0, y: 18, pointerEvents: "none" }
-              }
-              transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
-              className="mx-auto mb-8 flex max-w-3xl flex-wrap items-center justify-center gap-3 md:mb-10 md:gap-4"
+            <div
+              className="mx-auto mb-8 mt-6 flex max-w-3xl flex-wrap items-center justify-center gap-3 md:mb-10 md:gap-4"
             >
               {focusAreas.map((area) => (
                 <ShimmerButton
@@ -77,7 +73,7 @@ export default function AboutSection() {
                   </span>
                 </ShimmerButton>
               ))}
-            </motion.div>
+            </div>
 
             {/* Circular Gallery WebGL Component */}
             <div className="h-[600px] relative w-full overflow-hidden">
