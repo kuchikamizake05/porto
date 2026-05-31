@@ -15,7 +15,7 @@ export default function AboutSection() {
   return (
     <section
       id="about-me"
-      className="pb-5 scroll-mt-24 mb-20 px-4 md:px-0 relative overflow-hidden"
+      className="pb-5 scroll-mt-24 mb-10 md:mb-20 px-4 md:px-0 relative overflow-hidden"
     >
       {/* BACKGROUND TEXT */}
       <div className="absolute md:-top-30 left-1/2 -translate-x-1/2 select-none pointer-events-none -z-10 opacity-2">

@@ -244,7 +244,7 @@ export default function Home() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ delay: 2.25, duration: 1 }}
-        className="flex justify-center -mt-8 md:-mt-9 md:mb-8 mb-0"
+        className="flex justify-center -mt-8 md:-mt-9 mb-10 md:mb-8"
       >
         <div
           onClick={() =>
@@ -321,7 +321,7 @@ export default function Home() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-100px" }}
         transition={{ duration: 0.8 }}
-        className="mt-32"
+        className="mt-16 md:mt-32"
       >
         <AboutSection />
       </motion.div>

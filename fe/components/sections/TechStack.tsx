@@ -34,7 +34,7 @@ function TechCard({
   return (
     <figure
       className={cn(
-        "group relative h-fit w-32 md:w-36 cursor-pointer overflow-hidden rounded-xl border p-3 md:p-4",
+        "group relative h-fit w-[7.5rem] md:w-36 cursor-pointer overflow-hidden rounded-xl border p-3 md:p-4",
         "border-white/[0.04] bg-white/[0.03] hover:border-white/[0.08] hover:bg-white/[0.06]",
         "transition-all duration-300",
         "hover:shadow-[0_0_20px_rgba(59,130,246,0.08)]"

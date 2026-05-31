@@ -151,7 +151,7 @@ export default function ProjectsSection() {
   return (
     <section
       id="projects"
-      className="pt-12 scroll-mt-20 px-4 md:px-0 relative overflow-hidden"
+      className="pt-6 md:pt-12 scroll-mt-20 px-4 md:px-0 relative overflow-hidden"
     >
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 select-none pointer-events-none -z-10 opacity-2">
         <span className="text-[12rem] md:text-[25rem] font-black text-white tracking-tighter uppercase whitespace-nowrap">
