@@ -1,51 +1,54 @@
 "use client";
 
-import { motion } from "framer-motion";
-import Marquee from "@/components/ui/Marquee";
-// import {
-//   Atom, // React
-//   Wind, // Tailwind
-//   SquareCode, // Next.js/React
-//   FileJson, // TypeScript
-//   Server, // Node.js
-//   Database, // SQL
-//   Box, // Docker/Packaging
-//   Flame, // Firebase
-//   Braces, // C++/JS
-//   Github, // Version Control
-// } from "lucide-react";
+import { cn } from "@/lib/utils";
+import Marquee3D from "@/components/ui/marquee-3d";
 
-const logos = [
-  { icon: "devicon-python-plain", color: "text-blue-500" },
-  { icon: "devicon-tailwindcss-plain", color: "text-sky-400" },
-  { icon: "devicon-typescript-plain", color: "text-blue-600" },
-  { icon: "devicon-nodejs-plain", color: "text-green-500" },
-  { icon: "devicon-mysql-plain", color: "text-indigo-500" },
-  { icon: "devicon-docker-plain", color: "text-blue-400" },
-  { icon: "devicon-supabase-plain", color: "text-green-500" },
-  { icon: "devicon-cplusplus-plain", color: "text-blue-500" },
-  { icon: "devicon-javascript-plain", color: "text-yellow-400" },
-  { icon: "devicon-github-original", color: "text-white" },
-  { icon: "devicon-react-original", color: "text-blue-500" },
-  { icon: "devicon-mongodb-plain", color: "text-green-500" },
-  { icon: "devicon-amazonwebservices-plain", color: "text-white" },
-  { icon: "devicon-git-plain", color: "text-red-500" },
-  { icon: "devicon-nextjs-plain", color: "text-white" },
-  { icon: "devicon-googlecloud-plain", color: "text-white" },
+const techs = [
+  { icon: "devicon-python-plain", name: "Python", color: "text-blue-500" },
+  { icon: "devicon-tailwindcss-plain", name: "Tailwind", color: "text-sky-400" },
+  { icon: "devicon-typescript-plain", name: "TypeScript", color: "text-blue-600" },
+  { icon: "devicon-nodejs-plain", name: "Node.js", color: "text-green-500" },
+  { icon: "devicon-mysql-plain", name: "MySQL", color: "text-indigo-500" },
+  { icon: "devicon-docker-plain", name: "Docker", color: "text-blue-400" },
+  { icon: "devicon-supabase-plain", name: "Supabase", color: "text-green-500" },
+  { icon: "devicon-cplusplus-plain", name: "C++", color: "text-blue-500" },
+  { icon: "devicon-javascript-plain", name: "JavaScript", color: "text-yellow-400" },
+  { icon: "devicon-github-original", name: "GitHub", color: "text-white" },
+  { icon: "devicon-react-original", name: "React", color: "text-blue-500" },
+  { icon: "devicon-mongodb-plain", name: "MongoDB", color: "text-green-500" },
+  { icon: "devicon-amazonwebservices-plain", name: "AWS", color: "text-white" },
+  { icon: "devicon-git-plain", name: "Git", color: "text-red-500" },
+  { icon: "devicon-nextjs-plain", name: "Next.js", color: "text-white" },
+  { icon: "devicon-googlecloud-plain", name: "GCP", color: "text-white" },
 ];
 
-// const logos = [
-//   { icon: Atom, color: "text-blue-500" },
-//   { icon: Wind, color: "text-sky-400" },
-//   { icon: SquareCode, color: "text-white" },
-//   { icon: FileJson, color: "text-blue-600" },
-//   { icon: Server, color: "text-green-500" },
-//   { icon: Database, color: "text-indigo-500" },
-//   { icon: Box, color: "text-blue-400" },
-//   { icon: Flame, color: "text-orange-500" },
-//   { icon: Braces, color: "text-yellow-500" },
-//   { icon: Github, color: "text-white" },
-// ];
+function TechCard({
+  icon,
+  name,
+  color,
+}: {
+  icon: string;
+  name: string;
+  color: string;
+}) {
+  return (
+    <figure
+      className={cn(
+        "group relative h-fit w-36 cursor-pointer overflow-hidden rounded-xl border p-4",
+        "border-white/[0.04] bg-white/[0.03] hover:border-white/[0.08] hover:bg-white/[0.06]",
+        "transition-all duration-300",
+        "hover:shadow-[0_0_20px_rgba(59,130,246,0.08)]"
+      )}
+    >
+      <div className="flex flex-row items-center gap-3">
+        <i className={`${icon} ${color} text-2xl transition-transform duration-300 group-hover:scale-110`} />
+        <figcaption className="text-sm font-medium text-white transition-colors duration-300 group-hover:text-blue-300">
+          {name}
+        </figcaption>
+      </div>
+    </figure>
+  );
+}
 
 export default function TechStack() {
   return (
@@ -67,84 +70,11 @@ export default function TechStack() {
         </div>
       </div>
 
-      <div className="relative">
-        <Marquee
-          speed={30}
-          className="md:py-8 pt-0 hover:[animation-play-state:paused]"
-        >
-          {logos.map((logo, idx) => (
-            <motion.div
-              key={idx}
-              className="px-12 group"
-              animate={{
-                y: [0, -10, 0],
-              }}
-              transition={{
-                duration: 4 + (idx % 3),
-                repeat: Infinity,
-                ease: "easeInOut",
-              }}
-            >
-              <div className="relative flex items-center justify-center">
-                {/* Dynamic Glow */}
-                <div
-                  className={`absolute inset-0 blur-2xl opacity-0 group-hover:opacity-40 transition-opacity duration-700 bg-current ${logo.color}`}
-                />
-                <i
-                  className={`
-    ${logo.icon}
-    ${logo.color}
-    text-7xl
-    transition-all duration-700
-    group-hover:scale-125
-    drop-shadow-[0_0_8px_rgba(37,99,235,0.2)]
-    group-hover:drop-shadow-[0_0_15px_rgba(37,99,235,0.6)]
-  `}
-                />
-              </div>
-            </motion.div>
-          ))}
-        </Marquee>
-
-        <Marquee
-          speed={30}
-          direction="right"
-          className="py-8 hover:[animation-play-state:paused]"
-        >
-          {[...logos].reverse().map((logo, idx) => (
-            <motion.div
-              key={idx}
-              className="px-12 group"
-              animate={{
-                y: [0, 8, 0],
-              }}
-              transition={{
-                duration: 5 + (idx % 2),
-                repeat: Infinity,
-                ease: "easeInOut",
-              }}
-            >
-              <div className="relative flex items-center justify-center">
-                {/* Dynamic Glow */}
-                <div
-                  className={`absolute inset-0 blur-2xl opacity-0 group-hover:opacity-40 transition-opacity duration-700 bg-current ${logo.color}`}
-                />
-                <i
-                  className={`
-    ${logo.icon}
-    ${logo.color}
-    text-7xl
-    transition-all duration-700
-    group-hover:scale-125
-    drop-shadow-[0_0_8px_rgba(37,99,235,0.2)]
-    group-hover:drop-shadow-[0_0_15px_rgba(37,99,235,0.6)]
-  `}
-                />
-              </div>
-            </motion.div>
-          ))}
-        </Marquee>
-      </div>
+      <Marquee3D>
+        {techs.map((tech) => (
+          <TechCard key={tech.name} {...tech} />
+        ))}
+      </Marquee3D>
     </section>
   );
 }
