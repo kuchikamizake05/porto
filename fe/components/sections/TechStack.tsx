@@ -34,15 +34,15 @@ function TechCard({
   return (
     <figure
       className={cn(
-        "group relative h-fit w-36 cursor-pointer overflow-hidden rounded-xl border p-4",
+        "group relative h-fit w-28 md:w-36 cursor-pointer overflow-hidden rounded-xl border p-3 md:p-4",
         "border-white/[0.04] bg-white/[0.03] hover:border-white/[0.08] hover:bg-white/[0.06]",
         "transition-all duration-300",
         "hover:shadow-[0_0_20px_rgba(59,130,246,0.08)]"
       )}
     >
       <div className="flex flex-row items-center gap-3">
-        <i className={`${icon} ${color} text-2xl transition-transform duration-300 group-hover:scale-110`} />
-        <figcaption className="text-sm font-medium text-white transition-colors duration-300 group-hover:text-blue-300">
+        <i className={`${icon} ${color} text-xl md:text-2xl transition-transform duration-300 group-hover:scale-110`} />
+        <figcaption className="text-xs md:text-sm font-medium text-white transition-colors duration-300 group-hover:text-blue-300">
           {name}
         </figcaption>
       </div>

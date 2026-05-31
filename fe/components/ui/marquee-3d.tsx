@@ -10,46 +10,23 @@ interface Marquee3DProps {
 }
 
 export default function Marquee3D({ children, className }: Marquee3DProps) {
+  // Desktop: 4 kolom
   const quarter = Math.ceil(children.length / 4);
-  const first = children.slice(0, quarter);
-  const second = children.slice(quarter, quarter * 2);
-  const third = children.slice(quarter * 2, quarter * 3);
-  const fourth = children.slice(quarter * 3);
+  const d1 = children.slice(0, quarter);
+  const d2 = children.slice(quarter, quarter * 2);
+  const d3 = children.slice(quarter * 2, quarter * 3);
+  const d4 = children.slice(quarter * 3);
 
-  const renderContent = () => (
-    <>
-      <Marquee pauseOnHover vertical speed={30} className="h-full">
-        {first.map((child, i) => (
-          <React.Fragment key={i}>{child}</React.Fragment>
-        ))}
-      </Marquee>
-      <Marquee reverse pauseOnHover vertical speed={35} className="h-full">
-        {second.map((child, i) => (
-          <React.Fragment key={i}>{child}</React.Fragment>
-        ))}
-      </Marquee>
-      <Marquee pauseOnHover vertical speed={28} className="h-full">
-        {third.map((child, i) => (
-          <React.Fragment key={i}>{child}</React.Fragment>
-        ))}
-      </Marquee>
-      <Marquee reverse pauseOnHover vertical speed={33} className="h-full">
-        {fourth.map((child, i) => (
-          <React.Fragment key={i}>{child}</React.Fragment>
-        ))}
-      </Marquee>
-    </>
-  );
+  // Mobile: 3 kolom
+  const third = Math.ceil(children.length / 3);
+  const m1 = children.slice(0, third);
+  const m2 = children.slice(third, third * 2);
+  const m3 = children.slice(third * 2);
 
   return (
-    <div
-      className={cn(
-        "relative flex items-center justify-center",
-        className
-      )}
-    >
+    <div className={cn("relative flex items-center justify-center", className)}>
       <div
-        className="relative w-full max-w-4xl h-64 md:h-96 overflow-hidden [perspective:150px]"
+        className="relative w-full max-w-4xl h-52 md:h-96 overflow-hidden [perspective:100px]"
         style={{
           WebkitMaskImage:
             "linear-gradient(to bottom, transparent, black 10%, black 90%, transparent), linear-gradient(to right, transparent, black 5%, black 95%, transparent)",
@@ -59,26 +36,59 @@ export default function Marquee3D({ children, className }: Marquee3DProps) {
           maskComposite: "intersect",
         }}
       >
-        {/* Mobile */}
+        {/* Mobile — 3 kolom */}
         <div
-          className="absolute inset-0 flex md:hidden flex-row items-center justify-center gap-2"
+          className="md:hidden absolute inset-0 flex flex-row items-center justify-center gap-2"
           style={{
             transform:
-              "scale(1) translateX(0px) translateY(0px) translateZ(-20px) rotateX(12deg) rotateY(-6deg) rotateZ(0deg)",
+              "scale(0.85) translateX(0px) translateY(0px) translateZ(0px) rotateX(8deg) rotateY(-3deg) rotateZ(0deg)",
           }}
         >
-          {renderContent()}
+          <Marquee pauseOnHover vertical speed={28} className="h-full">
+            {m1.map((child, i) => (
+              <React.Fragment key={i}>{child}</React.Fragment>
+            ))}
+          </Marquee>
+          <Marquee reverse pauseOnHover vertical speed={33} className="h-full">
+            {m2.map((child, i) => (
+              <React.Fragment key={i}>{child}</React.Fragment>
+            ))}
+          </Marquee>
+          <Marquee pauseOnHover vertical speed={30} className="h-full">
+            {m3.map((child, i) => (
+              <React.Fragment key={i}>{child}</React.Fragment>
+            ))}
+          </Marquee>
         </div>
 
-        {/* Desktop */}
+        {/* Desktop — 4 kolom */}
         <div
-          className="absolute inset-0 hidden md:flex flex-row items-center justify-center gap-4"
+          className="hidden md:flex absolute inset-0 flex-row items-center justify-center gap-4"
           style={{
             transform:
               "scale(1.5) translateX(-60px) translateY(0px) translateZ(-20px) rotateX(12deg) rotateY(-6deg) rotateZ(0deg)",
           }}
         >
-          {renderContent()}
+          <Marquee pauseOnHover vertical speed={30} className="h-full">
+            {d1.map((child, i) => (
+              <React.Fragment key={i}>{child}</React.Fragment>
+            ))}
+          </Marquee>
+          <Marquee reverse pauseOnHover vertical speed={35} className="h-full">
+            {d2.map((child, i) => (
+              <React.Fragment key={i}>{child}</React.Fragment>
+            ))}
+          </Marquee>
+          <Marquee pauseOnHover vertical speed={28} className="h-full">
+            {d3.map((child, i) => (
+              <React.Fragment key={i}>{child}</React.Fragment>
+            ))}
+          </Marquee>
+          <Marquee reverse pauseOnHover vertical speed={33} className="h-full">
+            {d4.map((child, i) => (
+              <React.Fragment key={i}>{child}</React.Fragment>
+            ))}
+          </Marquee>
         </div>
       </div>
     </div>
