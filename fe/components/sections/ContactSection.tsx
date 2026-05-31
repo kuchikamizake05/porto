@@ -410,12 +410,12 @@ export default function ContactSection() {
       id="contact"
       className="scroll-mt-24 px-6 md:px-10 lg:px-14 relative overflow-hidden"
     >
-      {/* BACKGROUND TEXT
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 select-none pointer-events-none -z-10 opacity-2">
-        <span className="text-[12rem] md:text-[25rem] font-black text-white tracking-tighter uppercase whitespace-nowrap">
-          Talk
+      {/* BACKGROUND TEXT */}
+      <div className="absolute -top-16 md:-top-28 left-1/2 -translate-x-1/2 select-none pointer-events-none -z-10 opacity-2">
+        <span className="text-[8rem] md:text-[16rem] lg:text-[20rem] font-black text-white tracking-tighter uppercase whitespace-nowrap">
+          Contact
         </span>
-      </div> */}
+      </div>
 
       <div className="max-w-5xl mx-auto relative">
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-2 lg:gap-0 items-start">
@@ -514,7 +514,7 @@ export default function ContactSection() {
           >
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(37,99,235,0.2),transparent_58%)]" />
             <div
-              className="relative w-full max-w-[620px] lg:-translate-x-16"
+              className="relative w-full max-w-[620px] lg:-translate-x-6"
               style={{ height: 560 }}
               data-globe-root
             >
