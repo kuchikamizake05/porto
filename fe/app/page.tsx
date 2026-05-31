@@ -8,7 +8,7 @@ import TechStack from "@/components/sections/TechStack";
 import ProjectsSection from "@/components/sections/ProjectsSection";
 import MarqueeSection from "@/components/sections/MarqueeSection";
 import ContactSection from "@/components/sections/ContactSection";
-import Image from "next/image";
+import ProfileCard from "@/components/ProfileCard";
 import { TypingAnimation } from "@/components/ui/typing-animation";
 import RotatingText from "@/components/ui/rotating-text";
 import Text3DFlip from "@/components/ui/text-3d-flip";
@@ -184,40 +184,39 @@ export default function Home() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 1, duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
-            className="relative w-64 md:w-80 mx-auto md:mx-0"
+            className="relative mx-auto flex w-64 justify-center md:mx-0 md:w-80"
           >
-            {/* Arch Frame */}
-            <div
-              className="
-    relative
-    w-full
-    aspect-19/20
-    rounded-t-full
-    overflow-hidden
-    bg-linear-to-b from-blue-400 to-blue-900
-    shadow-[0_20px_50px_rgba(0,0,0,0.25)]
-  "
-            >
-              {/* NOISE OVERLAY */}
-              <div
-                className="
-      absolute inset-0
-      bg-[url('/formal-invitation.svg')]
-      opacity-[0.2]
-      pointer-events-none
-      mix-blend-overlay
-    "
-              />
-
-              {/* IMAGE */}
-              <Image
-                src="/fotoku.png"
-                alt="Portrait"
-                fill
-                priority
-                className="object-cover object-center"
-              />
-            </div>
+            <ProfileCard
+              name=""
+              title=""
+              handle="faaidsakhaa"
+              status="Online"
+              contactText="Contact Me"
+              avatarUrl="/fotoku.png"
+              iconUrl="/iconpattern.png"
+              patternUrl="/formal-invitation.svg"
+              grainUrl=""
+              showUserInfo={false}
+              showDetails={false}
+              avatarOnTop
+              enableTilt={true}
+              enableMobileTilt
+              behindGlowColor="rgba(125, 190, 255, 0.67)"
+              behindGlowEnabled={false}
+              innerGradient="linear-gradient(to bottom,#60a5fa 0%,#1e3a8a 100%)"
+              patternOverlayOpacity={0.2}
+              cardRadius="9999px 9999px 0 0"
+              aspectRatio="19 / 20"
+              avatarScale={1.05}
+              avatarBottomOffset="-20px"
+              avatarBlendMode="normal"
+              className="w-full [&_section]:!h-auto [&_section]:!max-h-none [&_section]:!w-full"
+              onContactClick={() =>
+                document
+                  .getElementById("contact")
+                  ?.scrollIntoView({ behavior: "smooth" })
+              }
+            />
           </motion.div>
         </motion.div>
       </section>

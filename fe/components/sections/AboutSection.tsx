@@ -1,14 +1,24 @@
 "use client";
 
+import { useState } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { TextReveal } from "@/components/ui/text-reveal";
 import CircularGallery from "@/components/ui/circular-gallery";
+import { ShimmerButton } from "@/components/ui/shimmer-button";
 
 const aboutText =
   "I am an IT student and software engineer focused on software development and cybersecurity. I enjoy building secure, reliable, and well-engineered web applications, combining clean interfaces with maintainable systems and a security-first mindset.";
 
+const focusAreas = [
+  "Software Development",
+  "Cyber Security",
+  "AI/ML Development",
+];
+
 export default function AboutSection() {
+  const [isTextRevealed, setIsTextRevealed] = useState(false);
+
   return (
     <section
       id="about-me"
@@ -36,9 +46,38 @@ export default function AboutSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="w-full max-w-3xl space-y-8 text-center"
+            className="w-full max-w-3xl space-y-4 text-center"
           >
-            <TextReveal>{aboutText}</TextReveal>
+            <TextReveal onRevealComplete={setIsTextRevealed}>
+              {aboutText}
+            </TextReveal>
+
+            <motion.div
+              initial={false}
+              animate={
+                isTextRevealed
+                  ? { opacity: 1, y: 0, pointerEvents: "auto" }
+                  : { opacity: 0, y: 18, pointerEvents: "none" }
+              }
+              transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+              className="mx-auto mb-8 flex max-w-3xl flex-wrap items-center justify-center gap-3 md:mb-10 md:gap-4"
+            >
+              {focusAreas.map((area) => (
+                <ShimmerButton
+                  key={area}
+                  type="button"
+                  aria-label={area}
+                  shimmerColor="#60a5fa"
+                  shimmerDuration="2.6s"
+                  background="rgba(15, 23, 42, 0.72)"
+                  className="cursor-default border-blue-400/20 px-5 py-3 shadow-[0_16px_45px_rgba(37,99,235,0.12)] backdrop-blur-md transition-all duration-300 hover:-translate-y-1 hover:border-blue-300/50 hover:shadow-[0_20px_55px_rgba(37,99,235,0.2)]"
+                >
+                  <span className="text-center text-xs font-semibold uppercase leading-none tracking-[0.18em] text-white/90 md:text-sm">
+                    {area}
+                  </span>
+                </ShimmerButton>
+              ))}
+            </motion.div>
 
             {/* Circular Gallery WebGL Component */}
             <div className="h-[600px] relative w-full overflow-hidden">

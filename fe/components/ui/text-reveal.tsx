@@ -12,6 +12,7 @@ import { cn } from "@/lib/utils";
 
 export interface TextRevealProps extends ComponentPropsWithoutRef<"div"> {
   children: string;
+  onRevealComplete?: (isComplete: boolean) => void;
 }
 
 const WORDS_PER_STEP = 4;
@@ -20,7 +21,11 @@ const LOCK_ZONE = 10;
 const WHEEL_STEP_THRESHOLD = 70;
 const TOUCH_STEP_THRESHOLD = 44;
 
-export const TextReveal: FC<TextRevealProps> = ({ children, className }) => {
+export const TextReveal: FC<TextRevealProps> = ({
+  children,
+  className,
+  onRevealComplete,
+}) => {
   if (typeof children !== "string") {
     throw new Error("TextReveal: children must be a string");
   }
@@ -39,10 +44,17 @@ export const TextReveal: FC<TextRevealProps> = ({ children, className }) => {
   const lastElementCenterRef = useRef<number | null>(null);
   const wheelDeltaRef = useRef(0);
   const touchDeltaRef = useRef(0);
+  const revealCompleteRef = useRef(false);
 
   const setProgressValue = (value: number) => {
     const next = Math.max(0, Math.min(1, value));
+    const isComplete = next >= 1;
+
     progressRef.current = next;
+    if (revealCompleteRef.current !== isComplete) {
+      revealCompleteRef.current = isComplete;
+      onRevealComplete?.(isComplete);
+    }
     setProgress(next);
   };
 
@@ -282,11 +294,11 @@ export const TextReveal: FC<TextRevealProps> = ({ children, className }) => {
     <div
       ref={sectionRef}
       className={cn(
-        "relative z-0 flex min-h-[25vh] items-center justify-center bg-transparent py-8",
+        "relative z-0 flex min-h-[18vh] items-center justify-center bg-transparent py-4",
         className,
       )}
     >
-      <span className="mx-auto flex max-w-4xl flex-wrap justify-center px-4 text-center text-2xl font-light leading-relaxed text-white/20 md:text-3xl">
+      <span className="mx-auto flex max-w-4xl flex-wrap justify-center px-4 text-center text-2xl font-light leading-snug text-white/20 md:text-3xl">
         {words.map((word, index) => {
           const stepIndex = Math.floor(index / WORDS_PER_STEP);
           const start = stepIndex / totalSteps;

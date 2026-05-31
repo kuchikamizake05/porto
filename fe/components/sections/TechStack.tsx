@@ -58,12 +58,12 @@ export default function TechStack() {
       </div>
 
       <div className="max-w-4xl mx-auto px-4 md:px-0 mb-15 relative">
-        <div className="flex items-center gap-4">
-          <div className="h-px flex-1 bg-gradient-to-r from-transparent to-white/10" />
-          <h2 className="md:text-2xl text-xl font-extrabold text-center uppercase tracking-[0.4em] text-blue-500/80 transition-colors hover:text-blue-400">
-            Professional Stack
+        <div className="flex items-center gap-6">
+          <div className="h-px flex-1 bg-linear-to-r from-transparent to-white/20" />
+          <h2 className="shrink-0 text-center text-4xl font-bold tracking-tight text-white md:text-5xl">
+            Professional <span className="text-blue-500 italic">Stack</span>
           </h2>
-          <div className="h-px flex-1 bg-gradient-to-l from-transparent to-white/10" />
+          <div className="h-px flex-1 bg-linear-to-r from-white/20 to-transparent" />
         </div>
       </div>
 
