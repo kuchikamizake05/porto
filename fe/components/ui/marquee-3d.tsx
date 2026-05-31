@@ -1,6 +1,6 @@
 "use client";
 
-import Marquee from "@/components/ui/marquee";
+import Marquee from "@/components/ui/Marquee";
 import { cn } from "@/lib/utils";
 import React from "react";
 
