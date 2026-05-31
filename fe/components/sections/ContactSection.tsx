@@ -411,7 +411,7 @@ export default function ContactSection() {
       className="scroll-mt-24 px-6 md:px-10 lg:px-14 relative overflow-hidden"
     >
       {/* BACKGROUND TEXT */}
-      <div className="absolute -top-16 md:-top-28 left-1/2 -translate-x-1/2 select-none pointer-events-none -z-10 opacity-2">
+      <div className="absolute -top-8 md:-top-16 left-1/2 -translate-x-1/2 select-none pointer-events-none -z-10 opacity-2">
         <span className="text-[8rem] md:text-[16rem] lg:text-[20rem] font-black text-white tracking-tighter uppercase whitespace-nowrap">
           Contact
         </span>
