@@ -270,3 +270,13 @@ body {
     @apply bg-background text-foreground;
   }
 }
+
+/* 3D Transform Utilities for Text3DFlip */
+.transform-3d {
+  transform-style: preserve-3d;
+}
+
+.backface-hidden {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}

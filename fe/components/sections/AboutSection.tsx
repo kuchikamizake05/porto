@@ -1,10 +1,12 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { User, Code2, Sparkles, ArrowRight } from "lucide-react";
 import Link from "next/link";
-import Magnetic from "@/components/ui/Magnetic";
-import Image from "next/image";
+import { TextReveal } from "@/components/ui/text-reveal";
+import CircularGallery from "@/components/ui/circular-gallery";
+
+const aboutText =
+  "I am an IT student and software engineer focused on software development and cybersecurity. I enjoy building secure, reliable, and well-engineered web applications, combining clean interfaces with maintainable systems and a security-first mindset.";
 
 export default function AboutSection() {
   return (
@@ -28,26 +30,28 @@ export default function AboutSection() {
           <div className="h-px flex-1 bg-linear-to-r from-white/20 to-transparent" />
         </div>
 
-        <div className="flex flex-col md:flex-row gap-3 md:gap-12 items-start">
+        <div className="flex justify-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="flex-1 space-y-8 order-2 md:order-1"
+            className="w-full max-w-3xl space-y-8 text-center"
           >
-            <p className="text-xl text-justify md:text-2xl text-gray-400 leading-relaxed font-light">
-              I am an IT student and software engineer focused on
-              <span className="text-white font-medium">
-                {" "}
-                software development{" "}
-              </span>
-              and{" "}
-              <span className="text-blue-400 font-medium">cybersecurity</span>,
-              building secure and well-engineered web applications.
-            </p>
+            <TextReveal>{aboutText}</TextReveal>
 
-            <div className="flex justify-center md:justify-start">
+            {/* Circular Gallery WebGL Component */}
+            <div className="h-[600px] relative w-full overflow-hidden">
+              <CircularGallery 
+                bend={1}
+                textColor="#ffffff"
+                borderRadius={0.05}
+                scrollSpeed={2}
+                scrollEase={0.05}
+              />
+            </div>
+
+            <div className="flex justify-center">
               <Link
                 href="/about"
                 className="relative inline-flex items-center gap-2 px-6 py-3 rounded-full bg-linear-to-b from-white/20 to-white/10 border border-white/10 text-white font-bold text-base tracking-wide overflow-hidden group hover:bg-white/10  transition-colors"
@@ -55,32 +59,6 @@ export default function AboutSection() {
                 <div className="absolute inset-0 bg-white/20 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700 skew-x-12" />
                 <span className="relative z-10">More About Me</span>
               </Link>
-            </div>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="w-full md:w-80 order-1 md:order-2"
-          >
-            <div className="space-y-6">
-              {/* LOGO + NAME */}
-              <div className="flex flex-col items-center gap-1 p-6 md:p-4 lg:p-0">
-                <div className="w-32 md:w-48 lg:w-50">
-                  <Image
-                    src="/logo.png" // ganti sesuai nama file logo
-                    alt="Kuchikamizake Logo"
-                    width={200}
-                    height={200}
-                    className="w-full h-auto opacity-100"
-                  />
-                </div>
-                <span className="md:text-2xl font-medium tracking-wide text-white">
-                  Kuchikamizake<span className="text-blue-400">.</span>
-                </span>
-              </div>
             </div>
           </motion.div>
         </div>

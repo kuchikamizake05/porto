@@ -1,9 +1,8 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import Link from "next/link";
+import { useEffect } from "react";
 import { motion } from "framer-motion";
-import { ArrowRight, ArrowDown } from "lucide-react";
+import { ArrowDown } from "lucide-react";
 import AboutSection from "@/components/sections/AboutSection";
 import TechStack from "@/components/sections/TechStack";
 import ProjectsSection from "@/components/sections/ProjectsSection";
@@ -11,7 +10,8 @@ import MarqueeSection from "@/components/sections/MarqueeSection";
 import ContactSection from "@/components/sections/ContactSection";
 import Image from "next/image";
 import { TypingAnimation } from "@/components/ui/typing-animation";
-import Magnetic from "@/components/ui/Magnetic";
+import RotatingText from "@/components/ui/rotating-text";
+import Text3DFlip from "@/components/ui/text-3d-flip";
 
 type Profile = {
   name: string[];
@@ -23,58 +23,13 @@ type Profile = {
 const PROFILE: Profile = {
   name: ["Faaid Sakhaa", "Kuchikamizake."],
   roles: [
-    "Information Engineering Student",
-    "Web Developer",
-    "Cyber Security Enthusiast",
-    "AI Enthusiast",
+    "Vibe Coder",
+    "Software Engineer",
+    "Cyber Security",
+    "AI/ML Enthusiast",
   ],
   stack: ["Next.js", "Express", "TypeScript"],
 };
-
-function AnimatedRole({
-  roles,
-  delay = 0,
-}: {
-  roles: string[];
-  delay?: number;
-}) {
-  const [index, setIndex] = useState<number>(0);
-  const [visible, setVisible] = useState(false);
-
-  useEffect(() => {
-    if (!roles.length) return;
-
-    const showTimeout = setTimeout(() => {
-      setVisible(true);
-    }, delay);
-
-    return () => clearTimeout(showTimeout);
-  }, [roles, delay]);
-
-  useEffect(() => {
-    if (!visible) return;
-
-    const interval = setInterval(() => {
-      setIndex((i) => (i + 1) % roles.length);
-    }, 2500);
-
-    return () => clearInterval(interval);
-  }, [visible, roles]);
-
-  if (!visible) return null;
-
-  return (
-    <motion.p
-      key={roles[index]}
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6 }}
-      className="text-xl md:text-3xl font-medium text-transparent bg-clip-text bg-linear-to-r from-blue-400 via-blue-300 to-blue-500"
-    >
-      {roles[index]}
-    </motion.p>
-  );
-}
 
 export default function Home() {
   const profile = PROFILE; // Use static data directly
@@ -109,7 +64,7 @@ export default function Home() {
           className="max-w-4xl mx-auto w-full relative z-10 flex flex-col md:flex-row items-center md:items-start gap-12"
         >
           {/* Text Content */}
-          <div className="flex-1 space-y-10 order-2 md:order-1 text-center md:text-left flex flex-col items-center md:items-start md:pt-19 w-full">
+          <div className="flex-1 space-y-6 order-2 md:order-1 text-center md:text-left flex flex-col items-center md:items-start md:pt-15 w-full">
             {/* Greeting */}
             <motion.div
               initial={{ opacity: 0, scale: 0.9 }}
@@ -149,7 +104,7 @@ export default function Home() {
                 duration: 0.8,
                 ease: [0.22, 1, 0.36, 1],
               }}
-              className="space-y-6"
+              className="space-y-5"
             >
               <TypingAnimation
                 words={profile.name}
@@ -161,33 +116,66 @@ export default function Home() {
                 loop
                 className="text-5xl md:text-7xl font-bold tracking-tighter text-foreground leading-[1.1]"
               />
-              <AnimatedRole
-                roles={profile.roles}
-                delay={2200} // Typing ends at 2000ms (800 + 12*100)
-              />
-            </motion.div>
+              <motion.p
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{
+                  delay: 2.2,
+                  duration: 0.6,
+                  ease: [0.22, 1, 0.36, 1],
+                }}
+                className="flex min-h-9 flex-wrap items-center justify-center gap-2 text-xl tracking-tight md:min-h-11 md:justify-start md:text-3xl mt-2.5 md:mt-3"
+              >
+                <span className="font-normal text-white">I&apos;m</span>
+                <RotatingText
+                  texts={profile.roles}
+                  mainClassName="overflow-hidden bg-blue-500 p-1 font-semibold text-white shadow-[0_0_28px_rgba(59,130,246,0.16)] md:p-1.5"
+                  splitLevelClassName="overflow-hidden pb-0.5"
+                  staggerFrom="last"
+                  initial={{ y: "100%" }}
+                  animate={{ y: 0 }}
+                  exit={{ y: "-120%" }}
+                  staggerDuration={0.025}
+                  transition={{ type: "spring", damping: 30, stiffness: 400 }}
+                  rotationInterval={2200}
+                  splitBy="characters"
+                  auto
+                  loop
+                  style={{ borderRadius: "0.75rem" }}
+                />
+              </motion.p>
+              <motion.div
+                initial={{ opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{
+                  delay: 2.55,
+                  duration: 0.7,
+                  ease: [0.22, 1, 0.36, 1],
+                }}
+              >
+                <div className="inline-flex flex-col items-center md:items-start">
+                  {/* Elegant Responsive Gradient Separator Line - Matches width of Text3DFlip */}
+                  <div className="h-[1.5px] w-full bg-gradient-to-r from-transparent via-white/50 to-transparent md:from-white/50 md:to-transparent mb-4" />
 
-            {/* CTA Button only */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{
-                delay: 2.5, // Appears after role animation starts
-                duration: 0.8,
-                ease: [0.22, 1, 0.36, 1],
-              }}
-              className="flex items-center justify-center md:justify-start"
-            >
-              <Magnetic strength={0.0}>
-                <Link
-                  href="/projects"
-                  className="relative h-[46px] px-6 rounded-full bg-linear-to-b from-blue-500  to-blue-700 text-white text-sm font-bold hover:bg-linear-to-b hover:from-blue-400 hover:to-blue-600 transition-all shadow-[0_0_30px_rgba(37,99,235,0.15)] flex items-center gap-2 group overflow-hidden"
+                  <Text3DFlip
+                    className="font-sans text-xl sm:text-2xl md:text-3.25xl font-normal"
+                  textClassName={[
+                    "font-serif italic text-white tracking-wide font-normal normal-case",
+                    "font-sans text-white tracking-widest font-extrabold uppercase"
+                  ]}
+                  flipTextClassName={[
+                    "font-serif italic text-white font-normal normal-case",
+                    "font-sans text-white font-black uppercase"
+                  ]}
+                  rotateDirection="top"
+                  staggerDuration={0.03}
+                  staggerFrom="first"
+                  transition={{ type: "spring", damping: 25, stiffness: 160 }}
                 >
-                  <div className="absolute inset-0 bg-white/20 translate-x-[-100%] group-hover:translate-x-full transition-transform duration-700 skew-x-12" />
-                  View Projects
-                  <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                </Link>
-              </Magnetic>
+                  Stay HUNGRY Stay FOOLISH
+                  </Text3DFlip>
+                </div>
+              </motion.div>
             </motion.div>
           </div>
 
