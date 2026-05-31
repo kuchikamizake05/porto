@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback, useRef } from "react";
+import { motion, useSpring, useMotionValue } from "framer-motion";
 import { apiGet } from "@/app/lib/api";
 import Link from "next/link";
 import Image from "next/image";
@@ -15,6 +16,125 @@ type Project = {
   siteUrl?: string;
 };
 
+function ProjectCard({ project }: { project: Project }) {
+  const cardRef = useRef<HTMLDivElement>(null);
+  const [visible, setVisible] = useState(false);
+  const mx = useMotionValue(0);
+  const my = useMotionValue(0);
+  const springX = useSpring(mx, { stiffness: 150, damping: 15 });
+  const springY = useSpring(my, { stiffness: 150, damping: 15 });
+
+  const handleMouseMove = useCallback(
+    (e: React.MouseEvent) => {
+      if (!cardRef.current) return;
+      const rect = cardRef.current.getBoundingClientRect();
+      const centerX = rect.width / 2;
+      const centerY = rect.height / 2;
+
+      // Magnetic pull — move max 15px from center
+      const pullX = ((e.clientX - rect.left) / rect.width - 0.5) * 30;
+      const pullY = ((e.clientY - rect.top) / rect.height - 0.5) * 30;
+
+      mx.set(pullX);
+      my.set(pullY);
+    },
+    [mx, my]
+  );
+
+  return (
+    <div
+      ref={cardRef}
+      onMouseEnter={() => setVisible(true)}
+      onMouseLeave={() => setVisible(false)}
+      onMouseMove={handleMouseMove}
+      className="relative"
+    >
+      <Link
+        key={project.id}
+        href={project.repoUrl || "#"}
+        target={project.repoUrl ? "_blank" : undefined}
+        rel={project.repoUrl ? "noopener noreferrer" : undefined}
+        className="group block border-b-3 border-white/15 py-7 px-6 relative overflow-hidden transition-all duration-500 hover:border-blue-500/30"
+      >
+        <div className="absolute inset-0 bg-linear-to-r from-transparent via-blue-600/5 to-transparent opacity-0 group-hover:opacity-30 transition-opacity duration-500 z-[1]" />
+
+        <div className="absolute inset-0 bg-linear-to-r from-transparent via-blue-600/5 to-transparent opacity-0 group-hover:opacity-30 transition-opacity duration-500 z-[1]" />
+
+        {/* Background Image on Hover */}
+        {project.imageUrl && (
+          <div
+            className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none z-0"
+            style={{
+              maskImage: "linear-gradient(to right, transparent 0%, black 40%, black 60%, transparent 100%)",
+              WebkitMaskImage: "linear-gradient(to right, transparent 0%, black 40%, black 60%, transparent 100%)",
+            }}
+          >
+            <Image
+              src={project.imageUrl}
+              alt=""
+              fill
+              sizes="100vw"
+              className="object-cover object-center"
+            />
+          </div>
+        )}
+
+        <div className="relative z-10 flex items-center justify-between gap-12">
+          <div className="flex-1 space-y-2 max-w-[50%] group-hover:translate-x-2 transition-transform duration-300">
+            <h3 className="text-3xl md:text-3xl font-bold text-white group-hover:text-blue-400 transition-colors duration-300">
+              {project.title}
+            </h3>
+            <p className="text-sm md:text-base text-gray-400 group-hover:text-gray-300 transition-colors duration-300">
+              {project.description}
+            </p>
+          </div>
+
+          <div className="shrink-0 md:mr-6">
+            <svg
+              className="w-15 h-15 text-gray-500 group-hover:text-blue-400 transform group-hover:translate-x-2 transition-all duration-300"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={1}
+                d="M17 8l4 4m0 0l-4 4m4-4H12"
+              />
+            </svg>
+          </div>
+        </div>
+      </Link>
+
+      {/* Floating Popup Image */}
+      {project.imageUrl && (
+        <motion.div
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{
+            opacity: visible ? 1 : 0,
+            scale: visible ? 1 : 0.8,
+          }}
+          transition={{ type: "spring", stiffness: 200, damping: 20 }}
+          style={{ x: springX, y: springY }}
+          className="absolute top-[30%] left-3/4 -translate-x-1/2 -translate-y-1/2 z-50 pointer-events-none"
+        >
+          <div
+            className="w-64 h-44 rounded-xl overflow-hidden border border-white/10 shadow-2xl shadow-black/50 rotate-3 group-hover:rotate-0 transition-transform duration-500">
+            <Image
+              src={project.imageUrl}
+              alt={project.title}
+              width={256}
+              height={176}
+              className="object-cover w-full h-full"
+            />
+          </div>
+        </motion.div>
+      )}
+    </div>
+  );
+}
+
 export default function ProjectsSection() {
   const [projects, setProjects] = useState<Project[]>([]);
   const [loading, setLoading] = useState(true);
@@ -22,7 +142,6 @@ export default function ProjectsSection() {
   useEffect(() => {
     apiGet<Project[]>("/projects")
       .then((data) => {
-        // Show first 5 projects for the list
         setProjects(data.slice(0, 5));
       })
       .catch(console.error)
@@ -34,7 +153,6 @@ export default function ProjectsSection() {
       id="projects"
       className="pt-12 scroll-mt-20 px-4 md:px-0 relative overflow-hidden"
     >
-      {/* BACKGROUND TEXT */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 select-none pointer-events-none -z-10 opacity-2">
         <span className="text-[12rem] md:text-[25rem] font-black text-white tracking-tighter uppercase whitespace-nowrap">
           Works
@@ -42,7 +160,6 @@ export default function ProjectsSection() {
       </div>
 
       <div className="max-w-4xl mx-auto px-4 md:px-0 relative">
-        {/* Header */}
         <div className="mb-4 space-y-4">
           <div className="flex items-center gap-4">
             <h2 className="text-4xl md:text-5xl font-extrabold text-white tracking-tight leading-none shrink-0">
@@ -56,7 +173,6 @@ export default function ProjectsSection() {
           </p>
         </div>
 
-        {/* Projects List */}
         {loading ? (
           <div className="space-y-0">
             {[1, 2, 3, 4].map((i) => (
@@ -76,70 +192,12 @@ export default function ProjectsSection() {
           </div>
         ) : (
           <div className="space-y-0">
-            {projects.map((project, idx) => (
-              <Link
-                key={project.id}
-                href={project.repoUrl || "#"}
-                target={project.repoUrl ? "_blank" : undefined}
-                rel={project.repoUrl ? "noopener noreferrer" : undefined}
-                className="group block border-b-3 border-white/15 py-7 px-6 relative overflow-hidden transition-all duration-500 hover:border-blue-500/30"
-              >
-                {/* Background Color Change on Hover */}
-                <div className="absolute inset-0 bg-linear-to-r from-blue-600/0 via-blue-600/8 to-blue-600/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-
-                {/* Project Image - Full size with zoom effect on hover */}
-                {project.imageUrl && (
-                  <div className="absolute inset-0 -mx-6 -my-7 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none will-change-transform overflow-hidden">
-                    <Image
-                      src={project.imageUrl}
-                      alt={project.title}
-                      fill
-                      sizes="100vw"
-                      className="object-cover object-center scale-100 group-hover:scale-110 transition-transform duration-700 will-change-transform"
-                      style={{
-                        backfaceVisibility: "hidden",
-                        transform: "translateZ(0)",
-                      }}
-                    />
-                    {/* Gradient mask: dark on left (protect text), transparent on right (show image) */}
-                    <div className="absolute inset-0 bg-linear-to-r from-black via-black/90 to-black/60" />
-                  </div>
-                )}
-
-                <div className="relative z-10 flex items-center justify-between gap-12">
-                  {/* Left: Title and Description */}
-                  <div className="flex-1 space-y-2">
-                    <h3 className="text-3xl md:text-3xl font-bold text-white group-hover:text-blue-400 transition-colors duration-300">
-                      {project.title}
-                    </h3>
-                    <p className="text-sm md:text-base text-gray-400 group-hover:text-gray-300 transition-colors duration-300">
-                      {project.description}
-                    </p>
-                  </div>
-
-                  {/* Right: Arrow Icon */}
-                  <div className="shrink-0 md:mr-6">
-                    <svg
-                      className="w-15 h-15 text-gray-500 group-hover:text-blue-400 transform group-hover:translate-x-2 transition-all duration-300"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={1}
-                        d="M17 8l4 4m0 0l-4 4m4-4H12"
-                      />
-                    </svg>
-                  </div>
-                </div>
-              </Link>
+            {projects.map((project) => (
+              <ProjectCard key={project.id} project={project} />
             ))}
           </div>
         )}
 
-        {/* See More */}
         {!loading && (
           <div className="mt-10 flex justify-center">
             <Link
