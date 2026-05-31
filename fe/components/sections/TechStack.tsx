@@ -34,7 +34,7 @@ function TechCard({
   return (
     <figure
       className={cn(
-        "group relative h-fit w-28 md:w-36 cursor-pointer overflow-hidden rounded-xl border p-3 md:p-4",
+        "group relative h-fit w-32 md:w-36 cursor-pointer overflow-hidden rounded-xl border p-3 md:p-4",
         "border-white/[0.04] bg-white/[0.03] hover:border-white/[0.08] hover:bg-white/[0.06]",
         "transition-all duration-300",
         "hover:shadow-[0_0_20px_rgba(59,130,246,0.08)]"
@@ -60,7 +60,7 @@ export default function TechStack() {
         </span>
       </div>
 
-      <div className="max-w-4xl mx-auto px-4 md:px-0 mb-15 relative">
+      <div className="max-w-4xl mx-auto px-4 md:px-0 mb-6 md:mb-15 relative">
         <div className="flex items-center gap-6">
           <div className="h-px flex-1 bg-linear-to-r from-transparent to-white/20" />
           <h2 className="shrink-0 text-center text-4xl font-bold tracking-tight text-white md:text-5xl">
