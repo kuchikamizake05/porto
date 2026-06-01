@@ -566,12 +566,14 @@ class App {
     const y = 'touches' in e ? e.touches[0].clientY : e.clientY;
     const deltaX = this.start - x;
     const deltaY = this.startY - y;
+    const isHorizontalSwipe = Math.abs(deltaX) > Math.abs(deltaY);
 
-    if ('touches' in e && Math.abs(deltaX) > Math.abs(deltaY)) {
+    if ('touches' in e && isHorizontalSwipe) {
       e.preventDefault();
     }
 
-    const distance = deltaX * (this.scrollSpeed * 0.025);
+    const touchDelta = isHorizontalSwipe ? deltaX : deltaY;
+    const distance = touchDelta * (this.scrollSpeed * 0.08);
     this.scroll.target = (this.scroll.position ?? 0) + distance;
   }
 
