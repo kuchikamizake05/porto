@@ -259,7 +259,7 @@ const RotatingText = forwardRef<RotatingTextRef, RotatingTextProps>(
             className={cn(
               splitBy === "lines"
                 ? "flex w-full flex-col"
-                : "relative inline-flex flex-nowrap whitespace-nowrap overflow-hidden",
+                : "relative inline-flex flex-nowrap whitespace-nowrap overflow-hidden justify-center",
             )}
             layout
             transition={layoutTransition}
