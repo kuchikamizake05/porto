@@ -1,9 +1,13 @@
 "use client";
 
+import { useRef } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import CircularGallery from "@/components/ui/circular-gallery";
 import { ShimmerButton } from "@/components/ui/shimmer-button";
+import VariableProximity, {
+  type VariableProximitySegment,
+} from "@/components/VariableProximity";
 
 const focusAreas = [
   "Software Development",
@@ -11,7 +15,43 @@ const focusAreas = [
   "AI/ML Development",
 ];
 
+const aboutText =
+  "I'm an IT student & software engineer at the intersection of development, cybersecurity, and AI/ML. I build secure, reliable web apps - clean interfaces, maintainable systems, security-first. Always.";
+
+const aboutTextSegments: VariableProximitySegment[] = [
+  { text: "I'm an " },
+  {
+    text: "IT student & software engineer",
+    className: "text-white italic",
+  },
+  { text: " at the intersection of " },
+  {
+    text: "development",
+    className: "text-blue-400 italic",
+  },
+  { text: ", " },
+  {
+    text: "cybersecurity",
+    className: "text-emerald-400 italic",
+  },
+  { text: ", and " },
+  {
+    text: "AI/ML",
+    className: "text-purple-400 italic",
+  },
+  {
+    text: ". I build secure, reliable web apps - clean interfaces, maintainable systems, ",
+  },
+  {
+    text: "security-first",
+    className: "text-white italic",
+  },
+  { text: ". Always." },
+];
+
 export default function AboutSection() {
+  const aboutTextRef = useRef<HTMLDivElement | null>(null);
+
   return (
     <section
       id="about-me"
@@ -42,31 +82,27 @@ export default function AboutSection() {
             className="w-full max-w-3xl space-y-4 text-center"
           >
             <motion.div
+              ref={aboutTextRef}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
-              className="text-xl md:text-2xl leading-relaxed text-white/80"
+              className="relative text-xl font-medium leading-relaxed text-white/80 md:text-2xl"
             >
-              I'm an{" "}
-              <span className="text-white font-bold italic">
-                IT student &amp; software engineer
-              </span>{" "}
-              at the intersection of{" "}
-              <span className="text-blue-400 font-bold italic">development</span>
-              ,{" "}
-              <span className="text-emerald-400 font-bold italic">cybersecurity</span>
-              , and{" "}
-              <span className="text-purple-400 font-bold italic">AI/ML</span>
-              . I build secure, reliable web apps — clean interfaces, maintainable
-              systems,{" "}
-              <span className="text-white font-semibold italic">security-first</span>
-              . Always.
+              <VariableProximity
+                label={aboutText}
+                segments={aboutTextSegments}
+                className="inline-block text-balance text-white/82"
+                fromFontVariationSettings="'wght' 420, 'opsz' 14"
+                toFontVariationSettings="'wght' 850, 'opsz' 32"
+                containerRef={aboutTextRef}
+                radius={100}
+                falloff="exponential"
+                style={{ fontFamily: "var(--font-geist-sans), sans-serif" }}
+              />
             </motion.div>
 
-            <div
-              className="mx-auto mb-8 mt-6 flex max-w-3xl flex-wrap items-center justify-center gap-3 md:mb-10 md:gap-4"
-            >
+            <div className="mx-auto mb-8 mt-6 flex max-w-3xl flex-wrap items-center justify-center gap-3 md:mb-10 md:gap-4">
               {focusAreas.map((area) => (
                 <ShimmerButton
                   key={area}
@@ -86,7 +122,7 @@ export default function AboutSection() {
 
             {/* Circular Gallery WebGL Component */}
             <div className="h-[600px] relative w-full overflow-hidden">
-              <CircularGallery 
+              <CircularGallery
                 bend={1}
                 textColor="#ffffff"
                 borderRadius={0.05}
@@ -98,7 +134,7 @@ export default function AboutSection() {
             <div className="flex justify-center">
               <Link
                 href="/about"
-                className="relative inline-flex items-center gap-2 px-6 py-3 rounded-full bg-linear-to-b from-white/20 to-white/10 border border-white/10 text-white font-bold text-base tracking-wide overflow-hidden group hover:bg-white/10  transition-colors"
+                className="relative inline-flex items-center gap-2 px-6 py-3 rounded-full bg-linear-to-b from-white/20 to-white/10 border border-white/10 text-white font-bold text-base tracking-wide overflow-hidden group hover:bg-white/10 transition-colors"
               >
                 <div className="absolute inset-0 bg-white/20 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700 skew-x-12" />
                 <span className="relative z-10">More About Me</span>

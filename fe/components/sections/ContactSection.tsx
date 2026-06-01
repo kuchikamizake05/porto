@@ -514,8 +514,7 @@ export default function ContactSection() {
           >
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(37,99,235,0.2),transparent_58%)]" />
             <div
-              className="relative w-full max-w-[400px] mx-auto lg:max-w-[620px] lg:-translate-x-6"
-              style={{ height: 300 }}
+              className="relative mx-auto h-[320px] w-full max-w-[420px] md:h-[420px] lg:h-[560px] lg:max-w-[680px] lg:-translate-x-6"
               data-globe-root
             >
               <World globeConfig={globeConfig} data={globeData} />
