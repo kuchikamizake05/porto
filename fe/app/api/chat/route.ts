@@ -1,6 +1,7 @@
 import Groq from "groq-sdk";
 import { NextResponse } from "next/server";
 import prisma from "@/app/lib/db";
+import type { Experience, Education, Project } from "@prisma/client";
 
 export async function POST(req: Request) {
   try {
@@ -24,21 +25,21 @@ export async function POST(req: Request) {
     // Build dynamic context strings
     const experienceContext = experiences
       .map(
-        (e) =>
+        (e: Experience) =>
           `- ${e.role} at ${e.company} (${e.duration})${e.description ? `: ${e.description}` : ""}`
       )
       .join("\n");
 
     const educationContext = educations
       .map(
-        (e) =>
+        (e: Education) =>
           `- ${e.degree} at ${e.school} (${e.duration})${e.description ? `: ${e.description}` : ""}`
       )
       .join("\n");
 
     const projectContext = projects
       .map(
-        (p) =>
+        (p: Project) =>
           `- ${p.title} [${p.category}]: ${p.description}${p.tech ? ` | Tech: ${p.tech}` : ""}${p.siteUrl ? ` | Live: ${p.siteUrl}` : ""}${p.repoUrl ? ` | Repo: ${p.repoUrl}` : ""}`
       )
       .join("\n");
@@ -74,8 +75,8 @@ Keep your answers concise (2-4 sentences max unless more detail is clearly neede
     // Convert messages to Groq format, skip initial bot greeting
     const chatHistory = messages
       .slice(0, -1)
-      .filter((m: any, index: number) => !(m.sender === "bot" && index === 0))
-      .map((m: any) => ({
+      .filter((m: { sender: string; text: string }, index: number) => !(m.sender === "bot" && index === 0))
+      .map((m: { sender: string; text: string }) => ({
         role: m.sender === "user" ? "user" : "assistant",
         content: m.text,
       }));
@@ -95,12 +96,13 @@ Keep your answers concise (2-4 sentences max unless more detail is clearly neede
     const text = completion.choices[0]?.message?.content ?? "No response";
 
     return NextResponse.json({ text });
-  } catch (error: any) {
-    console.error("Error in chat API:", error?.message ?? error);
+  } catch (error: unknown) {
+    const errorMessage = error instanceof Error ? error.message : String(error);
+    console.error("Error in chat API:", errorMessage);
     return NextResponse.json(
       {
         error: "Failed to process chat request",
-        detail: error?.message ?? String(error),
+        detail: errorMessage,
       },
       { status: 500 }
     );

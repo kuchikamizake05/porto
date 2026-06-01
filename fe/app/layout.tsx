@@ -4,6 +4,7 @@ import "./globals.css";
 import "devicon/devicon.min.css";
 import { ThemeProvider } from "@/components/ui/ThemeProvider";
 import LayoutWrapper from "@/components/layout/LayoutWrapper";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -34,6 +35,7 @@ export default function RootLayout({
           <div className="bg-mesh" />
           <LayoutWrapper>{children}</LayoutWrapper>
         </ThemeProvider>
+        <SpeedInsights />
       </body>
     </html>
   );
