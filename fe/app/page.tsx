@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { ArrowDown } from "lucide-react";
 import AboutSection from "@/components/sections/AboutSection";
@@ -34,6 +34,7 @@ const PROFILE: Profile = {
 
 export default function Home() {
   const profile = PROFILE; // Use static data directly
+  const [isMobileViewport, setIsMobileViewport] = useState(false);
 
   useEffect(() => {
     const shouldScroll = sessionStorage.getItem("scrollToContact");
@@ -49,6 +50,21 @@ export default function Home() {
     }
   }, []);
 
+  useEffect(() => {
+    const mobileQuery = window.matchMedia("(max-width: 767px)");
+
+    const updateViewport = () => {
+      setIsMobileViewport(mobileQuery.matches);
+    };
+
+    updateViewport();
+    mobileQuery.addEventListener("change", updateViewport);
+
+    return () => {
+      mobileQuery.removeEventListener("change", updateViewport);
+    };
+  }, []);
+
   return (
     <div className="space-y-16 pb-20 overflow-x-hidden relative">
       {/* Hero / About Section */}
@@ -57,20 +73,20 @@ export default function Home() {
         className="min-h-[70vh] flex flex-col justify-start pt-20 md:pt-25 scroll-mt-20 relative px-4 md:px-0 overflow-hidden"
       >
         {/* Viral UI Effects */}
-        <div className="absolute inset-0 z-0 opacity-70">
+        <div className="absolute inset-0 z-0 opacity-100 md:opacity-70">
           <LightRays
             raysOrigin="top-center"
             raysColor="#60a5fa"
-            raysSpeed={0.8}
-            lightSpread={2}
-            rayLength={0.5}
+            raysSpeed={isMobileViewport ? 0.55 : 0.8}
+            lightSpread={isMobileViewport ? 4.2 : 2}
+            rayLength={isMobileViewport ? 2.4 : 0.5}
             followMouse={true}
-            mouseInfluence={0.1}
-            noiseAmount={0.02}
-            distortion={0}
-            pulsating={false}
-            fadeDistance={1}
-            saturation={2}
+            mouseInfluence={isMobileViewport ? 0 : 0.1}
+            noiseAmount={isMobileViewport ? 0.045 : 0.02}
+            distortion={isMobileViewport ? 0.08 : 0}
+            pulsating={isMobileViewport}
+            fadeDistance={isMobileViewport ? 2 : 1}
+            saturation={isMobileViewport ? 3 : 2}
           />
         </div>
 
@@ -244,7 +260,7 @@ export default function Home() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ delay: 2.25, duration: 1 }}
-        className="flex justify-center -mt-8 md:-mt-9 mb-10 md:mb-8"
+        className="flex justify-center -mt-8 md:-mt-9 mb-20 md:mb-8"
       >
         <div
           onClick={() =>
