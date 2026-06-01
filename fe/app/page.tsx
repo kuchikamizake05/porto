@@ -186,6 +186,7 @@ export default function Home() {
                   duration: 0.7,
                   ease: [0.22, 1, 0.36, 1],
                 }}
+                className="hidden md:block"
               >
                 <div className="inline-flex flex-col items-center md:items-start">
                   {/* Elegant Responsive Gradient Separator Line - Matches width of Text3DFlip */}
