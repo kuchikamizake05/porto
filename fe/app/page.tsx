@@ -146,6 +146,7 @@ export default function Home() {
                 pauseDelay={2000}
                 delay={800} // Start typing after greeting is visible
                 cursorStyle="line"
+                startOnView={false}
                 loop
                 className="text-5xl md:text-7xl font-bold tracking-tighter text-foreground leading-[1.1]"
               />
