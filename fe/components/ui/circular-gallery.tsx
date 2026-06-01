@@ -417,6 +417,7 @@ class App {
 
   isDown: boolean = false;
   start: number = 0;
+  startY: number = 0;
 
   constructor(
     container: HTMLElement,
@@ -556,12 +557,21 @@ class App {
     this.isDown = true;
     this.scroll.position = this.scroll.current;
     this.start = 'touches' in e ? e.touches[0].clientX : e.clientX;
+    this.startY = 'touches' in e ? e.touches[0].clientY : e.clientY;
   }
 
   onTouchMove(e: MouseEvent | TouchEvent) {
     if (!this.isDown) return;
     const x = 'touches' in e ? e.touches[0].clientX : e.clientX;
-    const distance = (this.start - x) * (this.scrollSpeed * 0.025);
+    const y = 'touches' in e ? e.touches[0].clientY : e.clientY;
+    const deltaX = this.start - x;
+    const deltaY = this.startY - y;
+
+    if ('touches' in e && Math.abs(deltaX) > Math.abs(deltaY)) {
+      e.preventDefault();
+    }
+
+    const distance = deltaX * (this.scrollSpeed * 0.025);
     this.scroll.target = (this.scroll.position ?? 0) + distance;
   }
 
@@ -626,8 +636,8 @@ class App {
     this.container.addEventListener('mousedown', this.boundOnTouchDown);
     window.addEventListener('mousemove', this.boundOnTouchMove);
     window.addEventListener('mouseup', this.boundOnTouchUp);
-    this.container.addEventListener('touchstart', this.boundOnTouchDown);
-    window.addEventListener('touchmove', this.boundOnTouchMove);
+    this.container.addEventListener('touchstart', this.boundOnTouchDown, { passive: true });
+    window.addEventListener('touchmove', this.boundOnTouchMove, { passive: false });
     window.addEventListener('touchend', this.boundOnTouchUp);
   }
 
@@ -683,5 +693,5 @@ export default function CircularGallery({
       app.destroy();
     };
   }, [items, bend, textColor, borderRadius, font, scrollSpeed, scrollEase]);
-  return <div className="w-full h-full overflow-hidden cursor-grab active:cursor-grabbing" ref={containerRef} />;
+  return <div className="h-full w-full cursor-grab overflow-hidden [touch-action:pan-y] active:cursor-grabbing" ref={containerRef} />;
 }
