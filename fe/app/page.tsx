@@ -206,7 +206,7 @@ export default function Home() {
                   staggerFrom="first"
                   transition={{ type: "spring", damping: 25, stiffness: 160 }}
                 >
-                  Stay HUNGRY Stay FOOLISH
+                  Stay hungry, stay foolish
                   </Text3DFlip>
                 </div>
               </motion.div>

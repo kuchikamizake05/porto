@@ -53,6 +53,28 @@ const ROTATION_MAP = {
   left: "rotateY(-90deg)",
 } as const
 
+const SECOND_FACE_TRANSFORMS = {
+  top: "rotateX(-90deg) translateZ(0.5lh)",
+  right:
+    "rotateY(90deg) translateX(50%) rotateY(-90deg) translateX(-50%) rotateY(-90deg) translateX(50%)",
+  bottom: "rotateX(90deg) translateZ(0.5lh)",
+  left: "rotateY(90deg) translateX(50%) rotateY(-90deg) translateX(50%) rotateY(-90deg) translateX(50%)",
+} as const
+
+const FRONT_FACE_TRANSFORMS = {
+  top: "translateZ(0.5lh)",
+  bottom: "translateZ(0.5lh)",
+  left: "rotateY(90deg) translateX(50%) rotateY(-90deg)",
+  right: "rotateY(-90deg) translateX(50%) rotateY(90deg)",
+} as const
+
+const CONTAINER_TRANSFORMS = {
+  top: "translateZ(-0.5lh)",
+  bottom: "translateZ(-0.5lh)",
+  left: "rotateY(90deg) translateX(50%) rotateY(-90deg)",
+  right: "rotateY(90deg) translateX(50%) rotateY(-90deg)",
+} as const
+
 const DEFAULT_TRANSITION: ValueAnimationTransition = {
   type: "spring",
   damping: 30,
@@ -158,6 +180,7 @@ const Text3DFlip = ({
         getStaggerDelay(i, totalChars)
       )
 
+      // 1. Flip smoothly to the 3D secondary face
       await animate(
         ".text-3d-flip-char",
         { transform: rotationTransform },
@@ -169,9 +192,10 @@ const Text3DFlip = ({
 
       if (!isMountedRef.current) return
 
+      // 2. Snap instantly back to original container transform (preserving 3D depth)
       await animate(
         ".text-3d-flip-char",
-        { transform: "rotateX(0deg) rotateY(0deg)" },
+        { transform: CONTAINER_TRANSFORMS[rotateDirection] },
         { duration: 0 }
       )
     } finally {
@@ -179,14 +203,14 @@ const Text3DFlip = ({
         isAnimatingRef.current = false
       }
     }
-  }, [characters, transition, getStaggerDelay, rotationTransform, animate])
+  }, [characters, transition, getStaggerDelay, rotationTransform, rotateDirection, animate])
 
   useEffect(() => {
     if (!autoPlay) return
 
     const interval = setInterval(() => {
       handleHoverStart()
-    }, 4500) // Flip automatically every 4.5 seconds
+    }, 6000) // Flip automatically every 6 seconds
 
     const timeout = setTimeout(() => {
       handleHoverStart()
@@ -240,28 +264,6 @@ interface CharBoxProps {
   flipTextClassName?: string
   rotateDirection: "top" | "right" | "bottom" | "left"
 }
-
-const SECOND_FACE_TRANSFORMS = {
-  top: "rotateX(-90deg) translateZ(0.5lh)",
-  right:
-    "rotateY(90deg) translateX(50%) rotateY(-90deg) translateX(-50%) rotateY(-90deg) translateX(50%)",
-  bottom: "rotateX(90deg) translateZ(0.5lh)",
-  left: "rotateY(90deg) translateX(50%) rotateY(-90deg) translateX(50%) rotateY(-90deg) translateX(50%)",
-} as const
-
-const FRONT_FACE_TRANSFORMS = {
-  top: "translateZ(0.5lh)",
-  bottom: "translateZ(0.5lh)",
-  left: "rotateY(90deg) translateX(50%) rotateY(-90deg)",
-  right: "rotateY(-90deg) translateX(50%) rotateY(90deg)",
-} as const
-
-const CONTAINER_TRANSFORMS = {
-  top: "translateZ(-0.5lh)",
-  bottom: "translateZ(-0.5lh)",
-  left: "rotateY(90deg) translateX(50%) rotateY(-90deg)",
-  right: "rotateY(90deg) translateX(50%) rotateY(-90deg)",
-} as const
 
 const CharBox = memo(
   ({
