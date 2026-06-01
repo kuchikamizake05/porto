@@ -163,7 +163,7 @@ export default function Home() {
                 <span className="font-normal text-white">I&apos;m</span>
                 <RotatingText
                   texts={profile.roles}
-                  mainClassName="overflow-hidden bg-blue-500 p-2 font-semibold text-white shadow-[0_0_28px_rgba(59,130,246,0.16)] md:p-3 leading-none"
+                  mainClassName="overflow-hidden bg-blue-500 p-2 font-semibold text-white shadow-[0_0_28px_rgba(59,130,246,0.16)] leading-none"
                   splitLevelClassName="overflow-hidden"
                   staggerFrom="last"
                   initial={{ y: "100%" }}
