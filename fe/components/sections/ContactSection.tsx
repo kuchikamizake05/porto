@@ -1,5 +1,6 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import { Mail, MapPin, Github, Linkedin, ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
 import dynamic from "next/dynamic";
@@ -405,6 +406,17 @@ const globeData = [
 ];
 
 export default function ContactSection() {
+  const [isMobile, setIsMobile] = useState(true);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 1024);
+    };
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
+
   return (
     <section
       id="contact"
@@ -503,23 +515,25 @@ export default function ContactSection() {
           </div>
 
           {/* Right Column: Globe Visual */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.94 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true, amount: 0.35 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-            style={{ minHeight: 300 }}
-            className="relative flex min-h-[300px] -mt-6 -mb-4 items-center justify-center overflow-hidden lg:min-h-[520px] lg:mt-0 lg:mb-0"
-            data-contact-globe
-          >
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(37,99,235,0.2),transparent_58%)]" />
-            <div
-              className="relative mx-auto h-[320px] w-full max-w-[420px] md:h-[420px] lg:h-[560px] lg:max-w-[680px] lg:-translate-x-6"
-              data-globe-root
+          {!isMobile && (
+            <motion.div
+              initial={{ opacity: 0, scale: 0.94 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true, amount: 0.35 }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
+              style={{ minHeight: 300 }}
+              className="relative flex min-h-[300px] -mt-6 -mb-4 items-center justify-center overflow-hidden lg:min-h-[520px] lg:mt-0 lg:mb-0"
+              data-contact-globe
             >
-              <World globeConfig={globeConfig} data={globeData} />
-            </div>
-          </motion.div>
+              <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(37,99,235,0.2),transparent_58%)]" />
+              <div
+                className="relative mx-auto h-[320px] w-full max-w-[420px] md:h-[420px] lg:h-[560px] lg:max-w-[680px] lg:-translate-x-6"
+                data-globe-root
+              >
+                <World globeConfig={globeConfig} data={globeData} />
+              </div>
+            </motion.div>
+          )}
         </div>
       </div>
     </section>

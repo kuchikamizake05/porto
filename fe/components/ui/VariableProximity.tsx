@@ -3,6 +3,7 @@ import {
   useMemo,
   useRef,
   useEffect,
+  useState,
   MutableRefObject,
   CSSProperties,
   HTMLAttributes
@@ -14,10 +15,12 @@ export type VariableProximitySegment = {
   className?: string;
 };
 
-function useMousePositionRef(containerRef: MutableRefObject<HTMLElement | null>) {
+function useMousePositionRef(containerRef: MutableRefObject<HTMLElement | null>, disabled: boolean) {
   const positionRef = useRef({ x: 0, y: 0 });
 
   useEffect(() => {
+    if (disabled) return;
+
     const updatePosition = (x: number, y: number) => {
       if (containerRef?.current) {
         const rect = containerRef.current.getBoundingClientRect();
@@ -39,7 +42,7 @@ function useMousePositionRef(containerRef: MutableRefObject<HTMLElement | null>)
       window.removeEventListener('mousemove', handleMouseMove);
       window.removeEventListener('touchmove', handleTouchMove);
     };
-  }, [containerRef]);
+  }, [containerRef, disabled]);
 
   return positionRef;
 }
@@ -74,7 +77,19 @@ const VariableProximity = forwardRef<HTMLSpanElement, VariableProximityProps>((p
 
   const letterRefs = useRef<(HTMLSpanElement | null)[]>([]);
   const interpolatedSettingsRef = useRef<string[]>([]);
-  const mousePositionRef = useMousePositionRef(containerRef);
+  const [isMobile, setIsMobile] = useState(true);
+
+  // SSR-friendly media query to detect mobile viewport
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  const mousePositionRef = useMousePositionRef(containerRef, isMobile);
   const lastPositionRef = useRef<{ x: number | null; y: number | null }>({ x: null, y: null });
   const letterPositionsRef = useRef<{ centerX: number; centerY: number }[]>([]);
 
@@ -131,18 +146,22 @@ const VariableProximity = forwardRef<HTMLSpanElement, VariableProximityProps>((p
     });
   };
 
-  // Re-cache on mount, resize, and text updates
+  // Re-cache on mount, resize, and text updates (disabled on mobile)
   useEffect(() => {
+    if (isMobile) return;
+
     const timer = setTimeout(cachePositions, 250);
     window.addEventListener('resize', cachePositions);
     return () => {
       clearTimeout(timer);
       window.removeEventListener('resize', cachePositions);
     };
-  }, [containerRef, label, segments]);
+  }, [containerRef, label, segments, isMobile]);
 
-  // Run animation only when mouse moves, completely layout-thrashing free
+  // Run animation only when mouse moves, completely layout-thrashing free (disabled on mobile)
   useEffect(() => {
+    if (isMobile) return;
+
     let frameId: number;
     const loop = () => {
       if (!containerRef?.current) {
@@ -190,7 +209,34 @@ const VariableProximity = forwardRef<HTMLSpanElement, VariableProximityProps>((p
 
     frameId = requestAnimationFrame(loop);
     return () => cancelAnimationFrame(frameId);
-  }, [containerRef, radius, falloff, parsedSettings, fromFontVariationSettings]);
+  }, [containerRef, radius, falloff, parsedSettings, fromFontVariationSettings, isMobile]);
+
+  // If on mobile viewport, render static simple HTML elements for maximum performance
+  if (isMobile) {
+    return (
+      <span
+        ref={ref}
+        onClick={onClick}
+        style={{
+          display: 'inline',
+          fontFamily: 'var(--font-geist-sans), sans-serif',
+          ...style
+        }}
+        className={className}
+        {...restProps}
+      >
+        {segments ? (
+          segments.map((segment, index) => (
+            <span key={index} className={segment.className}>
+              {segment.text}
+            </span>
+          ))
+        ) : (
+          label
+        )}
+      </span>
+    );
+  }
 
   const words = label.split(' ');
   const segmentWords = segments?.flatMap((segment, segmentIndex) =>
