@@ -186,29 +186,30 @@ export default function Home() {
                   duration: 0.7,
                   ease: [0.22, 1, 0.36, 1],
                 }}
-                className="hidden md:block"
               >
-                <div className="inline-flex flex-col items-center md:items-start">
+                <div className="inline-flex flex-col items-center md:items-start w-full">
                   {/* Elegant Responsive Gradient Separator Line - Matches width of Text3DFlip */}
                   <div className="h-[1.5px] w-full bg-gradient-to-r from-transparent via-white/50 to-transparent md:from-white/50 md:to-transparent mb-4" />
 
-                  <Text3DFlip
-                    className="font-sans text-xl sm:text-2xl md:text-3.25xl font-normal"
-                  textClassName={[
-                    "font-serif italic text-white tracking-wide font-normal normal-case",
-                    "font-sans text-white tracking-widest font-extrabold uppercase"
-                  ]}
-                  flipTextClassName={[
-                    "font-serif italic text-white font-normal normal-case",
-                    "font-sans text-white font-black uppercase"
-                  ]}
-                  rotateDirection="top"
-                  staggerDuration={0.03}
-                  staggerFrom="first"
-                  transition={{ type: "spring", damping: 25, stiffness: 160 }}
-                >
-                  Stay hungry Stay foolish
-                  </Text3DFlip>
+                  <div className="hidden md:block">
+                    <Text3DFlip
+                      className="font-sans text-xl sm:text-2xl md:text-3.25xl font-normal"
+                    textClassName={[
+                      "font-serif italic text-white tracking-wide font-normal normal-case",
+                      "font-sans text-white tracking-widest font-extrabold uppercase"
+                    ]}
+                    flipTextClassName={[
+                      "font-serif italic text-white font-normal normal-case",
+                      "font-sans text-white font-black uppercase"
+                    ]}
+                    rotateDirection="top"
+                    staggerDuration={0.03}
+                    staggerFrom="first"
+                    transition={{ type: "spring", damping: 25, stiffness: 160 }}
+                  >
+                    Stay hungry Stay foolish
+                    </Text3DFlip>
+                  </div>
                 </div>
               </motion.div>
             </motion.div>
