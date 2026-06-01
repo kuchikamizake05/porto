@@ -228,7 +228,7 @@ export default function Home() {
               handle="faaidsakhaa"
               status="Online"
               contactText="Contact Me"
-              avatarUrl="/fotoku.png"
+              avatarUrl="/about-gallery/photo-7-nobg.png"
               iconUrl="/iconpattern.png"
               patternUrl="/formal-invitation.svg"
               grainUrl=""
@@ -243,8 +243,8 @@ export default function Home() {
               patternOverlayOpacity={0.2}
               cardRadius="9999px 9999px 0 0"
               aspectRatio="19 / 20"
-              avatarScale={1.05}
-              avatarBottomOffset="-20px"
+              avatarScale={1.3}
+              avatarBottomOffset="-95px"
               avatarBlendMode="normal"
               className="w-full [&_section]:!h-auto [&_section]:!max-h-none [&_section]:!w-full"
               onContactClick={() =>
