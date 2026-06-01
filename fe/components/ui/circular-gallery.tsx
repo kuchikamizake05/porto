@@ -573,7 +573,7 @@ class App {
     }
 
     const touchDelta = isHorizontalSwipe ? deltaX : deltaY;
-    const distance = touchDelta * (this.scrollSpeed * 0.08);
+    const distance = touchDelta * (this.scrollSpeed * 0.045);
     this.scroll.target = (this.scroll.position ?? 0) + distance;
   }
 
