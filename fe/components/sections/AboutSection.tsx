@@ -97,7 +97,7 @@ export default function AboutSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
-              className="relative text-xl font-medium leading-relaxed text-white/80 md:text-2xl"
+              className="relative text-lg font-medium leading-relaxed text-white/80 md:text-xl"
             >
               <VariableProximity
                 label={aboutText}
