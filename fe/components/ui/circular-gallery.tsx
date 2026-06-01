@@ -174,7 +174,7 @@ class Media {
   font?: string;
   program!: Program;
   plane!: Mesh;
-  title!: Title;
+  title?: Title;
   scale!: number;
   padding!: number;
   width!: number;
@@ -273,7 +273,7 @@ class Media {
           float edgeSmooth = 0.002;
           float alpha = 1.0 - smoothstep(-edgeSmooth, edgeSmooth, d);
           
-          gl_FragColor = vec4(color.rgb, alpha);
+          gl_FragColor = vec4(color.rgb, color.a * alpha);
         }
       `,
       uniforms: {
@@ -304,6 +304,8 @@ class Media {
   }
 
   createTitle() {
+    if (!this.text) return;
+
     this.title = new Title({
       gl: this.gl,
       plane: this.plane,

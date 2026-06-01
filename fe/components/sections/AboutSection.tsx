@@ -49,6 +49,16 @@ const aboutTextSegments: VariableProximitySegment[] = [
   { text: ". Always." },
 ];
 
+const galleryItems = [
+  { image: "/about-gallery/photo-1-nobg.png", text: "" },
+  { image: "/about-gallery/photo-2-nobg.png", text: "" },
+  { image: "/about-gallery/photo-3-nobg.png", text: "" },
+  { image: "/about-gallery/photo-4-nobg.png", text: "" },
+  { image: "/about-gallery/photo-5-nobg.png", text: "" },
+  { image: "/about-gallery/photo-6-nobg.png", text: "" },
+  { image: "/about-gallery/photo-7-nobg.png", text: "" },
+];
+
 export default function AboutSection() {
   const aboutTextRef = useRef<HTMLDivElement | null>(null);
 
@@ -102,7 +112,7 @@ export default function AboutSection() {
               />
             </motion.div>
 
-            <div className="mx-auto mb-8 mt-6 flex max-w-3xl flex-wrap items-center justify-center gap-3 md:mb-10 md:gap-4">
+            <div className="mx-auto mb-5 mt-6 flex max-w-3xl flex-wrap items-center justify-center gap-3 md:mb-6 md:gap-4">
               {focusAreas.map((area) => (
                 <ShimmerButton
                   key={area}
@@ -121,8 +131,9 @@ export default function AboutSection() {
             </div>
 
             {/* Circular Gallery WebGL Component */}
-            <div className="h-[600px] relative w-full overflow-hidden">
+            <div className="relative -mt-10 h-[500px] w-full overflow-hidden md:-mt-16">
               <CircularGallery
+                items={galleryItems}
                 bend={1}
                 textColor="#ffffff"
                 borderRadius={0.05}
@@ -131,7 +142,7 @@ export default function AboutSection() {
               />
             </div>
 
-            <div className="flex justify-center">
+            <div className="-mt-8 flex justify-center md:-mt-12">
               <Link
                 href="/about"
                 className="relative inline-flex items-center gap-2 px-6 py-3 rounded-full bg-linear-to-b from-white/20 to-white/10 border border-white/10 text-white font-bold text-base tracking-wide overflow-hidden group hover:bg-white/10 transition-colors"
