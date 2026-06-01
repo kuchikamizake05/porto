@@ -7,7 +7,7 @@ import CircularGallery from "@/components/ui/circular-gallery";
 import { ShimmerButton } from "@/components/ui/shimmer-button";
 import VariableProximity, {
   type VariableProximitySegment,
-} from "@/components/VariableProximity";
+} from "@/components/ui/VariableProximity";
 
 const focusAreas = [
   "Software Development",

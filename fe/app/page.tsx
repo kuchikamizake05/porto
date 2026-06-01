@@ -8,11 +8,11 @@ import TechStack from "@/components/sections/TechStack";
 import ProjectsSection from "@/components/sections/ProjectsSection";
 import MarqueeSection from "@/components/sections/MarqueeSection";
 import ContactSection from "@/components/sections/ContactSection";
-import ProfileCard from "@/components/ProfileCard";
+import ProfileCard from "@/components/ui/ProfileCard";
 import { TypingAnimation } from "@/components/ui/typing-animation";
 import RotatingText from "@/components/ui/rotating-text";
 import Text3DFlip from "@/components/ui/text-3d-flip";
-import LightRays from "@/components/LightRays";
+import LightRays from "@/components/ui/LightRays";
 
 type Profile = {
   name: string[];

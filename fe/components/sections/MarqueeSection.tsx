@@ -1,6 +1,6 @@
 "use client";
 
-import ScrollVelocity from "@/components/ScrollVelocity";
+import ScrollVelocity from "@/components/ui/ScrollVelocity";
 
 const text =
   "FAAID SAKHAA ✦ KUCHIKAMIZAKE ✦ WEB DEVELOPER ✦ CYBER SECURITY ENTHUSIAST ✦ AI ENTHUSIAST";

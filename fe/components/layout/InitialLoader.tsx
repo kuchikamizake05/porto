@@ -6,7 +6,7 @@ import {
   motion,
   useReducedMotion,
 } from "framer-motion";
-import CountUp from "@/components/CountUp";
+import CountUp from "@/components/ui/CountUp";
 
 const INTRO_DELAY_MS = 300;
 const COUNT_DURATION = 4.2;
