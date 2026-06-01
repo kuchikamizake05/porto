@@ -26,7 +26,7 @@ export default function Marquee3D({ children, className }: Marquee3DProps) {
   return (
     <div className={cn("relative flex items-center justify-center", className)}>
       <div
-        className="relative w-full max-w-4xl h-52 md:h-96 overflow-hidden [perspective:100px]"
+        className="relative w-full max-w-4xl h-72 md:h-96 overflow-hidden [perspective:100px]"
         style={{
           WebkitMaskImage:
             "linear-gradient(to bottom, transparent, black 10%, black 90%, transparent), linear-gradient(to right, transparent, black 5%, black 95%, transparent)",
