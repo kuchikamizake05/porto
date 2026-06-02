@@ -112,6 +112,7 @@ const Text3DFlip = ({
   const characters = useMemo(() => {
     const words = text.split(" ")
     return words.map((word, i) => ({
+      key: `${word}-${i}`,
       word,
       characters: splitIntoCharacters(word),
       needsSpace: i !== words.length - 1,
@@ -215,7 +216,7 @@ const Text3DFlip = ({
       <span className="sr-only">{text}</span>
 
       {characters.map((wordObj, wordIndex) => (
-        <span key={wordObj.word} className="inline-flex">
+        <span key={wordObj.key} className="inline-flex">
           {wordObj.characters.map((char, charIndex) => {
             const currentTextClass = Array.isArray(textClassName)
               ? textClassName[wordIndex % textClassName.length]

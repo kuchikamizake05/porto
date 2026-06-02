@@ -147,6 +147,36 @@ const VariableProximity = forwardRef<HTMLSpanElement, VariableProximityProps>((p
         tabIndex
       };
 
+  const mobileSegments = useMemo(
+    () =>
+      segments?.map((segment, segmentIndex) => ({
+        ...segment,
+        key: `${segment.className || 'segment'}-${segment.text}-${segmentIndex}`
+      })),
+    [segments]
+  );
+
+  const renderedWords = useMemo(
+    () =>
+      segments
+        ? segments.flatMap((segment, segmentIndex) =>
+            segment.text.split(' ').map((word, wordIndex, wordsArray) => ({
+              key: `${segment.className || 'segment'}-${word}-${segmentIndex}-${wordIndex}`,
+              text: word,
+              className: segment.className,
+              needsSpace:
+                segmentIndex < segments.length - 1 || wordIndex < wordsArray.length - 1
+            }))
+          )
+        : label.split(' ').map((word, wordIndex, wordsArray) => ({
+            key: `word-${word}-${wordIndex}`,
+            text: word,
+            className: undefined,
+            needsSpace: wordIndex < wordsArray.length - 1
+          })),
+    [label, segments]
+  );
+
   const calculateFalloff = useCallback((distance: number) => {
     const norm = Math.min(Math.max(1 - distance / radius, 0), 1);
     switch (falloff) {
@@ -260,9 +290,9 @@ const VariableProximity = forwardRef<HTMLSpanElement, VariableProximityProps>((p
         {...interactionProps}
         {...restProps}
       >
-        {segments ? (
-          segments.map((segment) => (
-            <span key={`${segment.className || 'segment'}-${segment.text}`} className={segment.className}>
+        {mobileSegments ? (
+          mobileSegments.map((segment) => (
+            <span key={segment.key} className={segment.className}>
               {segment.text}
             </span>
           ))
@@ -273,15 +303,6 @@ const VariableProximity = forwardRef<HTMLSpanElement, VariableProximityProps>((p
     );
   }
 
-  const words = label.split(' ');
-  const segmentWords = segments?.flatMap((segment, segmentIndex) =>
-    segment.text.split(' ').map((word, wordIndex, wordsArray) => ({
-      text: word,
-      className: segment.className,
-      needsSpace:
-        segmentIndex < segments.length - 1 || wordIndex < wordsArray.length - 1
-    }))
-  );
   let letterIndex = 0;
 
   return (
@@ -296,12 +317,8 @@ const VariableProximity = forwardRef<HTMLSpanElement, VariableProximityProps>((p
       {...interactionProps}
       {...restProps}
     >
-      {(segmentWords || words.map((word, wordIndex) => ({
-        text: word,
-        className: undefined,
-        needsSpace: wordIndex < words.length - 1
-      }))).map((word) => (
-        <span key={`${word.className || 'word'}-${word.text}`} className={`inline-block whitespace-nowrap ${word.className || ''}`.trim()}>
+      {renderedWords.map((word) => (
+        <span key={word.key} className={`inline-block whitespace-nowrap ${word.className || ''}`.trim()}>
           {word.text.split('').map(letter => {
             const currentLetterIndex = letterIndex++;
             return (
