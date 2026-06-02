@@ -50,7 +50,7 @@ export default function Navbar() {
   return (
     <>
       {/* Top Header Bar */}
-      <div className="fixed top-0 left-0 w-full z-20 px-8 py-8 pointer-events-none">
+      <div className="fixed top-0 left-0 w-full z-20 p-8 pointer-events-none">
         <div className="max-w-7xl mx-auto flex justify-between items-center">
           <Link href="/" className="pointer-events-auto">
             <motion.div
@@ -102,7 +102,7 @@ export default function Navbar() {
                 <Magnetic key={item.label} strength={0.05}>
                   <Link
                     href={item.href}
-                    className={`relative w-8 h-8 flex items-center justify-center rounded-full transition-all duration-300 group ${
+                    className={`relative size-8 flex items-center justify-center rounded-full transition-all duration-300 group ${
                       isActive
                         ? "text-blue-400"
                         : "text-foreground/50 hover:text-foreground"
@@ -111,7 +111,7 @@ export default function Navbar() {
                     {isActive && (
                       <motion.div
                         layoutId="nav-pill-active"
-                        className="absolute w-7 h-7 bg-blue-500/15 rounded-full"
+                        className="absolute size-7 bg-blue-500/15 rounded-full"
                         transition={{
                           type: "spring",
                           bounce: 0.2,
@@ -119,7 +119,7 @@ export default function Navbar() {
                         }}
                       />
                     )}
-                    <item.icon className="w-[18px] h-[18px] relative z-10 transition-transform duration-300 group-hover:scale-110" />
+                    <item.icon className="size-[18px] relative z-10 transition-transform duration-300 group-hover:scale-110" />
                     <div className="absolute -top-10 left-1/2 -translate-x-1/2 px-2 py-1 bg-foreground text-background text-[9px] font-bold rounded-lg opacity-0 group-hover:opacity-100 transition-all duration-300 pointer-events-none uppercase tracking-widest leading-none translate-y-2 group-hover:translate-y-0 shadow-lg border border-border/50">
                       {item.label}
                     </div>
@@ -139,9 +139,9 @@ export default function Navbar() {
                   href={item.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="relative w-8 h-8 flex items-center justify-center rounded-full transition-all duration-300 group text-foreground/50 hover:text-foreground"
+                  className="relative size-8 flex items-center justify-center rounded-full transition-all duration-300 group text-foreground/50 hover:text-foreground"
                 >
-                  <item.icon className="w-[18px] h-[18px] relative z-10 transition-transform duration-300 group-hover:scale-110" />
+                  <item.icon className="size-[18px] relative z-10 transition-transform duration-300 group-hover:scale-110" />
                   <div className="absolute -top-10 left-1/2 -translate-x-1/2 px-2 py-1 bg-foreground text-background text-[9px] font-bold rounded-lg opacity-0 group-hover:opacity-100 transition-all duration-300 pointer-events-none uppercase tracking-widest leading-none translate-y-2 group-hover:translate-y-0 shadow-lg border border-border/50">
                     {item.label}
                   </div>
@@ -152,9 +152,9 @@ export default function Navbar() {
               <button
                 type="button"
                 onClick={scrollToContact}
-                className="relative w-8 h-8 flex items-center justify-center rounded-full transition-all duration-300 group text-foreground/50 hover:text-foreground"
+                className="relative size-8 flex items-center justify-center rounded-full transition-all duration-300 group text-foreground/50 hover:text-foreground"
               >
-                <Mail className="w-[18px] h-[18px] relative z-10 transition-transform duration-300 group-hover:scale-110" />
+                <Mail className="size-[18px] relative z-10 transition-transform duration-300 group-hover:scale-110" />
                 <div className="absolute -top-10 left-1/2 -translate-x-1/2 px-2 py-1 bg-foreground text-background text-[9px] font-bold rounded-lg opacity-0 group-hover:opacity-100 transition-all duration-300 pointer-events-none uppercase tracking-widest leading-none translate-y-2 group-hover:translate-y-0 shadow-lg border border-border/50">
                   Email
                 </div>

@@ -101,9 +101,9 @@ export default function Chatbot() {
             {/* Header */}
             <div className="flex items-center justify-between border-b border-white/10 bg-white/5 p-4">
               <div className="flex items-center gap-3">
-                <div className="relative flex h-10 w-10 items-center justify-center rounded-full bg-linear-to-tr from-blue-600 to-sky-400 shadow-lg">
-                  <Bot className="h-6 w-6 text-white" />
-                  <span className="absolute bottom-0 right-0 h-2.5 w-2.5 rounded-full border-2 border-black bg-green-500" />
+                <div className="relative flex size-10 items-center justify-center rounded-full bg-linear-to-tr from-blue-600 to-sky-400 shadow-lg">
+                  <Bot className="size-6 text-white" />
+                  <span className="absolute bottom-0 right-0 size-2.5 rounded-full border-2 border-black bg-green-500" />
                 </div>
                 <div>
                   <h3 className="font-semibold text-white">Assistant</h3>
@@ -115,9 +115,9 @@ export default function Chatbot() {
               <button
                 type="button"
                 onClick={toggleChat}
-                className="flex h-8 w-8 items-center justify-center rounded-full text-white/50 hover:bg-white/10 hover:text-white transition-colors"
+                className="flex size-8 items-center justify-center rounded-full text-white/50 hover:bg-white/10 hover:text-white transition-colors"
               >
-                <X className="h-4 w-4" />
+                <X className="size-4" />
               </button>
             </div>
 
@@ -152,9 +152,9 @@ export default function Chatbot() {
                     className="self-start bg-white/10 text-white/90 rounded-2xl rounded-bl-none border border-white/5 px-4 py-2.5 text-sm"
                   >
                     <div className="flex gap-1">
-                      <span className="w-1.5 h-1.5 bg-white/50 rounded-full animate-pulse [animation-delay:-0.3s]"></span>
-                      <span className="w-1.5 h-1.5 bg-white/50 rounded-full animate-pulse [animation-delay:-0.15s]"></span>
-                      <span className="w-1.5 h-1.5 bg-white/50 rounded-full animate-pulse"></span>
+                      <span className="size-1.5 bg-white/50 rounded-full animate-pulse [animation-delay:-0.3s]"></span>
+                      <span className="size-1.5 bg-white/50 rounded-full animate-pulse [animation-delay:-0.15s]"></span>
+                      <span className="size-1.5 bg-white/50 rounded-full animate-pulse"></span>
                     </div>
                   </motion.div>
                 )}
@@ -180,9 +180,9 @@ export default function Chatbot() {
                   type="submit"
                   aria-label="Send chat message"
                   disabled={!inputValue.trim() || isLoading}
-                  className="flex h-10 w-10 items-center justify-center rounded-xl bg-blue-600 text-white shadow-lg shadow-blue-500/20 hover:bg-sky-500 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                  className="flex size-10 items-center justify-center rounded-xl bg-blue-600 text-white shadow-lg shadow-blue-500/20 hover:bg-sky-500 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
                 >
-                  <Send className="h-4 w-4" />
+                  <Send className="size-4" />
                 </button>
               </form>
             </div>
@@ -195,7 +195,7 @@ export default function Chatbot() {
         onClick={toggleChat}
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
-        className="group relative flex h-12 w-12 items-center justify-center rounded-full bg-linear-to-tr from-blue-600 to-sky-400 shadow-lg transition-all hover:shadow-blue-400/10"
+        className="group relative flex size-12 items-center justify-center rounded-full bg-linear-to-tr from-blue-600 to-sky-400 shadow-lg transition-all hover:shadow-blue-400/10"
       >
         <span className="absolute inset-0 rounded-full bg-white/20 opacity-0 group-hover:opacity-100 transition-opacity" />
         <AnimatePresence mode="wait">
@@ -207,7 +207,7 @@ export default function Chatbot() {
               exit={{ rotate: 90, opacity: 0 }}
               transition={{ duration: 0.2 }}
             >
-              <X className="h-6 w-6 text-white" />
+              <X className="size-6 text-white" />
             </motion.div>
           ) : (
             <motion.div
@@ -217,7 +217,7 @@ export default function Chatbot() {
               exit={{ rotate: -90, opacity: 0 }}
               transition={{ duration: 0.2 }}
             >
-              <MessageCircle className="h-6 w-6 text-white" />
+              <MessageCircle className="size-6 text-white" />
             </motion.div>
           )}
         </AnimatePresence>

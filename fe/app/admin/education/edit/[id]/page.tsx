@@ -1,14 +1,25 @@
-"use client";
-
-import { use } from "react";
+import { notFound } from "next/navigation";
+import prisma from "@/app/lib/db";
 import EducationForm from "../../../components/EducationForm";
 
-export default function EditEducationPage({
+export default async function EditEducationPage({
   params,
 }: {
   params: Promise<{ id: string }>;
 }) {
-  const { id } = use(params);
+  const { id } = await params;
+  const education = await prisma.education.findUnique({
+    where: { id: Number(id) },
+    select: {
+      school: true,
+      degree: true,
+      duration: true,
+      description: true,
+      logoUrl: true,
+    },
+  });
+
+  if (!education) notFound();
 
   return (
     <div className="space-y-10">
@@ -20,7 +31,7 @@ export default function EditEducationPage({
           Update your academic milestone details.
         </p>
       </div>
-      <EducationForm id={id} />
+      <EducationForm id={id} initialData={education} />
     </div>
   );
 }

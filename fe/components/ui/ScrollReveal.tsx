@@ -1,11 +1,11 @@
-import React, { useEffect, useRef, useMemo, ReactNode, RefObject } from 'react';
+import React, { useEffect, useRef, useMemo, RefObject } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
 
 interface ScrollRevealProps {
-  children: ReactNode;
+  children: string;
   scrollContainerRef?: RefObject<HTMLElement>;
   enableBlur?: boolean;
   baseOpacity?: number;
@@ -32,11 +32,13 @@ const ScrollReveal: React.FC<ScrollRevealProps> = ({
   const containerRef = useRef<HTMLHeadingElement>(null);
 
   const splitText = useMemo(() => {
-    const text = typeof children === 'string' ? children : '';
-    return text.split(/(\s+)/).map((word, index) => {
+    let offset = 0;
+    return children.split(/(\s+)/).map((word) => {
       if (word.match(/^\s+$/)) return word;
+      const key = `${word}-${offset}`;
+      offset += word.length;
       return (
-        <span className="inline-block word" key={index}>
+        <span className="inline-block word" key={key}>
           {word}
         </span>
       );

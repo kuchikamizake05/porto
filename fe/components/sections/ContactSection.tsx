@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useSyncExternalStore } from "react";
 import { Mail, MapPin, Github, Linkedin, ArrowRight } from "lucide-react";
 import { m as motion } from "motion/react";
 import dynamic from "next/dynamic";
@@ -405,17 +405,20 @@ const globeData = [
   },
 ];
 
-export default function ContactSection() {
-  const [isMobile, setIsMobile] = useState(true);
+const subscribeDesktopViewport = (onStoreChange: () => void) => {
+  window.addEventListener("resize", onStoreChange);
+  return () => window.removeEventListener("resize", onStoreChange);
+};
 
-  useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth < 1024);
-    };
-    checkMobile();
-    window.addEventListener("resize", checkMobile);
-    return () => window.removeEventListener("resize", checkMobile);
-  }, []);
+const getDesktopViewportSnapshot = () => window.innerWidth >= 1024;
+const getServerDesktopViewportSnapshot = () => false;
+
+export default function ContactSection() {
+  const isDesktop = useSyncExternalStore(
+    subscribeDesktopViewport,
+    getDesktopViewportSnapshot,
+    getServerDesktopViewportSnapshot,
+  );
 
   return (
     <section
@@ -447,8 +450,8 @@ export default function ContactSection() {
               {/* Contact Details */}
               <div className="space-y-6">
                 <div className="flex items-center gap-4 group">
-                  <div className="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center group-hover:bg-blue-500/10 transition-colors">
-                    <MapPin className="w-5 h-5 text-gray-400 group-hover:text-blue-400 transition-colors" />
+                  <div className="size-12 rounded-full bg-white/5 flex items-center justify-center group-hover:bg-blue-500/10 transition-colors">
+                    <MapPin className="size-5 text-gray-400 group-hover:text-blue-400 transition-colors" />
                   </div>
                   <div>
                     <span className="text-xs font-bold uppercase tracking-wider text-zinc-500 block mb-1">
@@ -459,8 +462,8 @@ export default function ContactSection() {
                 </div>
 
                 <div className="flex items-center gap-4 group">
-                  <div className="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center group-hover:bg-blue-500/10 transition-colors">
-                    <Mail className="w-5 h-5 text-gray-400 group-hover:text-blue-400 transition-colors" />
+                  <div className="size-12 rounded-full bg-white/5 flex items-center justify-center group-hover:bg-blue-500/10 transition-colors">
+                    <Mail className="size-5 text-gray-400 group-hover:text-blue-400 transition-colors" />
                   </div>
                   <div>
                     <span className="text-xs font-bold uppercase tracking-wider text-zinc-500 block mb-1">
@@ -505,9 +508,9 @@ export default function ContactSection() {
                     rel="noreferrer"
                     className="flex items-center gap-3 text-zinc-500 hover:text-white transition-colors group w-fit"
                   >
-                    <item.icon className="w-5 h-5" />
+                    <item.icon className="size-5" />
                     <span className="text-sm font-medium">{item.label}</span>
-                    <ArrowRight className="w-4 h-4 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all" />
+                    <ArrowRight className="size-4 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all" />
                   </a>
                 ))}
               </div>
@@ -515,7 +518,7 @@ export default function ContactSection() {
           </div>
 
           {/* Right Column: Globe Visual */}
-          {!isMobile && (
+          {isDesktop && (
             <motion.div
               initial={{ opacity: 0, scale: 0.94 }}
               whileInView={{ opacity: 1, scale: 1 }}

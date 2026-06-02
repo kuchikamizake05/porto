@@ -32,7 +32,7 @@ export default function EditExperiencePage({
       .finally(() => setLoading(false));
   }, [id]);
 
-  if (loading) return <div>Loading...</div>;
+  if (loading) return <div>Loading&hellip;</div>;
   if (!experience) return <div>Experience not found</div>;
 
   return (

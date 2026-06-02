@@ -61,7 +61,7 @@ export default function LoginPage() {
 
           <div className="space-y-6">
             <div className="inline-flex items-center gap-2 rounded-full border border-blue-500/20 bg-blue-500/10 px-4 py-2 text-sm text-blue-200">
-              <ShieldCheck className="h-4 w-4" />
+              <ShieldCheck className="size-4" />
               Secure admin session
             </div>
             <div className="space-y-4">
@@ -90,8 +90,8 @@ export default function LoginPage() {
             </div>
 
             <div className="mb-8 space-y-3 text-center lg:text-left">
-              <div className="mx-auto lg:mx-0 flex h-14 w-14 items-center justify-center rounded-2xl border border-white/10 bg-white/[0.04] shadow-[0_20px_60px_rgba(37,99,235,0.18)]">
-                <LockKeyhole className="h-6 w-6 text-blue-400" />
+              <div className="mx-auto lg:mx-0 flex size-14 items-center justify-center rounded-2xl border border-white/10 bg-white/[0.04] shadow-[0_20px_60px_rgba(37,99,235,0.18)]">
+                <LockKeyhole className="size-6 text-blue-400" />
               </div>
               <div>
                 <h2 className="text-3xl font-bold tracking-tight">
@@ -112,7 +112,7 @@ export default function LoginPage() {
                   Username
                 </span>
                 <span className="flex items-center gap-3 rounded-xl border border-white/10 bg-black/40 px-4 py-3.5 transition focus-within:border-blue-500/60 focus-within:ring-2 focus-within:ring-blue-500/15">
-                  <User className="h-5 w-5 text-gray-500" />
+                  <User className="size-5 text-gray-500" />
                   <input
                     type="text"
                     value={username}
@@ -130,7 +130,7 @@ export default function LoginPage() {
                   Password
                 </span>
                 <span className="flex items-center gap-3 rounded-xl border border-white/10 bg-black/40 px-4 py-3.5 transition focus-within:border-blue-500/60 focus-within:ring-2 focus-within:ring-blue-500/15">
-                  <LockKeyhole className="h-5 w-5 text-gray-500" />
+                  <LockKeyhole className="size-5 text-gray-500" />
                   <input
                     type="password"
                     value={password}
@@ -155,7 +155,7 @@ export default function LoginPage() {
                 className="group mt-2 flex w-full items-center justify-center gap-2 rounded-xl bg-blue-600 px-4 py-3.5 text-sm font-bold text-white shadow-[0_18px_50px_rgba(37,99,235,0.35)] transition hover:bg-blue-500 disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:bg-blue-600"
               >
                 {isSubmitting ? "Memproses..." : "Masuk"}
-                <ArrowRight className="h-4 w-4 transition group-hover:translate-x-0.5" />
+                <ArrowRight className="size-4 transition group-hover:translate-x-0.5" />
               </button>
             </form>
           </div>

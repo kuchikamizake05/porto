@@ -6,7 +6,7 @@ import React, {
   useContext,
   useEffect,
   useMemo,
-  useState,
+  useSyncExternalStore,
 } from "react";
 
 type Theme = "dark" | "light";
@@ -18,24 +18,39 @@ interface ThemeContextType {
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
+const THEME_CHANGE_EVENT = "themechange";
+
+const getThemeSnapshot = (): Theme => {
+  const savedTheme = localStorage.getItem("theme");
+  return savedTheme === "light" ? "light" : "dark";
+};
+
+const getServerThemeSnapshot = (): Theme => "dark";
+
+const subscribeTheme = (onStoreChange: () => void) => {
+  window.addEventListener("storage", onStoreChange);
+  window.addEventListener(THEME_CHANGE_EVENT, onStoreChange);
+  return () => {
+    window.removeEventListener("storage", onStoreChange);
+    window.removeEventListener(THEME_CHANGE_EVENT, onStoreChange);
+  };
+};
+
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  const [theme, setTheme] = useState<Theme>("dark");
+  const theme = useSyncExternalStore(
+    subscribeTheme,
+    getThemeSnapshot,
+    getServerThemeSnapshot,
+  );
 
   useEffect(() => {
-    const savedTheme = localStorage.getItem("theme") as Theme;
-    if (savedTheme) {
-      setTheme(savedTheme);
-      document.documentElement.classList.toggle("light", savedTheme === "light");
-    }
-  }, []);
+    document.documentElement.classList.toggle("light", theme === "light");
+  }, [theme]);
 
   const toggleTheme = useCallback(() => {
-    setTheme((currentTheme) => {
-      const newTheme = currentTheme === "dark" ? "light" : "dark";
-      localStorage.setItem("theme", newTheme);
-      document.documentElement.classList.toggle("light", newTheme === "light");
-      return newTheme;
-    });
+    const newTheme = getThemeSnapshot() === "dark" ? "light" : "dark";
+    localStorage.setItem("theme", newTheme);
+    window.dispatchEvent(new Event(THEME_CHANGE_EVENT));
   }, []);
 
   const value = useMemo(() => ({ theme, toggleTheme }), [theme, toggleTheme]);

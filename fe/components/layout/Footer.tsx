@@ -26,25 +26,25 @@ export default function Footer() {
                 href="https://twitter.com/kuchizukeee"
                 className="hover:text-sky-400 transition-colors"
               >
-                <FaXTwitter className="w-6 h-6" />
+                <FaXTwitter className="size-6" />
               </a>
               <a
                 href="https://www.facebook.com/kuchikamizakee"
                 className="hover:text-blue-500 transition-colors"
               >
-                <Facebook className="w-6 h-6" />
+                <Facebook className="size-6" />
               </a>
               <a
                 href="https://www.instagram.com/fsid.jp"
                 className="hover:text-blue-500 transition-colors"
               >
-                <Instagram className="w-6 h-6" />
+                <Instagram className="size-6" />
               </a>
               <a
                 href="https://sptfy.in/suckho"
                 className="hover:text-blue-500 transition-colors"
               >
-                <FaSpotify className="w-6 h-6" />
+                <FaSpotify className="size-6" />
               </a>
             </div>
           </div>

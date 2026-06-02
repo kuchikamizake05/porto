@@ -1,5 +1,6 @@
 "use client";
 
+/* eslint-disable react-doctor/no-unknown-property */
 import { useEffect, useMemo, useRef } from "react";
 import {
   Color,

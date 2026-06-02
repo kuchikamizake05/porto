@@ -1,29 +1,47 @@
 "use client";
-import { useState } from "react";
+import { useReducer } from "react";
 import { apiPost } from "@/app/lib/api";
 import { Loader2, Send } from "lucide-react";
 
 export default function ContactForm() {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [message, setMessage] = useState("");
-  const [status, setStatus] = useState("");
-  const [loading, setLoading] = useState(false);
+  const [state, dispatch] = useReducer(
+    (
+      current: {
+        name: string;
+        email: string;
+        message: string;
+        status: string;
+        loading: boolean;
+      },
+      next: Partial<typeof current>,
+    ) => ({ ...current, ...next }),
+    {
+      name: "",
+      email: "",
+      message: "",
+      status: "",
+      loading: false,
+    },
+  );
+
+  const { name, email, message, status, loading } = state;
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setLoading(true);
+    dispatch({ loading: true });
 
     try {
       await apiPost("/contact", { name, email, message });
-      setStatus("Message sent successfully!");
-      setName("");
-      setEmail("");
-      setMessage("");
+      dispatch({
+        status: "Message sent successfully!",
+        name: "",
+        email: "",
+        message: "",
+      });
     } catch {
-      setStatus("Failed to send message.");
+      dispatch({ status: "Failed to send message." });
     } finally {
-      setLoading(false);
+      dispatch({ loading: false });
     }
   };
 
@@ -37,7 +55,7 @@ export default function ContactForm() {
             placeholder="Your name"
             className="w-full h-[48px] bg-white/5 border border-white/10 rounded-xl px-4 focus:border-zinc-500/50 focus:bg-white/10 transition-all outline-hidden text-white placeholder:text-zinc-500 text-sm font-medium"
             value={name}
-            onChange={(e) => setName(e.target.value)}
+            onChange={(e) => dispatch({ name: e.target.value })}
             required
           />
         </div>
@@ -50,7 +68,7 @@ export default function ContactForm() {
             placeholder="Your email"
             className="w-full h-[48px] bg-white/5 border border-white/10 rounded-xl px-4  focus:bg-white/10 focus:border-zinc-500/50 transition-all outline-hidden text-white placeholder:text-zinc-500 text-sm font-medium"
             value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={(e) => dispatch({ email: e.target.value })}
             required
           />
         </div>
@@ -62,7 +80,7 @@ export default function ContactForm() {
             placeholder="Your message"
             className="w-full h-[120px] bg-white/5 border border-white/10 rounded-xl px-4 py-3 focus:bg-white/10 focus:border-zinc-500/50 transition-all outline-hidden text-white placeholder:text-zinc-500 text-sm font-medium resize-none"
             value={message}
-            onChange={(e) => setMessage(e.target.value)}
+            onChange={(e) => dispatch({ message: e.target.value })}
             required
           />
         </div>
@@ -76,11 +94,11 @@ export default function ContactForm() {
         <div className="absolute inset-0 bg-white/20 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700 skew-x-12" />
 
         {loading ? (
-          <Loader2 className="w-5 h-5 animate-spin relative z-10" />
+          <Loader2 className="size-5 animate-spin relative z-10" />
         ) : (
           <>
             <span className="relative z-10 text-sm">Send Message</span>
-            <Send className="w-4 h-4 relative z-10 group-hover:translate-x-1 transition-transform" />
+            <Send className="size-4 relative z-10 group-hover:translate-x-1 transition-transform" />
           </>
         )}
       </button>

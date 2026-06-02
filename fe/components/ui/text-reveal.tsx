@@ -2,6 +2,7 @@
 
 import {
   useEffect,
+  useCallback,
   useRef,
   useState,
   type ComponentPropsWithoutRef,
@@ -46,7 +47,7 @@ export const TextReveal: FC<TextRevealProps> = ({
   const touchDeltaRef = useRef(0);
   const revealCompleteRef = useRef(false);
 
-  const setProgressValue = (value: number) => {
+  const setProgressValue = useCallback((value: number) => {
     const next = Math.max(0, Math.min(1, value));
     const isComplete = next >= 1;
 
@@ -56,12 +57,12 @@ export const TextReveal: FC<TextRevealProps> = ({
       onRevealComplete?.(isComplete);
     }
     setProgress(next);
-  };
+  }, [onRevealComplete]);
 
-  const moveOneStep = (direction: 1 | -1) => {
+  const moveOneStep = useCallback((direction: 1 | -1) => {
     const currentStep = Math.round(progressRef.current / stepSize);
     setProgressValue((currentStep + direction) * stepSize);
-  };
+  }, [setProgressValue, stepSize]);
 
   useEffect(() => {
     lastScrollYRef.current = window.scrollY;
@@ -143,7 +144,7 @@ export const TextReveal: FC<TextRevealProps> = ({
     window.addEventListener("scroll", handleScroll, { passive: true });
 
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [stepSize]);
+  }, [setProgressValue, stepSize]);
 
   useEffect(() => {
     const unlock = () => {
@@ -284,7 +285,7 @@ export const TextReveal: FC<TextRevealProps> = ({
       window.removeEventListener("touchstart", handleTouchStart);
       window.removeEventListener("touchmove", handleTouchMove);
     };
-  }, [stepSize]);
+  }, [moveOneStep, setProgressValue, stepSize]);
 
   return (
     <div

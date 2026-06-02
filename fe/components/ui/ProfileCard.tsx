@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useCallback, useMemo } from 'react';
+import Image from 'next/image';
 
 const DEFAULT_INNER_GRADIENT = 'linear-gradient(145deg,#60496e8c 0%,#71C4FF44 100%)';
 
@@ -292,6 +293,17 @@ const ProfileCardComponent: React.FC<ProfileCardProps> = ({
     [tiltEngine, mobileTiltSensitivity]
   );
 
+  const clearPendingTiltTimers = useCallback((): void => {
+    if (enterTimerRef.current) {
+      window.clearTimeout(enterTimerRef.current);
+      enterTimerRef.current = null;
+    }
+    if (leaveRafRef.current) {
+      cancelAnimationFrame(leaveRafRef.current);
+      leaveRafRef.current = null;
+    }
+  }, []);
+
   useEffect(() => {
     if (!enableTilt || !tiltEngine) return;
 
@@ -339,8 +351,7 @@ const ProfileCardComponent: React.FC<ProfileCardProps> = ({
       shell.removeEventListener('pointerleave', pointerLeaveHandler);
       shell.removeEventListener('click', handleClick);
       window.removeEventListener('deviceorientation', deviceOrientationHandler);
-      if (enterTimerRef.current) window.clearTimeout(enterTimerRef.current);
-      if (leaveRafRef.current) cancelAnimationFrame(leaveRafRef.current);
+      clearPendingTiltTimers();
       tiltEngine.cancel();
       shell.classList.remove('entering');
     };
@@ -351,7 +362,8 @@ const ProfileCardComponent: React.FC<ProfileCardProps> = ({
     handlePointerMove,
     handlePointerEnter,
     handlePointerLeave,
-    handleDeviceOrientation
+    handleDeviceOrientation,
+    clearPendingTiltTimers
   ]);
 
   const cardStyle = useMemo(
@@ -556,10 +568,13 @@ const ProfileCardComponent: React.FC<ProfileCardProps> = ({
                 zIndex: avatarOnTop ? 10 : 2
               }}
             >
-              <img
+              <Image
                 className="absolute left-1/2 z-10 w-full will-change-transform transition-transform duration-[120ms] ease-out"
                 src={avatarUrl}
                 alt={`${name || 'User'} avatar`}
+                width={640}
+                height={640}
+                unoptimized
                 loading="lazy"
                 style={{
                   transformOrigin: '50% 100%',
@@ -597,10 +612,13 @@ const ProfileCardComponent: React.FC<ProfileCardProps> = ({
                       className="rounded-full overflow-hidden border border-white/10 flex-shrink-0"
                       style={{ width: '48px', height: '48px' }}
                     >
-                      <img
+                      <Image
                         className="w-full h-full object-cover rounded-full"
                         src={miniAvatarUrl || avatarUrl}
                         alt={`${name || 'User'} mini avatar`}
+                        width={48}
+                        height={48}
+                        unoptimized
                         loading="lazy"
                         style={{ display: 'block', gridArea: 'auto', borderRadius: '50%', pointerEvents: 'auto' }}
                         onError={e => {

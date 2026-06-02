@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useMemo, useRef, useState } from "react"
+import { useEffect, useMemo, useReducer, useRef } from "react"
 import { m as motion, MotionProps, useInView } from "motion/react"
 
 import { cn } from "@/lib/utils"
@@ -20,6 +20,22 @@ interface TypingAnimationProps extends MotionProps {
   showCursor?: boolean
   blinkCursor?: boolean
   cursorStyle?: "line" | "block" | "underscore"
+}
+
+type TypingPhase = "typing" | "pause" | "deleting"
+
+type TypingState = {
+  displayedText: string
+  currentWordIndex: number
+  currentCharIndex: number
+  phase: TypingPhase
+}
+
+const INITIAL_TYPING_STATE: TypingState = {
+  displayedText: "",
+  currentWordIndex: 0,
+  currentCharIndex: 0,
+  phase: "typing",
 }
 
 export function TypingAnimation({
@@ -43,10 +59,15 @@ export function TypingAnimation({
     forwardMotionProps: true,
   })
 
-  const [displayedText, setDisplayedText] = useState<string>("")
-  const [currentWordIndex, setCurrentWordIndex] = useState(0)
-  const [currentCharIndex, setCurrentCharIndex] = useState(0)
-  const [phase, setPhase] = useState<"typing" | "pause" | "deleting">("typing")
+  const [typingState, setTypingState] = useReducer(
+    (current: TypingState, next: Partial<TypingState>) => ({
+      ...current,
+      ...next,
+    }),
+    INITIAL_TYPING_STATE,
+  )
+  const { displayedText, currentWordIndex, currentCharIndex, phase } =
+    typingState
   const elementRef = useRef<HTMLElement | null>(null)
   const isInView = useInView(elementRef as React.RefObject<Element>, {
     amount: 0.3,
@@ -83,30 +104,36 @@ export function TypingAnimation({
       switch (phase) {
         case "typing":
           if (currentCharIndex < graphemes.length) {
-            setDisplayedText(graphemes.slice(0, currentCharIndex + 1).join(""))
-            setCurrentCharIndex((current) => current + 1)
+            setTypingState({
+              displayedText: graphemes.slice(0, currentCharIndex + 1).join(""),
+              currentCharIndex: currentCharIndex + 1,
+            })
           } else {
             if (hasMultipleWords || loop) {
               const isLastWord = currentWordIndex === wordsToAnimate.length - 1
               if (!isLastWord || loop) {
-                setPhase("pause")
+                setTypingState({ phase: "pause" })
               }
             }
           }
           break
 
         case "pause":
-          setPhase("deleting")
+          setTypingState({ phase: "deleting" })
           break
 
         case "deleting":
           if (currentCharIndex > 0) {
-            setDisplayedText(graphemes.slice(0, currentCharIndex - 1).join(""))
-            setCurrentCharIndex((current) => current - 1)
+            setTypingState({
+              displayedText: graphemes.slice(0, currentCharIndex - 1).join(""),
+              currentCharIndex: currentCharIndex - 1,
+            })
           } else {
             const nextIndex = (currentWordIndex + 1) % wordsToAnimate.length
-            setCurrentWordIndex(nextIndex)
-            setPhase("typing")
+            setTypingState({
+              currentWordIndex: nextIndex,
+              phase: "typing",
+            })
           }
           break
       }

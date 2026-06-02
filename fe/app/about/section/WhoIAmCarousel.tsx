@@ -74,7 +74,7 @@ const slides = [
             "Understand systems at both application and infrastructure levels",
           ].map((goal, i) => (
             <li key={i} className="flex items-center gap-3 text-zinc-400">
-              <div className="w-1.5 h-1.5 rounded-full bg-white" />
+              <div className="size-1.5 rounded-full bg-white" />
               {goal}
             </li>
           ))}
@@ -119,7 +119,7 @@ export default function WhoIAmCarousel() {
       <div className="p-8 pb-0 flex items-center justify-between relative z-10">
         <div className="flex items-center gap-3">
           <div className="p-2 rounded-xl bg-white/5 border border-white/10">
-            <slide.icon className="w-5 h-5 text-white" />
+            <slide.icon className="size-5 text-white" />
           </div>
           <h2 className="text-lg font-bold uppercase text-white tracking-widest">
             {slide.title}
@@ -132,14 +132,14 @@ export default function WhoIAmCarousel() {
             onClick={() => paginate(-1)}
             className="p-2 rounded-full hover:bg-white/10 text-zinc-400 hover:text-white transition-colors"
           >
-            <ChevronLeft className="w-5 h-5" />
+            <ChevronLeft className="size-5" />
           </button>
           <button
             type="button"
             onClick={() => paginate(1)}
             className="p-2 rounded-full hover:bg-white/10 text-zinc-400 hover:text-white transition-colors"
           >
-            <ChevronRight className="w-5 h-5" />
+            <ChevronRight className="size-5" />
           </button>
         </div>
       </div>

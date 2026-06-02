@@ -5,6 +5,7 @@ import { apiGet } from "@/app/lib/api";
 import { GraduationCap } from "lucide-react";
 import { useRef } from "react";
 import { m as motion, useScroll, useSpring } from "motion/react";
+import Image from "next/image";
 
 type Education = {
   id: number;
@@ -45,7 +46,7 @@ export default function EducationSection() {
     >
       <div className="mb-2 flex items-center gap-3">
         <div className="p-2 rounded-xl bg-white/5 border border-white/10">
-          <GraduationCap className="w-5 h-5 text-white" />
+          <GraduationCap className="size-5 text-white" />
         </div>
         <h2 className="text-lg md:text-xl font-bold text-white uppercase tracking-[0.2em]">
           Education
@@ -106,23 +107,26 @@ export default function EducationSection() {
 
                   {/* Dot */}
                   <div className="flex items-center justify-center relative z-10 shrink-0 h-full">
-                    <div className="w-3 h-3 rounded-full bg-zinc-900 border-2 border-purple-500 shadow-[0_0_10px_rgba(168,85,247,0.4)]" />
+                    <div className="size-3 rounded-full bg-zinc-900 border-2 border-purple-500 shadow-[0_0_10px_rgba(168,85,247,0.4)]" />
                   </div>
                 </div>
 
                 {/* Content Card */}
                 <div className="flex-1 glass-card bg-zinc-900/40 p-6 rounded-[24px] border border-white/10 group-hover:border-purple-500 transition-all duration-300 flex items-center gap-5">
                   {/* Logo - Circular crop */}
-                  <div className="w-12 h-12 rounded-[5px] overflow-hidden shrink-0 transition-all duration-300 shadow-xl">
+                  <div className="size-12 rounded-[5px] overflow-hidden shrink-0 transition-all duration-300 shadow-xl">
                     {edu.logoUrl ? (
-                      <img
+                      <Image
                         src={edu.logoUrl}
                         alt={edu.school}
+                        width={48}
+                        height={48}
+                        unoptimized
                         className="w-full h-full object-cover"
                       />
                     ) : (
                       <div className="w-full h-full bg-zinc-800 flex items-center justify-center">
-                        <GraduationCap className="w-6 h-6 text-zinc-500" />
+                        <GraduationCap className="size-6 text-zinc-500" />
                       </div>
                     )}
                   </div>

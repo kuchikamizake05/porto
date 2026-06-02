@@ -62,7 +62,7 @@ export default function AdminSidebar() {
                 {item.name}
               </span>
               {isActive && (
-                <div className="ml-auto w-1.5 h-1.5 rounded-full bg-white shadow-sm relative z-10" />
+                <div className="ml-auto size-1.5 rounded-full bg-white shadow-sm relative z-10" />
               )}
             </Link>
           );

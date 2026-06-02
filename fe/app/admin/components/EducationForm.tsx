@@ -1,53 +1,34 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { apiGet, apiPost, apiPut } from "../../lib/api";
+import { apiPost, apiPut } from "../../lib/api";
 import Link from "next/link";
 import AdminToast from "./AdminToast";
 import { emptyToast } from "./admin-toast-state";
 
 type EducationFormProps = {
   id?: string;
+  initialData?: {
+    school?: string | null;
+    degree?: string | null;
+    duration?: string | null;
+    description?: string | null;
+    logoUrl?: string | null;
+  };
 };
 
-export default function EducationForm({ id }: EducationFormProps) {
+export default function EducationForm({ id, initialData }: EducationFormProps) {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
-  const [fetching, setFetching] = useState(!!id);
   const [toast, setToast] = useState(emptyToast);
   const [formData, setFormData] = useState({
-    school: "",
-    degree: "",
-    duration: "",
-    description: "",
-    logoUrl: "",
+    school: initialData?.school || "",
+    degree: initialData?.degree || "",
+    duration: initialData?.duration || "",
+    description: initialData?.description || "",
+    logoUrl: initialData?.logoUrl || "",
   });
-
-  useEffect(() => {
-    if (id) {
-      fetchEducation();
-    }
-  }, [id]);
-
-  const fetchEducation = async () => {
-    try {
-      const data = await apiGet<any>(`/education/${id}`);
-      setFormData({
-        school: data.school || "",
-        degree: data.degree || "",
-        duration: data.duration || "",
-        description: data.description || "",
-        logoUrl: data.logoUrl || "",
-      });
-    } catch (error) {
-      console.error("Failed to fetch education", error);
-      alert("Education data not found.");
-      router.push("/admin/education");
-    } finally {
-      setFetching(false);
-    }
-  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -81,14 +62,6 @@ export default function EducationForm({ id }: EducationFormProps) {
       setLoading(false);
     }
   };
-
-  if (fetching) {
-    return (
-      <div className="bg-white/2 border border-white/5 rounded-3xl p-8 animate-pulse">
-        <div className="h-64 bg-white/5 rounded-2xl" />
-      </div>
-    );
-  }
 
   return (
     <>

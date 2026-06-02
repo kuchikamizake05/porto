@@ -93,7 +93,7 @@ function ProjectCard({ project }: { project: Project }) {
 
           <div className="shrink-0 md:mr-6">
             <svg
-              className="w-15 h-15 text-gray-500 group-hover:text-blue-400 transform group-hover:translate-x-2 transition-all duration-300"
+              className="size-15 text-gray-500 group-hover:text-blue-400 transform group-hover:translate-x-2 transition-all duration-300"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"

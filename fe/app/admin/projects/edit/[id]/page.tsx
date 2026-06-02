@@ -33,7 +33,7 @@ export default function EditProjectPage({
       .finally(() => setLoading(false));
   }, [id]);
 
-  if (loading) return <div>Loading...</div>;
+  if (loading) return <div>Loading&hellip;</div>;
   if (!project) return <div>Project not found</div>;
 
   return (

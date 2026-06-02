@@ -1,9 +1,10 @@
 import {
   forwardRef,
   useMemo,
+  useCallback,
   useRef,
   useEffect,
-  useState,
+  useSyncExternalStore,
   MutableRefObject,
   CSSProperties,
   HTMLAttributes,
@@ -48,6 +49,17 @@ function useMousePositionRef(containerRef: MutableRefObject<HTMLElement | null>,
   return positionRef;
 }
 
+const subscribeMobileViewport = (onStoreChange: () => void) => {
+  window.addEventListener('resize', onStoreChange);
+  return () => window.removeEventListener('resize', onStoreChange);
+};
+
+const getMobileViewportSnapshot = () => window.innerWidth < 768;
+const getServerMobileViewportSnapshot = () => true;
+
+const calculateDistance = (x1: number, y1: number, x2: number, y2: number) =>
+  Math.sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2);
+
 interface VariableProximityProps extends HTMLAttributes<HTMLSpanElement> {
   label: string;
   segments?: VariableProximitySegment[];
@@ -80,17 +92,11 @@ const VariableProximity = forwardRef<HTMLSpanElement, VariableProximityProps>((p
 
   const letterRefs = useRef<(HTMLSpanElement | null)[]>([]);
   const interpolatedSettingsRef = useRef<string[]>([]);
-  const [isMobile, setIsMobile] = useState(true);
-
-  // SSR-friendly media query to detect mobile viewport
-  useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth < 768);
-    };
-    checkMobile();
-    window.addEventListener('resize', checkMobile);
-    return () => window.removeEventListener('resize', checkMobile);
-  }, []);
+  const isMobile = useSyncExternalStore(
+    subscribeMobileViewport,
+    getMobileViewportSnapshot,
+    getServerMobileViewportSnapshot
+  );
 
   const mousePositionRef = useMousePositionRef(containerRef, isMobile);
   const lastPositionRef = useRef<{ x: number | null; y: number | null }>({ x: null, y: null });
@@ -141,10 +147,7 @@ const VariableProximity = forwardRef<HTMLSpanElement, VariableProximityProps>((p
         tabIndex
       };
 
-  const calculateDistance = (x1: number, y1: number, x2: number, y2: number) =>
-    Math.sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2);
-
-  const calculateFalloff = (distance: number) => {
+  const calculateFalloff = useCallback((distance: number) => {
     const norm = Math.min(Math.max(1 - distance / radius, 0), 1);
     switch (falloff) {
       case 'exponential':
@@ -155,10 +158,10 @@ const VariableProximity = forwardRef<HTMLSpanElement, VariableProximityProps>((p
       default:
         return norm;
     }
-  };
+  }, [falloff, radius]);
 
   // Cache positions of letters relative to container
-  const cachePositions = () => {
+  const cachePositions = useCallback(() => {
     if (!containerRef?.current) return;
     const containerRect = containerRef.current.getBoundingClientRect();
     
@@ -170,19 +173,25 @@ const VariableProximity = forwardRef<HTMLSpanElement, VariableProximityProps>((p
         centerY: rect.top + rect.height / 2 - containerRect.top
       };
     });
-  };
+  }, [containerRef]);
+  const cachePositionsRef = useRef(cachePositions);
+
+  useEffect(() => {
+    cachePositionsRef.current = cachePositions;
+  }, [cachePositions]);
 
   // Re-cache on mount, resize, and text updates (disabled on mobile)
   useEffect(() => {
     if (isMobile) return;
 
-    const timer = setTimeout(cachePositions, 250);
-    window.addEventListener('resize', cachePositions);
+    const handleResize = () => cachePositionsRef.current();
+    const timer = setTimeout(handleResize, 250);
+    window.addEventListener('resize', handleResize);
     return () => {
       clearTimeout(timer);
-      window.removeEventListener('resize', cachePositions);
+      window.removeEventListener('resize', handleResize);
     };
-  }, [containerRef, label, segments, isMobile]);
+  }, [label, segments, isMobile]);
 
   // Run animation only when mouse moves, completely layout-thrashing free (disabled on mobile)
   useEffect(() => {
@@ -235,7 +244,7 @@ const VariableProximity = forwardRef<HTMLSpanElement, VariableProximityProps>((p
 
     frameId = requestAnimationFrame(loop);
     return () => cancelAnimationFrame(frameId);
-  }, [containerRef, radius, falloff, parsedSettings, fromFontVariationSettings, isMobile]);
+  }, [containerRef, mousePositionRef, radius, calculateFalloff, parsedSettings, fromFontVariationSettings, isMobile]);
 
   // If on mobile viewport, render static simple HTML elements for maximum performance
   if (isMobile) {

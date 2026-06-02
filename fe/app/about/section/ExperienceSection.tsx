@@ -15,6 +15,7 @@ type Experience = {
 
 import { useRef } from "react";
 import { m as motion, useScroll, useSpring } from "motion/react";
+import Image from "next/image";
 
 export default function ExperienceSection() {
   const [experiences, setExperiences] = useState<Experience[]>([]);
@@ -46,7 +47,7 @@ export default function ExperienceSection() {
     >
       <div className="mb-4 flex items-center gap-3">
         <div className="p-2 rounded-xl bg-white/5 border border-white/10">
-          <BriefcaseBusiness className="w-5 h-5 text-white" />
+          <BriefcaseBusiness className="size-5 text-white" />
         </div>
         <h2 className="text-lg md:text-xl font-bold text-white uppercase tracking-[0.2em]">
           Experience
@@ -116,23 +117,26 @@ export default function ExperienceSection() {
 
                   {/* Dot */}
                   <div className="flex items-center justify-center relative z-10 shrink-0 h-full">
-                    <div className="w-3 h-3 rounded-full bg-zinc-900 border-2 border-blue-400/80 shadow-[0_0_10px_rgba(244,63,94,0.4)]" />
+                    <div className="size-3 rounded-full bg-zinc-900 border-2 border-blue-400/80 shadow-[0_0_10px_rgba(244,63,94,0.4)]" />
                   </div>
                 </div>
 
                 {/* Content Card */}
                 <div className="flex-1 glass-card bg-zinc-900/40 p-6 rounded-[24px] border border-white/10 group-hover:border-blue-400/80 transition-all duration-300 flex items-center gap-5">
                   {/* Logo - No Container box, just the image cropped */}
-                  <div className="w-12 h-12 rounded-[5px] overflow-hidden shrink-0 transition-all duration-300 shadow-xl">
+                  <div className="size-12 rounded-[5px] overflow-hidden shrink-0 transition-all duration-300 shadow-xl">
                     {exp.logoUrl ? (
-                      <img
+                      <Image
                         src={exp.logoUrl}
                         alt={exp.company}
+                        width={48}
+                        height={48}
+                        unoptimized
                         className="w-full h-full object-cover"
                       />
                     ) : (
                       <div className="w-full h-full bg-zinc-800 flex items-center justify-center">
-                        <BriefcaseBusiness className="w-6 h-6 text-zinc-500" />
+                        <BriefcaseBusiness className="size-6 text-zinc-500" />
                       </div>
                     )}
                   </div>

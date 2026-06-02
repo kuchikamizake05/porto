@@ -77,6 +77,9 @@ function wrap(min: number, max: number, v: number): number {
   return mod + min;
 }
 
+const getCopyKey = (children: React.ReactNode, index: number) =>
+  `${getTextKey(children)}-copy-${index}`;
+
 const VelocityText: React.FC<VelocityTextProps> = ({
   children,
   baseVelocity,
@@ -136,7 +139,7 @@ const VelocityText: React.FC<VelocityTextProps> = ({
   const spans = [];
   for (let i = 0; i < numCopies; i++) {
     spans.push(
-      <span className={`flex-shrink-0 ${className}`} key={i} ref={i === 0 ? copyRef : null}>
+      <span className={`flex-shrink-0 ${className}`} key={getCopyKey(children, i)} ref={i === 0 ? copyRef : null}>
         {children}&nbsp;
       </span>
     );

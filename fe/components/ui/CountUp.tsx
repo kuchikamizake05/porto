@@ -1,5 +1,5 @@
 import { useInView } from 'motion/react';
-import { useCallback, useEffect, useRef } from 'react';
+import { useCallback, useEffect, useEffectEvent, useRef } from 'react';
 
 interface CountUpProps {
   to: number;
@@ -14,6 +14,17 @@ interface CountUpProps {
   onUpdate?: (value: number) => void;
   onEnd?: () => void;
 }
+
+const getDecimalPlaces = (num: number): number => {
+  const str = num.toString();
+  if (str.includes('.')) {
+    const decimals = str.split('.')[1];
+    if (parseInt(decimals) !== 0) {
+      return decimals.length;
+    }
+  }
+  return 0;
+};
 
 export default function CountUp({
   to,
@@ -30,17 +41,9 @@ export default function CountUp({
 }: CountUpProps) {
   const ref = useRef<HTMLSpanElement>(null);
   const isInView = useInView(ref, { once: true, margin: '0px' });
-
-  const getDecimalPlaces = (num: number): number => {
-    const str = num.toString();
-    if (str.includes('.')) {
-      const decimals = str.split('.')[1];
-      if (parseInt(decimals) !== 0) {
-        return decimals.length;
-      }
-    }
-    return 0;
-  };
+  const handleStart = useEffectEvent(() => onStart?.());
+  const handleUpdate = useEffectEvent((value: number) => onUpdate?.(value));
+  const handleEnd = useEffectEvent(() => onEnd?.());
 
   const maxDecimals = Math.max(getDecimalPlaces(from), getDecimalPlaces(to));
 
@@ -69,9 +72,7 @@ export default function CountUp({
 
   useEffect(() => {
     if (isInView && startWhen) {
-      if (typeof onStart === 'function') {
-        onStart();
-      }
+      handleStart();
 
       let intervalId: number | undefined;
       const timeoutId = window.setTimeout(() => {
@@ -86,9 +87,7 @@ export default function CountUp({
           ref.current.textContent = formatValue(current);
         }
 
-        if (typeof onUpdate === 'function') {
-          onUpdate(current);
-        }
+        handleUpdate(current);
 
         intervalId = window.setInterval(() => {
           current += stepDirection;
@@ -100,16 +99,12 @@ export default function CountUp({
             ref.current.textContent = formatValue(nextValue);
           }
 
-          if (typeof onUpdate === 'function') {
-            onUpdate(nextValue);
-          }
+          handleUpdate(nextValue);
 
           if (isDone) {
             window.clearInterval(intervalId);
 
-            if (typeof onEnd === 'function') {
-              onEnd();
-            }
+            handleEnd();
           }
         }, stepMs);
       }, delay * 1000);
@@ -121,7 +116,7 @@ export default function CountUp({
         }
       };
     }
-  }, [isInView, startWhen, direction, from, to, delay, onStart, onUpdate, onEnd, duration, formatValue]);
+  }, [isInView, startWhen, direction, from, to, delay, duration, formatValue]);
 
   return <span className={className} ref={ref} />;
 }

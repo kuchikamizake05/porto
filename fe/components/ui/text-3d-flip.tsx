@@ -4,6 +4,7 @@ import React, {
   memo,
   useCallback,
   useEffect,
+  useEffectEvent,
   useMemo,
   useRef,
   type ElementType,
@@ -26,26 +27,6 @@ const splitIntoCharacters = (text: string): string[] => {
     return Array.from(GRAPHEME_SEGMENTER.segment(text), ({ segment }) => segment)
   }
   return Array.from(text)
-}
-
-const extractTextFromChildren = (children: React.ReactNode): string => {
-  if (children == null) return ""
-  if (typeof children === "string") return children
-  if (typeof children === "number") return String(children)
-
-  if (Array.isArray(children)) {
-    return children.map(extractTextFromChildren).join("")
-  }
-
-  if (React.isValidElement(children)) {
-    const props = children.props as Record<string, unknown>
-    const childText = props.children as React.ReactNode
-    if (childText != null) {
-      return extractTextFromChildren(childText)
-    }
-  }
-
-  return ""
 }
 
 const ROTATION_MAP = {
@@ -84,7 +65,7 @@ const DEFAULT_TRANSITION: ValueAnimationTransition = {
 }
 
 interface Text3DFlipProps {
-  children: React.ReactNode
+  children: string
   as?: ElementType
   className?: string
   textClassName?: string | string[]
@@ -126,13 +107,7 @@ const Text3DFlip = ({
     }
   }, [])
 
-  const text = useMemo(() => {
-    try {
-      return extractTextFromChildren(children)
-    } catch {
-      return ""
-    }
-  }, [children])
+  const text = children
 
   const characters = useMemo(() => {
     const words = text.split(" ")
@@ -209,23 +184,26 @@ const Text3DFlip = ({
       }
     }
   }, [characters, transition, getStaggerDelay, rotationTransform, rotateDirection, animate])
+  const handleAutoPlay = useEffectEvent(() => {
+    void handleHoverStart()
+  })
 
   useEffect(() => {
     if (!autoPlay) return
 
     const interval = setInterval(() => {
-      handleHoverStart()
+      handleAutoPlay()
     }, 6000) // Flip automatically every 6 seconds
 
     const timeout = setTimeout(() => {
-      handleHoverStart()
+      handleAutoPlay()
     }, 2000) // Initial flip after 2 seconds
 
     return () => {
       clearInterval(interval)
       clearTimeout(timeout)
     }
-  }, [autoPlay, handleHoverStart])
+  }, [autoPlay])
 
   return (
     <ElementTag

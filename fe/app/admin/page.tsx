@@ -16,7 +16,7 @@ export default function AdminDashboard() {
           className="p-6 bg-white/5 border border-white/10 rounded-2xl hover:bg-blue-500/10 hover:border-blue-500/30 transition-all group relative overflow-hidden"
         >
           <div className="flex flex-col gap-4">
-            <div className="w-12 h-12 rounded-xl bg-blue-500/10 flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">
+            <div className="size-12 rounded-xl bg-blue-500/10 flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">
               🚀
             </div>
             <div className="space-y-1">
@@ -33,7 +33,7 @@ export default function AdminDashboard() {
           className="p-6 bg-white/5 border border-white/10 rounded-2xl hover:bg-rose-500/10 hover:border-rose-500/30 transition-all group relative overflow-hidden"
         >
           <div className="flex flex-col gap-4">
-            <div className="w-12 h-12 rounded-xl bg-rose-500/10 flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">
+            <div className="size-12 rounded-xl bg-rose-500/10 flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">
               💼
             </div>
             <div className="space-y-1">
@@ -50,7 +50,7 @@ export default function AdminDashboard() {
           className="p-6 bg-white/5 border border-white/10 rounded-2xl hover:bg-amber-500/10 hover:border-amber-500/30 transition-all group relative overflow-hidden"
         >
           <div className="flex flex-col gap-4">
-            <div className="w-12 h-12 rounded-xl bg-amber-500/10 flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">
+            <div className="size-12 rounded-xl bg-amber-500/10 flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">
               🎓
             </div>
             <div className="space-y-1">
