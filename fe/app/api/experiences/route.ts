@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/app/lib/db";
+import { requireAdmin } from "@/app/lib/admin-request";
 
 // GET /api/experiences - Fetch all experiences
 export async function GET() {
@@ -15,6 +16,9 @@ export async function GET() {
 // POST /api/experiences - Create new experience
 export async function POST(request: NextRequest) {
   try {
+    const unauthorized = await requireAdmin(request);
+    if (unauthorized) return unauthorized;
+
     const body = await request.json();
     const { company, role, duration, description, logoUrl } = body;
     

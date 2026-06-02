@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { apiPost, apiPut } from "../../lib/api";
 import { motion } from "framer-motion";
+import AdminToast, { emptyToast } from "./AdminToast";
 
 type ProjectFormProps = {
   initialData?: {
@@ -31,6 +32,7 @@ export default function ProjectForm({ initialData, isEdit }: ProjectFormProps) {
     siteUrl: initialData?.siteUrl || "",
   });
   const [loading, setLoading] = useState(false);
+  const [toast, setToast] = useState(emptyToast);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -42,11 +44,24 @@ export default function ProjectForm({ initialData, isEdit }: ProjectFormProps) {
       } else {
         await apiPost("/projects", formData);
       }
-      router.push("/admin/projects");
-      router.refresh();
+      setToast({
+        open: true,
+        severity: "success",
+        message: isEdit
+          ? "Project berhasil diperbarui."
+          : "Project berhasil ditambahkan.",
+      });
+      setTimeout(() => {
+        router.push("/admin/projects");
+        router.refresh();
+      }, 900);
     } catch (error) {
       console.error("Failed to save project", error);
-      alert("Something went wrong!");
+      setToast({
+        open: true,
+        severity: "error",
+        message: "Project gagal disimpan. Coba lagi.",
+      });
     } finally {
       setLoading(false);
     }
@@ -56,6 +71,7 @@ export default function ProjectForm({ initialData, isEdit }: ProjectFormProps) {
     "w-full px-5 py-3 rounded-xl bg-white/5 border border-white/10 text-white focus:border-blue-500/50 focus:ring-2 focus:ring-blue-500/20 outline-none transition-all placeholder:text-gray-600";
 
   return (
+    <>
     <form
       onSubmit={handleSubmit}
       className="bg-white/2 border border-white/5 rounded-2xl overflow-hidden"
@@ -76,9 +92,10 @@ export default function ProjectForm({ initialData, isEdit }: ProjectFormProps) {
         </div>
 
         <div className="space-y-3 text-sm">
-          <label className="block font-bold text-gray-400">Description</label>
+          <label className="block font-bold text-gray-400">
+            Description (optional)
+          </label>
           <textarea
-            required
             rows={4}
             className={`${inputClass} resize-none font-light`}
             placeholder="Tell us about this project..."
@@ -198,5 +215,10 @@ export default function ProjectForm({ initialData, isEdit }: ProjectFormProps) {
         </button>
       </div>
     </form>
+    <AdminToast
+      {...toast}
+      onClose={() => setToast((current) => ({ ...current, open: false }))}
+    />
+    </>
   );
 }

@@ -1,11 +1,15 @@
+"use client";
+
+import { use } from "react";
 import EducationForm from "../../../components/EducationForm";
-import Link from "next/link";
 
 export default function EditEducationPage({
   params,
 }: {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 }) {
+  const { id } = use(params);
+
   return (
     <div className="space-y-10">
       <div className="space-y-1">
@@ -16,7 +20,7 @@ export default function EditEducationPage({
           Update your academic milestone details.
         </p>
       </div>
-      <EducationForm id={params.id} />
+      <EducationForm id={id} />
     </div>
   );
 }

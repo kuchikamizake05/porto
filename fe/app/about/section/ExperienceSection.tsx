@@ -140,9 +140,11 @@ export default function ExperienceSection() {
                     <div className="text-blue-400/80 text-sm font-medium">
                       {exp.company}
                     </div>
-                    <p className="text-zinc-400 text-sm leading-relaxed mt-2 font-light">
-                      {exp.description}
-                    </p>
+                    {exp.description.trim() && (
+                      <p className="text-zinc-400 text-sm leading-relaxed mt-2 font-light">
+                        {exp.description}
+                      </p>
+                    )}
                   </div>
                 </div>
               </motion.div>

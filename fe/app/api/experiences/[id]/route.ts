@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/app/lib/db";
+import { requireAdmin } from "@/app/lib/admin-request";
 
 // GET /api/experiences/:id - Fetch single experience
 export async function GET(
@@ -32,6 +33,9 @@ export async function PUT(
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
+    const unauthorized = await requireAdmin(request);
+    if (unauthorized) return unauthorized;
+
     const { id } = await params;
     const body = await request.json();
     const { company, role, duration, description, logoUrl } = body;
@@ -54,6 +58,9 @@ export async function DELETE(
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
+    const unauthorized = await requireAdmin(request);
+    if (unauthorized) return unauthorized;
+
     const { id } = await params;
     await prisma.experience.delete({
       where: { id: Number(id) },

@@ -7,7 +7,7 @@ Modern portfolio website built with Next.js and deployed on Vercel.
 - **Framework:** Next.js 16 (React 19)
 - **Styling:** Tailwind CSS v4
 - **Animations:** Framer Motion
-- **Database:** Turso (libSQL)
+- **Database:** Supabase Postgres
 - **ORM:** Prisma
 - **Language:** TypeScript
 
@@ -26,9 +26,14 @@ Visit `http://localhost:3000`
 Create `.env` in the `fe/` directory:
 
 ```env
-DATABASE_URL=your_turso_database_url
-DATABASE_AUTH_TOKEN=your_turso_auth_token
+DATABASE_URL="postgresql://postgres.[project-ref]:[password]@[pooler-host]:6543/postgres"
+DIRECT_URL="postgresql://postgres.[project-ref]:[password]@[pooler-host]:5432/postgres"
+ADMIN_USERNAME="admin"
+ADMIN_PASSWORD_HASH="scrypt:..."
+JWT_SECRET="your-random-secret"
 ```
+
+Use the connection string from Supabase Project Settings > Database.
 
 ## 📝 API Routes
 
@@ -46,7 +51,10 @@ Deployed on **Vercel** with automatic deployments from GitHub.
 
 **Environment variables needed:**
 - `DATABASE_URL`
-- `DATABASE_AUTH_TOKEN`
+- `DIRECT_URL`
+- `ADMIN_USERNAME`
+- `ADMIN_PASSWORD_HASH`
+- `JWT_SECRET`
 
 ## 👤 Author
 

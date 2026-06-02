@@ -134,9 +134,11 @@ export default function EducationSection() {
                     <div className="text-purple-400/80 text-sm font-medium">
                       {edu.school}
                     </div>
-                    <p className="text-zinc-400 text-sm leading-relaxed mt-2 font-light">
-                      {edu.description}
-                    </p>
+                    {edu.description.trim() && (
+                      <p className="text-zinc-400 text-sm leading-relaxed mt-2 font-light">
+                        {edu.description}
+                      </p>
+                    )}
                   </div>
                 </div>
               </motion.div>

@@ -1,0 +1,28 @@
+{
+  "name": "porto",
+  "version": "1.0.0",
+  "description": "Modern portfolio website built with Next.js and deployed on Vercel.",
+  "main": "index.js",
+  "scripts": {
+    "dev": "concurrently -n fe,be -c cyan,magenta \"npm run dev --prefix fe\" \"npm run dev --prefix be\"",
+    "dev:fe": "npm run dev --prefix fe",
+    "dev:be": "npm run dev --prefix be",
+    "build": "npm run build --prefix fe && npm run build --prefix be",
+    "test": "echo \"No tests configured\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kuchikamizake05/porto.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/kuchikamizake05/porto/issues"
+  },
+  "homepage": "https://github.com/kuchikamizake05/porto#readme",
+  "devDependencies": {
+    "concurrently": "^10.0.1"
+  }
+}

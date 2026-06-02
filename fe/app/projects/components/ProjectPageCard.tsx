@@ -52,9 +52,11 @@ export default function ProjectPageCard({
           {title}
         </h3>
 
-        <p className="text-sm leading-relaxed text-zinc-400  line-clamp-2 font-light">
-          {description}
-        </p>
+        {description.trim() && (
+          <p className="text-sm leading-relaxed text-zinc-400 line-clamp-2 font-light">
+            {description}
+          </p>
+        )}
 
         {/* Tags */}
         <div className="flex flex-wrap gap-2 mt-3">

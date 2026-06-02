@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { apiPost, apiPut } from "../../lib/api";
+import AdminToast, { emptyToast } from "./AdminToast";
 
 type ExperienceFormProps = {
   initialData?: {
@@ -29,6 +30,7 @@ export default function ExperienceForm({
     logoUrl: initialData?.logoUrl || "",
   });
   const [loading, setLoading] = useState(false);
+  const [toast, setToast] = useState(emptyToast);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -40,11 +42,24 @@ export default function ExperienceForm({
       } else {
         await apiPost("/experiences", formData);
       }
-      router.push("/admin/experience");
-      router.refresh();
+      setToast({
+        open: true,
+        severity: "success",
+        message: isEdit
+          ? "Experience berhasil diperbarui."
+          : "Experience berhasil ditambahkan.",
+      });
+      setTimeout(() => {
+        router.push("/admin/experience");
+        router.refresh();
+      }, 900);
     } catch (error) {
       console.error("Failed to save experience", error);
-      alert("Something went wrong!");
+      setToast({
+        open: true,
+        severity: "error",
+        message: "Experience gagal disimpan. Coba lagi.",
+      });
     } finally {
       setLoading(false);
     }
@@ -54,6 +69,7 @@ export default function ExperienceForm({
     "w-full px-5 py-3 rounded-xl bg-white/5 border border-white/10 text-white focus:border-rose-500/50 focus:ring-2 focus:ring-rose-500/20 outline-none transition-all placeholder:text-gray-600";
 
   return (
+    <>
     <form
       onSubmit={handleSubmit}
       className="bg-white/2 border border-white/5 rounded-2xl overflow-hidden"
@@ -123,9 +139,10 @@ export default function ExperienceForm({
         </div>
 
         <div className="space-y-3 text-sm">
-          <label className="block font-bold text-gray-400">Description</label>
+          <label className="block font-bold text-gray-400">
+            Description (optional)
+          </label>
           <textarea
-            required
             rows={5}
             className={`${inputClass} resize-none font-light`}
             placeholder="What did you do there?"
@@ -161,5 +178,10 @@ export default function ExperienceForm({
         </button>
       </div>
     </form>
+    <AdminToast
+      {...toast}
+      onClose={() => setToast((current) => ({ ...current, open: false }))}
+    />
+    </>
   );
 }

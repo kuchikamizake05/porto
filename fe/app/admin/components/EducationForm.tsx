@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { apiGet, apiPost, apiPut } from "../../lib/api";
 import Link from "next/link";
+import AdminToast, { emptyToast } from "./AdminToast";
 
 type EducationFormProps = {
   id?: string;
@@ -13,6 +14,7 @@ export default function EducationForm({ id }: EducationFormProps) {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [fetching, setFetching] = useState(!!id);
+  const [toast, setToast] = useState(emptyToast);
   const [formData, setFormData] = useState({
     school: "",
     degree: "",
@@ -56,10 +58,24 @@ export default function EducationForm({ id }: EducationFormProps) {
       } else {
         await apiPost("/education", formData);
       }
-      router.push("/admin/education");
+      setToast({
+        open: true,
+        severity: "success",
+        message: id
+          ? "Education berhasil diperbarui."
+          : "Education berhasil ditambahkan.",
+      });
+      setTimeout(() => {
+        router.push("/admin/education");
+        router.refresh();
+      }, 900);
     } catch (error) {
-      alert(`Failed to ${id ? "update" : "create"} education`);
       console.error(error);
+      setToast({
+        open: true,
+        severity: "error",
+        message: "Education gagal disimpan. Coba lagi.",
+      });
     } finally {
       setLoading(false);
     }
@@ -74,6 +90,7 @@ export default function EducationForm({ id }: EducationFormProps) {
   }
 
   return (
+    <>
     <div className="max-w-4xl mx-auto space-y-10">
       <div className="bg-white/2 border border-white/5 rounded-3xl p-8 backdrop-blur-md shadow-2xl">
         <form onSubmit={handleSubmit} className="space-y-8">
@@ -144,10 +161,9 @@ export default function EducationForm({ id }: EducationFormProps) {
 
           <div className="space-y-3">
             <label className="text-xs font-bold uppercase tracking-widest text-gray-500 px-1">
-              Description
+              Description (Optional)
             </label>
             <textarea
-              required
               rows={5}
               placeholder="Briefly describe your focus of study or achievements..."
               className="w-full bg-white/5 border border-white/5 rounded-2xl px-5 py-4 text-white focus:border-blue-500/50 focus:bg-white/10 transition-all outline-hidden font-medium placeholder:text-gray-600 resize-none"
@@ -183,5 +199,10 @@ export default function EducationForm({ id }: EducationFormProps) {
         </form>
       </div>
     </div>
+    <AdminToast
+      {...toast}
+      onClose={() => setToast((current) => ({ ...current, open: false }))}
+    />
+    </>
   );
 }

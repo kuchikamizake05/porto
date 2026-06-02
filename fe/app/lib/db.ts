@@ -1,5 +1,5 @@
 import { PrismaClient } from "@prisma/client";
-import { PrismaLibSql } from "@prisma/adapter-libsql";
+import { PrismaPg } from "@prisma/adapter-pg";
 
 // Prevent multiple instances of Prisma Client in development
 const globalForPrisma = globalThis as unknown as {
@@ -8,22 +8,31 @@ const globalForPrisma = globalThis as unknown as {
 
 let prisma: PrismaClient;
 
+function getDatabaseUrl() {
+  const databaseUrl = process.env.DATABASE_URL;
+
+  if (!databaseUrl) {
+    throw new Error("DATABASE_URL is not configured");
+  }
+
+  const url = new URL(databaseUrl);
+  url.searchParams.delete("pgbouncer");
+  return url.toString();
+}
+
 if (process.env.NODE_ENV === "production") {
-  // Production: Create new client with libSQL adapter
-  const adapter = new PrismaLibSql({
-    url: process.env.DATABASE_URL || "",
-    authToken: process.env.DATABASE_AUTH_TOKEN,
+  const adapter = new PrismaPg({
+    connectionString: getDatabaseUrl(),
   });
-  
+
   prisma = new PrismaClient({ adapter });
 } else {
   // Development: Reuse existing client to prevent connection exhaustion
   if (!globalForPrisma.prisma) {
-    const adapter = new PrismaLibSql({
-      url: process.env.DATABASE_URL || "file:./dev.db",
-      authToken: process.env.DATABASE_AUTH_TOKEN,
+    const adapter = new PrismaPg({
+      connectionString: getDatabaseUrl(),
     });
-    
+
     globalForPrisma.prisma = new PrismaClient({ adapter });
   }
   prisma = globalForPrisma.prisma;

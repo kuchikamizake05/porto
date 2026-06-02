@@ -15,9 +15,8 @@ const navItems = [
 export default function AdminSidebar() {
   const pathname = usePathname();
 
-  const handleLogout = () => {
-    document.cookie =
-      "admin_auth=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT";
+  const handleLogout = async () => {
+    await fetch("/api/admin/logout", { method: "POST" });
     window.location.href = "/";
   };
 
