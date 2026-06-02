@@ -150,6 +150,7 @@ export default function Navbar() {
             ))}
             <Magnetic strength={0.05}>
               <button
+                type="button"
                 onClick={scrollToContact}
                 className="relative w-8 h-8 flex items-center justify-center rounded-full transition-all duration-300 group text-foreground/50 hover:text-foreground"
               >

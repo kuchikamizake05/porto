@@ -9,15 +9,18 @@ import {
 import CountUp from "@/components/ui/CountUp";
 
 const INTRO_DELAY_MS = 300;
-const COUNT_DURATION = 4.2;
-const ALMOST_READY_DELAY_MS = 3600;
-const EXIT_HOLD_MS = 420;
-const EXIT_DURATION_MS = 820;
+const COUNT_DURATION = 1.4;
+const ALMOST_READY_DELAY_MS = 900;
+const EXIT_HOLD_MS = 180;
+const EXIT_DURATION_MS = 420;
+const LOADER_SEEN_KEY = "portfolio-initial-loader-seen";
 
 export default function InitialLoader() {
-  const [isVisible, setIsVisible] = useState(true);
+  const [isVisible, setIsVisible] = useState(() => {
+    if (typeof window === "undefined") return false;
+    return window.sessionStorage.getItem(LOADER_SEEN_KEY) !== "true";
+  });
   const [showContent, setShowContent] = useState(false);
-  const [isLeaving, setIsLeaving] = useState(false);
   const [isAlmostReady, setIsAlmostReady] = useState(false);
   const [progress, setProgress] = useState(0);
   const shouldReduceMotion = useReducedMotion();
@@ -42,9 +45,11 @@ export default function InitialLoader() {
 
   const startExit = useCallback(() => {
     window.setTimeout(() => {
-      setIsLeaving(true);
       window.setTimeout(
-        () => setIsVisible(false),
+        () => {
+          window.sessionStorage.setItem(LOADER_SEEN_KEY, "true");
+          setIsVisible(false);
+        },
         shouldReduceMotion ? 180 : EXIT_DURATION_MS
       );
     }, shouldReduceMotion ? 140 : EXIT_HOLD_MS);

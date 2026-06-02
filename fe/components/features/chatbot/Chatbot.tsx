@@ -113,6 +113,7 @@ export default function Chatbot() {
                 </div>
               </div>
               <button
+                type="button"
                 onClick={toggleChat}
                 className="flex h-8 w-8 items-center justify-center rounded-full text-white/50 hover:bg-white/10 hover:text-white transition-colors"
               >
@@ -168,6 +169,7 @@ export default function Chatbot() {
                 className="flex items-center gap-2"
               >
                 <input
+                  aria-label="Chat message"
                   value={inputValue}
                   onChange={(e) => setInputValue(e.target.value)}
                   placeholder="Type a message..."
@@ -176,6 +178,7 @@ export default function Chatbot() {
                 />
                 <button
                   type="submit"
+                  aria-label="Send chat message"
                   disabled={!inputValue.trim() || isLoading}
                   className="flex h-10 w-10 items-center justify-center rounded-xl bg-blue-600 text-white shadow-lg shadow-blue-500/20 hover:bg-sky-500 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
                 >

@@ -12,6 +12,53 @@ type ProjectPageCardProps = {
   siteUrl?: string;
 };
 
+const SVG_ICON_MAP: Record<string, string> = {
+  react: "/icons/devicon/react-original.svg",
+  vite: "/icons/devicon/vitejs-original.svg",
+  "vite.js": "/icons/devicon/vitejs-original.svg",
+  vitejs: "/icons/devicon/vitejs-original.svg",
+  tailwind: "/icons/devicon/tailwindcss-original.svg",
+  "tailwind css": "/icons/devicon/tailwindcss-original.svg",
+  tailwindcss: "/icons/devicon/tailwindcss-original.svg",
+  next: "/icons/devicon/nextjs-original.svg",
+  "next.js": "/icons/devicon/nextjs-original.svg",
+  nextjs: "/icons/devicon/nextjs-original.svg",
+  typescript: "/icons/devicon/typescript-original.svg",
+  javascript: "/icons/devicon/javascript-original.svg",
+  node: "/icons/devicon/nodejs-original.svg",
+  "node.js": "/icons/devicon/nodejs-original.svg",
+  nodejs: "/icons/devicon/nodejs-original.svg",
+  express: "/icons/devicon/express-original.svg",
+  python: "/icons/devicon/python-original.svg",
+  django: "/icons/devicon/django-original.svg",
+  flask: "/icons/devicon/flask-original.svg",
+  mysql: "/icons/devicon/mysql-original.svg",
+  postgresql: "/icons/devicon/postgresql-original.svg",
+  postgres: "/icons/devicon/postgresql-original.svg",
+  mongodb: "/icons/devicon/mongodb-original.svg",
+  prisma: "/icons/devicon/prisma-original.svg",
+  supabase: "/icons/devicon/supabase-original.svg",
+  docker: "/icons/devicon/docker-original.svg",
+  git: "/icons/devicon/git-original.svg",
+  github: "/icons/devicon/github-original.svg",
+  figma: "/icons/devicon/figma-original.svg",
+  html: "/icons/devicon/html5-original.svg",
+  css: "/icons/devicon/css3-original.svg",
+  sass: "/icons/devicon/sass-original.svg",
+  bootstrap: "/icons/devicon/bootstrap-original.svg",
+  firebase: "/icons/devicon/firebase-original.svg",
+  vercel: "/icons/devicon/vercel-original.svg",
+  laravel: "/icons/devicon/laravel-original.svg",
+  php: "/icons/devicon/php-original.svg",
+  java: "/icons/devicon/java-original.svg",
+  "c++": "/icons/devicon/cplusplus-original.svg",
+  cpp: "/icons/devicon/cplusplus-original.svg",
+};
+
+function normalizeTechName(techName: string) {
+  return techName.trim().toLowerCase().replace(/\s+/g, " ");
+}
+
 export default function ProjectPageCard({
   title,
   description,
@@ -21,7 +68,25 @@ export default function ProjectPageCard({
   siteUrl,
 }: ProjectPageCardProps) {
   const techArray =
-    typeof tech === "string" ? tech.split(",").map((t) => t.trim()) : tech;
+    typeof tech === "string"
+      ? tech
+          .split(",")
+          .map((t) => t.trim())
+          .filter(Boolean)
+      : tech.filter(Boolean);
+  const techIcons = techArray
+    .map((name) => {
+      const normalizedName = normalizeTechName(name);
+      const iconSrc = SVG_ICON_MAP[normalizedName];
+
+      if (iconSrc) {
+        return { name, iconSrc };
+      }
+
+      return null;
+    })
+    .filter((item): item is { name: string; iconSrc: string } => Boolean(item))
+    .slice(0, 5);
 
   return (
     <motion.div
@@ -36,6 +101,7 @@ export default function ProjectPageCard({
             src={imageUrl}
             alt={title}
             fill
+            sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
             className="object-cover group-hover:scale-105 transition-transform duration-700"
           />
         ) : (
@@ -58,15 +124,18 @@ export default function ProjectPageCard({
           </p>
         )}
 
-        {/* Tags */}
-        <div className="flex flex-wrap gap-2 mt-3">
-          {techArray.slice(0, 3).map((t) => (
-            <span
-              key={t}
-              className="px-3 py-1 bg-linear-to-b from-white/10 to-white/5 text-zinc-500 rounded-lg text-[9px] font-bold uppercase tracking-wider border border-white/8"
-            >
-              {t}
-            </span>
+        {/* Tech logos */}
+        <div className="mt-3 flex flex-wrap items-center gap-3">
+          {techIcons.map(({ name, iconSrc }) => (
+            <Image
+              key={name}
+              src={iconSrc}
+              alt={name}
+              title={name}
+              width={28}
+              height={28}
+              className="size-7 object-contain transition-all duration-300 hover:-translate-y-0.5 hover:scale-110"
+            />
           ))}
         </div>
 

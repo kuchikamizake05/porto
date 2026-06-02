@@ -3,20 +3,10 @@
 import Alert from "@mui/material/Alert";
 import Snackbar from "@mui/material/Snackbar";
 
-export type AdminToastState = {
-  open: boolean;
-  severity: "success" | "error";
-  message: string;
-};
+import type { AdminToastState } from "./admin-toast-state";
 
 type AdminToastProps = AdminToastState & {
   onClose: () => void;
-};
-
-export const emptyToast: AdminToastState = {
-  open: false,
-  severity: "success",
-  message: "",
 };
 
 export default function AdminToast({

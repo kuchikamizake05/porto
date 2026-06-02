@@ -10,6 +10,8 @@ import {
   useInView
 } from 'motion/react';
 
+const EMPTY_TEXTS: React.ReactNode[] = [];
+
 interface VelocityMapping {
   input: [number, number];
   output: [number, number];
@@ -148,7 +150,7 @@ const VelocityText: React.FC<VelocityTextProps> = ({
 
 export const ScrollVelocity: React.FC<ScrollVelocityProps> = ({
   scrollContainerRef,
-  texts = [],
+  texts = EMPTY_TEXTS,
   velocity = 100,
   className = '',
   damping = 50,

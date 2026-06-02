@@ -6,7 +6,8 @@ import {
   useState,
   MutableRefObject,
   CSSProperties,
-  HTMLAttributes
+  HTMLAttributes,
+  KeyboardEvent
 } from 'react';
 import { motion } from 'motion/react';
 
@@ -71,7 +72,9 @@ const VariableProximity = forwardRef<HTMLSpanElement, VariableProximityProps>((p
     falloff = 'linear',
     className = '',
     onClick,
+    onKeyDown,
     style,
+    tabIndex,
     ...restProps
   } = props;
 
@@ -114,6 +117,29 @@ const VariableProximity = forwardRef<HTMLSpanElement, VariableProximityProps>((p
       toValue: toSettings.get(axis) ?? fromValue
     }));
   }, [fromFontVariationSettings, toFontVariationSettings]);
+
+  const handleKeyDown = (event: KeyboardEvent<HTMLSpanElement>) => {
+    onKeyDown?.(event);
+
+    if (event.defaultPrevented || !onClick) return;
+
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      onClick();
+    }
+  };
+
+  const interactionProps = onClick
+    ? {
+        onClick,
+        onKeyDown: handleKeyDown,
+        role: 'button' as const,
+        tabIndex: tabIndex ?? 0
+      }
+    : {
+        onKeyDown,
+        tabIndex
+      };
 
   const calculateDistance = (x1: number, y1: number, x2: number, y2: number) =>
     Math.sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2);
@@ -216,13 +242,13 @@ const VariableProximity = forwardRef<HTMLSpanElement, VariableProximityProps>((p
     return (
       <span
         ref={ref}
-        onClick={onClick}
         style={{
           display: 'inline',
           fontFamily: 'var(--font-geist-sans), sans-serif',
           ...style
         }}
         className={className}
+        {...interactionProps}
         {...restProps}
       >
         {segments ? (
@@ -252,13 +278,13 @@ const VariableProximity = forwardRef<HTMLSpanElement, VariableProximityProps>((p
   return (
     <span
       ref={ref}
-      onClick={onClick}
       style={{
         display: 'inline',
         fontFamily: '"Roboto Flex", sans-serif',
         ...style
       }}
       className={className}
+      {...interactionProps}
       {...restProps}
     >
       {(segmentWords || words.map((word, wordIndex) => ({

@@ -85,15 +85,19 @@ export default function AdminExperiencePage() {
             {loading ? (
               [1, 2, 3].map((i) => (
                 <tr key={i} className="animate-pulse">
-                  <td className="px-8 py-6">
-                    <div className="h-5 bg-white/5 rounded-lg w-48 mb-2" />
-                    <div className="h-4 bg-white/5 rounded-lg w-32" />
-                  </td>
-                  <td className="px-8 py-6">
-                    <div className="h-5 bg-white/5 rounded-lg w-24" />
-                  </td>
-                  <td className="px-8 py-6">
-                    <div className="h-5 bg-white/5 rounded-lg w-24 ml-auto" />
+                  <td colSpan={3} className="px-8 py-6">
+                    <span className="sr-only">Loading experience entries</span>
+                    <div
+                      aria-hidden="true"
+                      className="grid grid-cols-[1fr_120px_120px] gap-6 items-center"
+                    >
+                      <div>
+                        <div className="h-5 bg-white/5 rounded-lg w-48 mb-2" />
+                        <div className="h-4 bg-white/5 rounded-lg w-32" />
+                      </div>
+                      <div className="h-5 bg-white/5 rounded-lg w-24" />
+                      <div className="h-5 bg-white/5 rounded-lg w-24 ml-auto" />
+                    </div>
                   </td>
                 </tr>
               ))
@@ -145,6 +149,7 @@ export default function AdminExperiencePage() {
                       Edit
                     </Link>
                     <button
+                      type="button"
                       onClick={() => handleDelete(exp.id)}
                       className="text-sm font-bold text-gray-500 hover:text-red-500 transition-colors"
                     >

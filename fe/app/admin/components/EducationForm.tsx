@@ -4,7 +4,8 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { apiGet, apiPost, apiPut } from "../../lib/api";
 import Link from "next/link";
-import AdminToast, { emptyToast } from "./AdminToast";
+import AdminToast from "./AdminToast";
+import { emptyToast } from "./admin-toast-state";
 
 type EducationFormProps = {
   id?: string;
@@ -96,10 +97,14 @@ export default function EducationForm({ id }: EducationFormProps) {
         <form onSubmit={handleSubmit} className="space-y-8">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div className="space-y-3">
-              <label className="text-xs font-bold uppercase tracking-widest text-gray-500 px-1">
+              <label
+                htmlFor="education-school"
+                className="text-xs font-bold uppercase tracking-widest text-gray-500 px-1"
+              >
                 School/Institution
               </label>
               <input
+                id="education-school"
                 type="text"
                 required
                 placeholder="e.g. University of Indonesia"
@@ -111,10 +116,14 @@ export default function EducationForm({ id }: EducationFormProps) {
               />
             </div>
             <div className="space-y-3">
-              <label className="text-xs font-bold uppercase tracking-widest text-gray-500 px-1">
+              <label
+                htmlFor="education-degree"
+                className="text-xs font-bold uppercase tracking-widest text-gray-500 px-1"
+              >
                 Degree/Field
               </label>
               <input
+                id="education-degree"
                 type="text"
                 required
                 placeholder="e.g. Bachelor of Computer Science"
@@ -129,10 +138,14 @@ export default function EducationForm({ id }: EducationFormProps) {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div className="space-y-3">
-              <label className="text-xs font-bold uppercase tracking-widest text-gray-500 px-1">
+              <label
+                htmlFor="education-duration"
+                className="text-xs font-bold uppercase tracking-widest text-gray-500 px-1"
+              >
                 Duration
               </label>
               <input
+                id="education-duration"
                 type="text"
                 required
                 placeholder="e.g. 2020 - 2024"
@@ -144,10 +157,14 @@ export default function EducationForm({ id }: EducationFormProps) {
               />
             </div>
             <div className="space-y-3">
-              <label className="text-xs font-bold uppercase tracking-widest text-gray-500 px-1">
+              <label
+                htmlFor="education-logo-url"
+                className="text-xs font-bold uppercase tracking-widest text-gray-500 px-1"
+              >
                 Logo URL (Optional)
               </label>
               <input
+                id="education-logo-url"
                 type="text"
                 placeholder="https://example.com/logo.png"
                 className="w-full bg-white/5 border border-white/5 rounded-2xl px-5 py-4 text-white focus:border-blue-500/50 focus:bg-white/10 transition-all outline-hidden font-medium placeholder:text-gray-600"
@@ -160,10 +177,14 @@ export default function EducationForm({ id }: EducationFormProps) {
           </div>
 
           <div className="space-y-3">
-            <label className="text-xs font-bold uppercase tracking-widest text-gray-500 px-1">
+            <label
+              htmlFor="education-description"
+              className="text-xs font-bold uppercase tracking-widest text-gray-500 px-1"
+            >
               Description (Optional)
             </label>
             <textarea
+              id="education-description"
               rows={5}
               placeholder="Briefly describe your focus of study or achievements..."
               className="w-full bg-white/5 border border-white/5 rounded-2xl px-5 py-4 text-white focus:border-blue-500/50 focus:bg-white/10 transition-all outline-hidden font-medium placeholder:text-gray-600 resize-none"

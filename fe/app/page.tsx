@@ -38,16 +38,24 @@ export default function Home() {
 
   useEffect(() => {
     const shouldScroll = sessionStorage.getItem("scrollToContact");
+    let scrollTimeoutId: ReturnType<typeof setTimeout> | null = null;
+
     if (shouldScroll === "true") {
       sessionStorage.removeItem("scrollToContact");
       // Small delay to ensure the page layout is fully calculated
-      setTimeout(() => {
+      scrollTimeoutId = setTimeout(() => {
         const contactSection = document.getElementById("contact");
         if (contactSection) {
           contactSection.scrollIntoView({ behavior: "smooth" });
         }
       }, 500);
     }
+
+    return () => {
+      if (scrollTimeoutId) {
+        clearTimeout(scrollTimeoutId);
+      }
+    };
   }, []);
 
   useEffect(() => {
@@ -97,7 +105,7 @@ export default function Home() {
           className="max-w-4xl mx-auto w-full relative z-10 flex flex-col md:flex-row items-center md:items-start gap-12"
         >
           {/* Text Content */}
-          <div className="flex-1 space-y-6 order-2 md:order-1 text-center md:text-left flex flex-col items-center md:items-start md:pt-15 w-full">
+          <div className="flex-1 gap-6 order-2 md:order-1 text-center md:text-left flex flex-col items-center md:items-start md:pt-15 w-full">
             {/* Greeting */}
             <motion.div
               initial={{ opacity: 0, scale: 0.9 }}
@@ -265,13 +273,15 @@ export default function Home() {
         transition={{ delay: 2.25, duration: 1 }}
         className="flex justify-center -mt-8 md:-mt-9 mb-20 md:mb-8"
       >
-        <div
+        <button
+          type="button"
+          aria-label="Scroll to about me"
           onClick={() =>
             document
               .getElementById("about-me")
               ?.scrollIntoView({ behavior: "smooth" })
           }
-          className="group relative block cursor-pointer"
+          className="group relative block cursor-pointer appearance-none border-0 bg-transparent p-0"
         >
           <div
             className="
@@ -331,7 +341,7 @@ export default function Home() {
       "
             />
           </div>
-        </div>
+        </button>
       </motion.div>
 
       {/* Sections with Reveal Animation */}

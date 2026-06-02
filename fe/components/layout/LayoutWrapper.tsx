@@ -13,10 +13,11 @@ export default function LayoutWrapper({
 }) {
   const pathname = usePathname();
   const isAdminPage = pathname.startsWith("/admin");
+  const shouldShowInitialLoader = pathname === "/";
 
   return (
     <>
-      {!isAdminPage && <InitialLoader />}
+      {shouldShowInitialLoader && <InitialLoader />}
       {!isAdminPage && <Navbar />}
       <main className="flex-1">{children}</main>
       <div className="fixed bottom-6 right-6 z-50">

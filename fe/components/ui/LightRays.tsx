@@ -130,6 +130,8 @@ const LightRays: React.FC<LightRaysProps> = ({
 
   useEffect(() => {
     if (!isVisible || !containerRef.current) return;
+    let isCancelled = false;
+    let initTimeoutId: ReturnType<typeof setTimeout> | null = null;
 
     if (cleanupFunctionRef.current) {
       cleanupFunctionRef.current();
@@ -139,9 +141,11 @@ const LightRays: React.FC<LightRaysProps> = ({
     const initializeWebGL = async () => {
       if (!containerRef.current) return;
 
-      await new Promise(resolve => setTimeout(resolve, 10));
+      await new Promise(resolve => {
+        initTimeoutId = setTimeout(resolve, 10);
+      });
 
-      if (!containerRef.current) return;
+      if (isCancelled || !containerRef.current) return;
 
       const renderer = new Renderer({
         dpr: Math.min(window.devicePixelRatio, 2),
@@ -371,6 +375,11 @@ void main() {
     initializeWebGL();
 
     return () => {
+      isCancelled = true;
+      if (initTimeoutId) {
+        clearTimeout(initTimeoutId);
+      }
+
       if (cleanupFunctionRef.current) {
         cleanupFunctionRef.current();
         cleanupFunctionRef.current = null;

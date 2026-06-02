@@ -3,7 +3,8 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { apiPost, apiPut } from "../../lib/api";
-import AdminToast, { emptyToast } from "./AdminToast";
+import AdminToast from "./AdminToast";
+import { emptyToast } from "./admin-toast-state";
 
 type ExperienceFormProps = {
   initialData?: {
@@ -77,10 +78,11 @@ export default function ExperienceForm({
       <div className="p-8 space-y-6">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div className="space-y-3 text-sm">
-            <label className="block font-bold text-gray-400">
+            <label htmlFor="experience-role" className="block font-bold text-gray-400">
               Role / Job Title
             </label>
             <input
+              id="experience-role"
               type="text"
               required
               className={inputClass}
@@ -92,10 +94,11 @@ export default function ExperienceForm({
             />
           </div>
           <div className="space-y-3 text-sm">
-            <label className="block font-bold text-gray-400">
+            <label htmlFor="experience-company" className="block font-bold text-gray-400">
               Company Name
             </label>
             <input
+              id="experience-company"
               type="text"
               required
               className={inputClass}
@@ -110,8 +113,9 @@ export default function ExperienceForm({
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div className="space-y-3 text-sm">
-            <label className="block font-bold text-gray-400">Duration</label>
+            <label htmlFor="experience-duration" className="block font-bold text-gray-400">Duration</label>
             <input
+              id="experience-duration"
               type="text"
               required
               className={inputClass}
@@ -123,10 +127,11 @@ export default function ExperienceForm({
             />
           </div>
           <div className="space-y-3 text-sm">
-            <label className="block font-bold text-gray-400">
+            <label htmlFor="experience-logo-url" className="block font-bold text-gray-400">
               Company Logo URL
             </label>
             <input
+              id="experience-logo-url"
               type="text"
               className={inputClass}
               placeholder="e.g. https://example.com/logo.png"
@@ -139,10 +144,11 @@ export default function ExperienceForm({
         </div>
 
         <div className="space-y-3 text-sm">
-          <label className="block font-bold text-gray-400">
+          <label htmlFor="experience-description" className="block font-bold text-gray-400">
             Description (optional)
           </label>
           <textarea
+            id="experience-description"
             rows={5}
             className={`${inputClass} resize-none font-light`}
             placeholder="What did you do there?"

@@ -33,6 +33,7 @@ export default function ContactForm() {
         {/* Name Field */}
         <div className="space-y-2">
           <input
+            aria-label="Your name"
             placeholder="Your name"
             className="w-full h-[48px] bg-white/5 border border-white/10 rounded-xl px-4 focus:border-zinc-500/50 focus:bg-white/10 transition-all outline-hidden text-white placeholder:text-zinc-500 text-sm font-medium"
             value={name}
@@ -44,6 +45,7 @@ export default function ContactForm() {
         {/* Email Field */}
         <div className="space-y-2">
           <input
+            aria-label="Your email"
             type="email"
             placeholder="Your email"
             className="w-full h-[48px] bg-white/5 border border-white/10 rounded-xl px-4  focus:bg-white/10 focus:border-zinc-500/50 transition-all outline-hidden text-white placeholder:text-zinc-500 text-sm font-medium"
@@ -56,6 +58,7 @@ export default function ContactForm() {
         {/* Message Field */}
         <div className="space-y-2">
           <textarea
+            aria-label="Your message"
             placeholder="Your message"
             className="w-full h-[120px] bg-white/5 border border-white/10 rounded-xl px-4 py-3 focus:bg-white/10 focus:border-zinc-500/50 transition-all outline-hidden text-white placeholder:text-zinc-500 text-sm font-medium resize-none"
             value={message}

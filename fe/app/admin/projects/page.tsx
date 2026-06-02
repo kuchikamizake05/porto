@@ -85,14 +85,16 @@ export default function AdminProjectsPage() {
             {loading ? (
               [1, 2, 3].map((i) => (
                 <tr key={i} className="animate-pulse">
-                  <td className="px-8 py-6">
-                    <div className="h-5 bg-white/5 rounded-lg w-48" />
-                  </td>
-                  <td className="px-8 py-6">
-                    <div className="h-5 bg-white/5 rounded-lg w-64" />
-                  </td>
-                  <td className="px-8 py-6">
-                    <div className="h-5 bg-white/5 rounded-lg w-24 ml-auto" />
+                  <td colSpan={3} className="px-8 py-6">
+                    <span className="sr-only">Loading projects</span>
+                    <div
+                      aria-hidden="true"
+                      className="grid grid-cols-[1fr_260px_120px] gap-6 items-center"
+                    >
+                      <div className="h-5 bg-white/5 rounded-lg w-48" />
+                      <div className="h-5 bg-white/5 rounded-lg w-64" />
+                      <div className="h-5 bg-white/5 rounded-lg w-24 ml-auto" />
+                    </div>
                   </td>
                 </tr>
               ))
@@ -122,9 +124,9 @@ export default function AdminProjectsPage() {
                       {project.tech
                         .split(",")
                         .slice(0, 4)
-                        .map((t, idx) => (
+                        .map((t) => (
                           <span
-                            key={idx}
+                            key={t.trim()}
                             className="bg-white/5 text-gray-400 px-3 py-1 rounded-full border border-white/5"
                           >
                             {t.trim()}
@@ -143,6 +145,7 @@ export default function AdminProjectsPage() {
                       Edit
                     </Link>
                     <button
+                      type="button"
                       onClick={() => handleDelete(project.id)}
                       className="text-sm font-bold text-gray-500 hover:text-red-500 transition-colors"
                     >

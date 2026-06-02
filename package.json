@@ -8,6 +8,8 @@
     "dev:fe": "npm run dev --prefix fe",
     "dev:be": "npm run dev --prefix be",
     "build": "npm run build --prefix fe && npm run build --prefix be",
+    "doctor": "npm run doctor --prefix fe",
+    "doctor:install": "npm run doctor:install --prefix fe",
     "test": "echo \"No tests configured\""
   },
   "repository": {

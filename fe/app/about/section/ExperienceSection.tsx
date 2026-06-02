@@ -76,12 +76,16 @@ export default function ExperienceSection() {
               >
                 {/* Date Column */}
                 <div className="md:w-24 shrink-0 text-sm font-medium text-blue-400/80 text-center self-center leading-relaxed">
-                  {exp.duration.split("-").map((d, i) => (
-                    <div key={i}>
-                      {d.trim()}
-                      {i === 0 && experiences.length > 1 && " -"}
-                    </div>
-                  ))}
+                  {exp.duration.split("-").map((d, i) => {
+                    const durationPart = d.trim();
+
+                    return (
+                      <div key={durationPart}>
+                        {durationPart}
+                        {i === 0 && experiences.length > 1 && " -"}
+                      </div>
+                    );
+                  })}
                 </div>
 
                 {/* Timeline Column (Dot & Line) */}

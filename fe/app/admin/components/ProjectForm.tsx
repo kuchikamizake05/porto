@@ -4,7 +4,8 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { apiPost, apiPut } from "../../lib/api";
 import { motion } from "framer-motion";
-import AdminToast, { emptyToast } from "./AdminToast";
+import AdminToast from "./AdminToast";
+import { emptyToast } from "./admin-toast-state";
 
 type ProjectFormProps = {
   initialData?: {
@@ -78,8 +79,9 @@ export default function ProjectForm({ initialData, isEdit }: ProjectFormProps) {
     >
       <div className="p-8 space-y-6">
         <div className="space-y-3 text-sm">
-          <label className="block font-bold text-gray-400">Project Title</label>
+          <label htmlFor="project-title" className="block font-bold text-gray-400">Project Title</label>
           <input
+            id="project-title"
             type="text"
             required
             className={inputClass}
@@ -92,10 +94,11 @@ export default function ProjectForm({ initialData, isEdit }: ProjectFormProps) {
         </div>
 
         <div className="space-y-3 text-sm">
-          <label className="block font-bold text-gray-400">
+          <label htmlFor="project-description" className="block font-bold text-gray-400">
             Description (optional)
           </label>
           <textarea
+            id="project-description"
             rows={4}
             className={`${inputClass} resize-none font-light`}
             placeholder="Tell us about this project..."
@@ -107,10 +110,11 @@ export default function ProjectForm({ initialData, isEdit }: ProjectFormProps) {
         </div>
 
         <div className="space-y-3 text-sm">
-          <label className="block font-bold text-gray-400">
+          <label htmlFor="project-tech" className="block font-bold text-gray-400">
             Tech Stack (comma separated)
           </label>
           <input
+            id="project-tech"
             type="text"
             required
             className={inputClass}
@@ -120,10 +124,10 @@ export default function ProjectForm({ initialData, isEdit }: ProjectFormProps) {
           />
         </div>
 
-        <div className="space-y-4">
-          <label className="block text-sm font-bold text-gray-400">
+        <fieldset className="space-y-4">
+          <legend className="block text-sm font-bold text-gray-400">
             Project Category
-          </label>
+          </legend>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
             {["WEBAPP", "WEBSITE", "UI/UX", "GRAPHIC"].map((cat) => (
               <button
@@ -147,14 +151,15 @@ export default function ProjectForm({ initialData, isEdit }: ProjectFormProps) {
               </button>
             ))}
           </div>
-        </div>
+        </fieldset>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <div className="space-y-3 text-sm">
-            <label className="block font-bold text-gray-400">
+            <label htmlFor="project-image-url" className="block font-bold text-gray-400">
               Image URL (optional)
             </label>
             <input
+              id="project-image-url"
               type="url"
               className={inputClass}
               placeholder="https://..."
@@ -165,10 +170,11 @@ export default function ProjectForm({ initialData, isEdit }: ProjectFormProps) {
             />
           </div>
           <div className="space-y-3 text-sm">
-            <label className="block font-bold text-gray-400">
+            <label htmlFor="project-repo-url" className="block font-bold text-gray-400">
               Repository URL (optional)
             </label>
             <input
+              id="project-repo-url"
               type="url"
               className={inputClass}
               placeholder="https://github.com/..."
@@ -179,10 +185,11 @@ export default function ProjectForm({ initialData, isEdit }: ProjectFormProps) {
             />
           </div>
           <div className="space-y-3 text-sm">
-            <label className="block font-bold text-gray-400">
+            <label htmlFor="project-site-url" className="block font-bold text-gray-400">
               Live Site URL (optional)
             </label>
             <input
+              id="project-site-url"
               type="url"
               className={inputClass}
               placeholder="https://..."

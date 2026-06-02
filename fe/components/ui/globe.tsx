@@ -286,9 +286,14 @@ export function World({ globeConfig, data }: WorldProps) {
 
 function genRandomNumbers(min: number, max: number, count: number) {
   const arr: number[] = [];
+  const usedValues = new Set<number>();
+
   while (arr.length < count) {
     const value = Math.floor(Math.random() * (max - min)) + min;
-    if (!arr.includes(value)) arr.push(value);
+    if (!usedValues.has(value)) {
+      usedValues.add(value);
+      arr.push(value);
+    }
   }
 
   return arr;
