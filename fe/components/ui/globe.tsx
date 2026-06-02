@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef } from "react";
 import {
   Color,
   Fog,
@@ -77,7 +77,7 @@ type GlobeMaterial = {
 function Globe({ globeConfig, data }: WorldProps) {
   const globeRef = useRef<ThreeGlobe | null>(null);
   const groupRef = useRef<Group>(null);
-  const [isInitialized, setIsInitialized] = useState(false);
+  const isInitializedRef = useRef(false);
 
   const defaultProps = useMemo(
     () => ({
@@ -103,12 +103,12 @@ function Globe({ globeConfig, data }: WorldProps) {
     if (!globeRef.current && groupRef.current) {
       globeRef.current = new ThreeGlobe();
       groupRef.current.add(globeRef.current);
-      setIsInitialized(true);
+      isInitializedRef.current = true;
     }
   }, []);
 
   useEffect(() => {
-    if (!globeRef.current || !isInitialized) return;
+    if (!globeRef.current || !isInitializedRef.current) return;
 
     const globeMaterial =
       globeRef.current.globeMaterial() as unknown as GlobeMaterial;
@@ -121,11 +121,10 @@ function Globe({ globeConfig, data }: WorldProps) {
     defaultProps.emissiveIntensity,
     defaultProps.globeColor,
     defaultProps.shininess,
-    isInitialized,
   ]);
 
   useEffect(() => {
-    if (!globeRef.current || !isInitialized || !data.length) return;
+    if (!globeRef.current || !isInitializedRef.current || !data.length) return;
 
     const points: GlobePoint[] = [];
     data.forEach((arc) => {
@@ -190,10 +189,10 @@ function Globe({ globeConfig, data }: WorldProps) {
       .ringRepeatPeriod(
         (defaultProps.arcTime * defaultProps.arcLength) / defaultProps.rings,
       );
-  }, [data, defaultProps, isInitialized]);
+  }, [data, defaultProps]);
 
   useEffect(() => {
-    if (!globeRef.current || !isInitialized || !data.length) return;
+    if (!globeRef.current || !isInitializedRef.current || !data.length) return;
 
     const interval = window.setInterval(() => {
       if (!globeRef.current) return;
@@ -204,19 +203,24 @@ function Globe({ globeConfig, data }: WorldProps) {
         Math.floor((data.length * 4) / 5),
       );
 
-      const ringsData = data
-        .filter((_, index) => ringIndexes.includes(index))
-        .map((item) => ({
-          lat: item.startLat,
-          lng: item.startLng,
-          color: item.color,
-        }));
+      const ringIndexSet = new Set(ringIndexes);
+      const ringsData = data.flatMap((item, index) =>
+        ringIndexSet.has(index)
+          ? [
+              {
+                lat: item.startLat,
+                lng: item.startLng,
+                color: item.color,
+              },
+            ]
+          : [],
+      );
 
       globeRef.current.ringsData(ringsData);
     }, 2000);
 
     return () => window.clearInterval(interval);
-  }, [data, isInitialized]);
+  }, [data]);
 
   return <group ref={groupRef} />;
 }

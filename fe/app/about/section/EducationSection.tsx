@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { apiGet } from "@/app/lib/api";
 import { GraduationCap } from "lucide-react";
 import { useRef } from "react";
-import { motion, useScroll, useSpring } from "framer-motion";
+import { m as motion, useScroll, useSpring } from "motion/react";
 
 type Education = {
   id: number;

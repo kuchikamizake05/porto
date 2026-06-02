@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { Mail, MapPin, Github, Linkedin, ArrowRight } from "lucide-react";
-import { motion } from "framer-motion";
+import { m as motion } from "motion/react";
 import dynamic from "next/dynamic";
 import { FaXTwitter } from "react-icons/fa6";
 import type { GlobeConfig } from "@/components/ui/globe";

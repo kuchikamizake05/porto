@@ -3,9 +3,9 @@
 import { useCallback, useEffect, useState } from "react";
 import {
   AnimatePresence,
-  motion,
+  m as motion,
   useReducedMotion,
-} from "framer-motion";
+} from "motion/react";
 import CountUp from "@/components/ui/CountUp";
 
 const INTRO_DELAY_MS = 300;

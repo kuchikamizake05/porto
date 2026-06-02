@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef } from "react";
-import { motion } from "framer-motion";
+import { m as motion } from "motion/react";
 import Link from "next/link";
 import CircularGallery from "@/components/ui/circular-gallery";
 import { ShimmerButton } from "@/components/ui/shimmer-button";

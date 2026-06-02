@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { motion } from "framer-motion";
+import { m as motion } from "motion/react";
 import { ArrowDown } from "lucide-react";
 import AboutSection from "@/components/sections/AboutSection";
 import TechStack from "@/components/sections/TechStack";

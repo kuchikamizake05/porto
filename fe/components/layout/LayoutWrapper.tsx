@@ -5,6 +5,7 @@ import Navbar from "./Navbar";
 import Footer from "./Footer";
 import Chatbot from "@/components/features/chatbot/Chatbot";
 import InitialLoader from "./InitialLoader";
+import { LazyMotion, domAnimation } from "motion/react";
 
 export default function LayoutWrapper({
   children,
@@ -16,7 +17,7 @@ export default function LayoutWrapper({
   const shouldShowInitialLoader = pathname === "/";
 
   return (
-    <>
+    <LazyMotion features={domAnimation}>
       {shouldShowInitialLoader && <InitialLoader />}
       {!isAdminPage && <Navbar />}
       <main className="flex-1">{children}</main>
@@ -24,6 +25,6 @@ export default function LayoutWrapper({
         {!isAdminPage && <Chatbot />}
       </div>
       {!isAdminPage && <Footer />}
-    </>
+    </LazyMotion>
   );
 }

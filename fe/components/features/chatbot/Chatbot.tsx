@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import { MessageCircle, X, Send, Bot } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
+import { m as motion, AnimatePresence } from "motion/react";
 import { cn } from "@/lib/utils";
 
 interface Message {
@@ -152,9 +152,9 @@ export default function Chatbot() {
                     className="self-start bg-white/10 text-white/90 rounded-2xl rounded-bl-none border border-white/5 px-4 py-2.5 text-sm"
                   >
                     <div className="flex gap-1">
-                      <span className="w-1.5 h-1.5 bg-white/50 rounded-full animate-bounce [animation-delay:-0.3s]"></span>
-                      <span className="w-1.5 h-1.5 bg-white/50 rounded-full animate-bounce [animation-delay:-0.15s]"></span>
-                      <span className="w-1.5 h-1.5 bg-white/50 rounded-full animate-bounce"></span>
+                      <span className="w-1.5 h-1.5 bg-white/50 rounded-full animate-pulse [animation-delay:-0.3s]"></span>
+                      <span className="w-1.5 h-1.5 bg-white/50 rounded-full animate-pulse [animation-delay:-0.15s]"></span>
+                      <span className="w-1.5 h-1.5 bg-white/50 rounded-full animate-pulse"></span>
                     </div>
                   </motion.div>
                 )}

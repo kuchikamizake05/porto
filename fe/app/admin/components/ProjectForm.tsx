@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { apiPost, apiPut } from "../../lib/api";
-import { motion } from "framer-motion";
+import { m as motion } from "motion/react";
 import AdminToast from "./AdminToast";
 import { emptyToast } from "./admin-toast-state";
 

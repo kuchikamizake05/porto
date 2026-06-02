@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { useRouter, usePathname } from "next/navigation";
-import { motion } from "framer-motion";
+import { m as motion } from "motion/react";
 import { User, Home, Clock, Github, Linkedin, Code, Mail } from "lucide-react";
 import Magnetic from "../ui/Magnetic";
 import Image from "next/image";

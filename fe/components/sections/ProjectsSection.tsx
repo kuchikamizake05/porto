@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState, useCallback, useRef } from "react";
-import { motion, useSpring, useMotionValue } from "framer-motion";
+import { m as motion, useSpring, useMotionValue } from "motion/react";
 import { apiGet } from "@/app/lib/api";
 import Link from "next/link";
 import Image from "next/image";

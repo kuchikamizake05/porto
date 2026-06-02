@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useRef, useState, useEffect } from "react";
-import { motion, useSpring, useMotionValue } from "framer-motion";
+import { m as motion, useSpring, useMotionValue } from "motion/react";
 
 export default function Spotlight({
   className = "",
@@ -50,7 +50,7 @@ export default function Spotlight({
           x: smoothX,
           y: smoothY,
           background: `radial-gradient(circle, ${fillColor} 0%, transparent 70%)`,
-          filter: "blur(40px)",
+          filter: "blur(10px)",
         }}
       />
     </div>

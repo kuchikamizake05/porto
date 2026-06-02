@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { m as motion } from "motion/react";
 import ExperienceSection from "@/app/about/section/ExperienceSection";
 import EducationSection from "@/app/about/section/EducationSection";
 import WhoIAmCarousel from "@/app/about/section/WhoIAmCarousel";

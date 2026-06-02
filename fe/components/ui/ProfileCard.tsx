@@ -474,7 +474,7 @@ const ProfileCardComponent: React.FC<ProfileCardProps> = ({
           className="absolute inset-0 z-0 pointer-events-none transition-opacity duration-200 ease-out"
           style={{
             background: `radial-gradient(circle at var(--pointer-x) var(--pointer-y), var(--behind-glow-color) 0%, transparent var(--behind-glow-size))`,
-            filter: 'blur(50px) saturate(1.1)',
+            filter: 'blur(10px) saturate(1.1)',
             opacity: 'calc(0.8 * var(--card-opacity))'
           }}
         />

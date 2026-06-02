@@ -9,7 +9,7 @@ import {
   HTMLAttributes,
   KeyboardEvent
 } from 'react';
-import { motion } from 'motion/react';
+import { m as motion } from 'motion/react';
 
 export type VariableProximitySegment = {
   text: string;
@@ -38,7 +38,7 @@ function useMousePositionRef(containerRef: MutableRefObject<HTMLElement | null>,
     };
 
     window.addEventListener('mousemove', handleMouseMove);
-    window.addEventListener('touchmove', handleTouchMove);
+    window.addEventListener('touchmove', handleTouchMove, { passive: true });
     return () => {
       window.removeEventListener('mousemove', handleMouseMove);
       window.removeEventListener('touchmove', handleTouchMove);
@@ -252,8 +252,8 @@ const VariableProximity = forwardRef<HTMLSpanElement, VariableProximityProps>((p
         {...restProps}
       >
         {segments ? (
-          segments.map((segment, index) => (
-            <span key={index} className={segment.className}>
+          segments.map((segment) => (
+            <span key={`${segment.className || 'segment'}-${segment.text}`} className={segment.className}>
               {segment.text}
             </span>
           ))
@@ -291,8 +291,8 @@ const VariableProximity = forwardRef<HTMLSpanElement, VariableProximityProps>((p
         text: word,
         className: undefined,
         needsSpace: wordIndex < words.length - 1
-      }))).map((word, wordIndex) => (
-        <span key={wordIndex} className={`inline-block whitespace-nowrap ${word.className || ''}`.trim()}>
+      }))).map((word) => (
+        <span key={`${word.className || 'word'}-${word.text}`} className={`inline-block whitespace-nowrap ${word.className || ''}`.trim()}>
           {word.text.split('').map(letter => {
             const currentLetterIndex = letterIndex++;
             return (

@@ -72,13 +72,17 @@ Keep your answers concise (2-4 sentences max unless more detail is clearly neede
     const groq = new Groq({ apiKey });
 
     // Convert messages to Groq format, skip initial bot greeting
-    const chatHistory = messages
-      .slice(0, -1)
-      .filter((m: any, index: number) => !(m.sender === "bot" && index === 0))
-      .map((m: any) => ({
-        role: m.sender === "user" ? "user" : "assistant",
-        content: m.text,
-      }));
+    const chatHistory: Array<{ role: "user" | "assistant"; content: string }> =
+      [];
+    for (let index = 0; index < messages.length - 1; index += 1) {
+      const message = messages[index];
+      if (message.sender === "bot" && index === 0) continue;
+
+      chatHistory.push({
+        role: message.sender === "user" ? "user" : "assistant",
+        content: message.text,
+      });
+    }
 
     const lastMessage = messages[messages.length - 1].text;
 

@@ -568,10 +568,6 @@ class App {
     const deltaY = this.startY - y;
     const isHorizontalSwipe = Math.abs(deltaX) > Math.abs(deltaY);
 
-    if ('touches' in e && isHorizontalSwipe) {
-      e.preventDefault();
-    }
-
     const touchDelta = isHorizontalSwipe ? deltaX : deltaY;
     const distance = touchDelta * (this.scrollSpeed * 0.045);
     this.scroll.target = (this.scroll.position ?? 0) + distance;
@@ -633,14 +629,14 @@ class App {
     this.boundOnTouchMove = this.onTouchMove.bind(this);
     this.boundOnTouchUp = this.onTouchUp.bind(this);
     window.addEventListener('resize', this.boundOnResize);
-    this.container.addEventListener('mousewheel', this.boundOnWheel);
-    this.container.addEventListener('wheel', this.boundOnWheel);
+    this.container.addEventListener('mousewheel', this.boundOnWheel, { passive: true });
+    this.container.addEventListener('wheel', this.boundOnWheel, { passive: true });
     this.container.addEventListener('mousedown', this.boundOnTouchDown);
     window.addEventListener('mousemove', this.boundOnTouchMove);
     window.addEventListener('mouseup', this.boundOnTouchUp);
     this.container.addEventListener('touchstart', this.boundOnTouchDown, { passive: true });
-    window.addEventListener('touchmove', this.boundOnTouchMove, { passive: false });
-    window.addEventListener('touchend', this.boundOnTouchUp);
+    window.addEventListener('touchmove', this.boundOnTouchMove, { passive: true });
+    window.addEventListener('touchend', this.boundOnTouchUp, { passive: true });
   }
 
   destroy() {

@@ -12,7 +12,7 @@ import React, {
 } from "react";
 import {
   AnimatePresence,
-  motion,
+  m as motion,
   type Target,
   type TargetAndTransition,
   type Transition,
@@ -20,6 +20,11 @@ import {
 } from "motion/react";
 
 import { cn } from "@/lib/utils";
+
+const GRAPHEME_SEGMENTER =
+  typeof Intl !== "undefined" && Intl.Segmenter
+    ? new Intl.Segmenter("en", { granularity: "grapheme" })
+    : null;
 
 export interface RotatingTextRef {
   next: () => void;
@@ -86,13 +91,9 @@ const RotatingText = forwardRef<RotatingTextRef, RotatingTextProps>(
     };
 
     const splitIntoCharacters = (text: string): string[] => {
-      if (typeof Intl !== "undefined" && Intl.Segmenter) {
-        const segmenter = new Intl.Segmenter("en", {
-          granularity: "grapheme",
-        });
-
+      if (GRAPHEME_SEGMENTER) {
         return Array.from(
-          segmenter.segment(text),
+          GRAPHEME_SEGMENTER.segment(text),
           (segment) => segment.segment,
         );
       }

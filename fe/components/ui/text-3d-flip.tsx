@@ -17,11 +17,13 @@ import {
 import { cn } from "@/lib/utils"
 
 const HAS_SEGMENTER = typeof Intl !== "undefined" && "Segmenter" in Intl
+const GRAPHEME_SEGMENTER = HAS_SEGMENTER
+  ? new Intl.Segmenter("en", { granularity: "grapheme" })
+  : null
 
 const splitIntoCharacters = (text: string): string[] => {
-  if (HAS_SEGMENTER) {
-    const segmenter = new Intl.Segmenter("en", { granularity: "grapheme" })
-    return Array.from(segmenter.segment(text), ({ segment }) => segment)
+  if (GRAPHEME_SEGMENTER) {
+    return Array.from(GRAPHEME_SEGMENTER.segment(text), ({ segment }) => segment)
   }
   return Array.from(text)
 }
@@ -135,6 +137,7 @@ const Text3DFlip = ({
   const characters = useMemo(() => {
     const words = text.split(" ")
     return words.map((word, i) => ({
+      word,
       characters: splitIntoCharacters(word),
       needsSpace: i !== words.length - 1,
     }))
@@ -180,6 +183,8 @@ const Text3DFlip = ({
         getStaggerDelay(i, totalChars)
       )
 
+      if (!isMountedRef.current) return
+
       // 1. Flip smoothly to the 3D secondary face
       await animate(
         ".text-3d-flip-char",
@@ -190,14 +195,14 @@ const Text3DFlip = ({
         }
       )
 
-      if (!isMountedRef.current) return
-
-      // 2. Snap instantly back to original container transform (preserving 3D depth)
-      await animate(
-        ".text-3d-flip-char",
-        { transform: CONTAINER_TRANSFORMS[rotateDirection] },
-        { duration: 0 }
-      )
+      if (isMountedRef.current) {
+        // 2. Snap instantly back to original container transform (preserving 3D depth)
+        await animate(
+          ".text-3d-flip-char",
+          { transform: CONTAINER_TRANSFORMS[rotateDirection] },
+          { duration: 0 }
+        )
+      }
     } finally {
       if (isMountedRef.current) {
         isAnimatingRef.current = false
@@ -232,7 +237,7 @@ const Text3DFlip = ({
       <span className="sr-only">{text}</span>
 
       {characters.map((wordObj, wordIndex) => (
-        <span key={wordIndex} className="inline-flex">
+        <span key={wordObj.word} className="inline-flex">
           {wordObj.characters.map((char, charIndex) => {
             const currentTextClass = Array.isArray(textClassName)
               ? textClassName[wordIndex % textClassName.length]

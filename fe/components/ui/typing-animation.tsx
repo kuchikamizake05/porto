@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect, useMemo, useRef, useState } from "react"
-import { motion, MotionProps, useInView } from "motion/react"
+import { m as motion, MotionProps, useInView } from "motion/react"
 
 import { cn } from "@/lib/utils"
 
@@ -84,7 +84,7 @@ export function TypingAnimation({
         case "typing":
           if (currentCharIndex < graphemes.length) {
             setDisplayedText(graphemes.slice(0, currentCharIndex + 1).join(""))
-            setCurrentCharIndex(currentCharIndex + 1)
+            setCurrentCharIndex((current) => current + 1)
           } else {
             if (hasMultipleWords || loop) {
               const isLastWord = currentWordIndex === wordsToAnimate.length - 1
@@ -102,7 +102,7 @@ export function TypingAnimation({
         case "deleting":
           if (currentCharIndex > 0) {
             setDisplayedText(graphemes.slice(0, currentCharIndex - 1).join(""))
-            setCurrentCharIndex(currentCharIndex - 1)
+            setCurrentCharIndex((current) => current - 1)
           } else {
             const nextIndex = (currentWordIndex + 1) % wordsToAnimate.length
             setCurrentWordIndex(nextIndex)

@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { motion } from "framer-motion";
+import { m as motion } from "motion/react";
 
 type ProjectPageCardProps = {
   title: string;
@@ -71,21 +71,22 @@ export default function ProjectPageCard({
     typeof tech === "string"
       ? tech
           .split(",")
-          .map((t) => t.trim())
-          .filter(Boolean)
+          .flatMap((t) => {
+            const techName = t.trim();
+            return techName ? [techName] : [];
+          })
       : tech.filter(Boolean);
   const techIcons = techArray
-    .map((name) => {
+    .flatMap((name) => {
       const normalizedName = normalizeTechName(name);
       const iconSrc = SVG_ICON_MAP[normalizedName];
 
       if (iconSrc) {
-        return { name, iconSrc };
+        return [{ name, iconSrc }];
       }
 
-      return null;
+      return [];
     })
-    .filter((item): item is { name: string; iconSrc: string } => Boolean(item))
     .slice(0, 5);
 
   return (

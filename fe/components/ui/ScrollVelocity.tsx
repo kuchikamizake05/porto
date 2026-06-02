@@ -1,6 +1,6 @@
 import React, { useRef, useLayoutEffect, useState } from 'react';
 import {
-  motion,
+  m as motion,
   useScroll,
   useSpring,
   useTransform,
@@ -11,6 +11,12 @@ import {
 } from 'motion/react';
 
 const EMPTY_TEXTS: React.ReactNode[] = [];
+
+const getTextKey = (text: React.ReactNode) => {
+  if (typeof text === 'string' || typeof text === 'number') return text;
+  if (React.isValidElement(text) && text.key != null) return text.key;
+  return String(text);
+};
 
 interface VelocityMapping {
   input: [number, number];
@@ -170,7 +176,7 @@ export const ScrollVelocity: React.FC<ScrollVelocityProps> = ({
     <section ref={containerRef}>
       {texts.map((text, index) => (
         <VelocityText
-          key={index}
+          key={getTextKey(text)}
           className={className}
           baseVelocity={index % 2 !== 0 ? -velocity : velocity}
           scrollContainerRef={scrollContainerRef}

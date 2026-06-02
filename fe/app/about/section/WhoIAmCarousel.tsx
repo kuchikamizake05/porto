@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { m as motion, AnimatePresence } from "motion/react";
 import { ChevronLeft, ChevronRight, Quote, Target, User } from "lucide-react";
 
 const slides = [

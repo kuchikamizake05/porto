@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { motion } from "framer-motion";
+import { m as motion } from "motion/react";
 
 export default function Meteors({ number = 20 }: { number?: number }) {
   const [meteorStyles, setMeteorStyles] = useState<Array<React.CSSProperties>>([]);

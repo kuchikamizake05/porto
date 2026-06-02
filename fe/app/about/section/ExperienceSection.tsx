@@ -14,7 +14,7 @@ type Experience = {
 };
 
 import { useRef } from "react";
-import { motion, useScroll, useSpring } from "framer-motion";
+import { m as motion, useScroll, useSpring } from "motion/react";
 
 export default function ExperienceSection() {
   const [experiences, setExperiences] = useState<Experience[]>([]);

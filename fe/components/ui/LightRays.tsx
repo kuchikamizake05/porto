@@ -1,4 +1,4 @@
-import { useRef, useEffect, useState } from 'react';
+import { useRef, useEffect } from 'react';
 import { Renderer, Program, Triangle, Mesh } from 'ogl';
 
 export type RaysOrigin =
@@ -104,48 +104,28 @@ const LightRays: React.FC<LightRaysProps> = ({
   const animationIdRef = useRef<number | null>(null);
   const meshRef = useRef<Mesh | null>(null);
   const cleanupFunctionRef = useRef<(() => void) | null>(null);
-  const [isVisible, setIsVisible] = useState(false);
+  const isVisibleRef = useRef(false);
   const observerRef = useRef<IntersectionObserver | null>(null);
 
   useEffect(() => {
     if (!containerRef.current) return;
-
-    observerRef.current = new IntersectionObserver(
-      entries => {
-        const entry = entries[0];
-        setIsVisible(entry.isIntersecting);
-      },
-      { threshold: 0.1 }
-    );
-
-    observerRef.current.observe(containerRef.current);
-
-    return () => {
-      if (observerRef.current) {
-        observerRef.current.disconnect();
-        observerRef.current = null;
-      }
-    };
-  }, []);
-
-  useEffect(() => {
-    if (!isVisible || !containerRef.current) return;
     let isCancelled = false;
     let initTimeoutId: ReturnType<typeof setTimeout> | null = null;
 
-    if (cleanupFunctionRef.current) {
+    const cleanupWebGL = () => {
+      if (!cleanupFunctionRef.current) return;
       cleanupFunctionRef.current();
       cleanupFunctionRef.current = null;
-    }
+    };
 
     const initializeWebGL = async () => {
-      if (!containerRef.current) return;
+      if (!containerRef.current || cleanupFunctionRef.current) return;
 
       await new Promise(resolve => {
         initTimeoutId = setTimeout(resolve, 10);
       });
 
-      if (isCancelled || !containerRef.current) return;
+      if (isCancelled || !isVisibleRef.current || !containerRef.current) return;
 
       const renderer = new Renderer({
         dpr: Math.min(window.devicePixelRatio, 2),
@@ -372,7 +352,22 @@ void main() {
       };
     };
 
-    initializeWebGL();
+    observerRef.current = new IntersectionObserver(
+      entries => {
+        const entry = entries[0];
+        const isIntersecting = entry?.isIntersecting ?? false;
+
+        isVisibleRef.current = isIntersecting;
+        if (isIntersecting) {
+          void initializeWebGL();
+        } else {
+          cleanupWebGL();
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    observerRef.current.observe(containerRef.current);
 
     return () => {
       isCancelled = true;
@@ -380,13 +375,14 @@ void main() {
         clearTimeout(initTimeoutId);
       }
 
-      if (cleanupFunctionRef.current) {
-        cleanupFunctionRef.current();
-        cleanupFunctionRef.current = null;
+      if (observerRef.current) {
+        observerRef.current.disconnect();
+        observerRef.current = null;
       }
+
+      cleanupWebGL();
     };
   }, [
-    isVisible,
     raysOrigin,
     raysColor,
     raysSpeed,

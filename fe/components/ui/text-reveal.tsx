@@ -140,7 +140,7 @@ export const TextReveal: FC<TextRevealProps> = ({
       lastElementCenterRef.current = elementCenter;
     };
 
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
 
     return () => window.removeEventListener("scroll", handleScroll);
   }, [stepSize]);
@@ -227,7 +227,6 @@ export const TextReveal: FC<TextRevealProps> = ({
 
     const handleWheel = (event: WheelEvent) => {
       if (!isLockedRef.current && lockBeforeNativeScroll(event.deltaY)) {
-        event.preventDefault();
         return;
       }
 
@@ -241,7 +240,6 @@ export const TextReveal: FC<TextRevealProps> = ({
 
       if (!shouldPrevent) return;
 
-      event.preventDefault();
       if (lockedScrollYRef.current !== null) {
         window.scrollTo({ top: lockedScrollYRef.current, behavior: "instant" });
       }
@@ -259,7 +257,6 @@ export const TextReveal: FC<TextRevealProps> = ({
       touchStart = currentY;
 
       if (!isLockedRef.current && lockBeforeNativeScroll(delta)) {
-        event.preventDefault();
         return;
       }
 
@@ -273,15 +270,14 @@ export const TextReveal: FC<TextRevealProps> = ({
 
       if (!shouldPrevent) return;
 
-      event.preventDefault();
       if (lockedScrollYRef.current !== null) {
         window.scrollTo({ top: lockedScrollYRef.current, behavior: "instant" });
       }
     };
 
-    window.addEventListener("wheel", handleWheel, { passive: false });
+    window.addEventListener("wheel", handleWheel, { passive: true });
     window.addEventListener("touchstart", handleTouchStart, { passive: true });
-    window.addEventListener("touchmove", handleTouchMove, { passive: false });
+    window.addEventListener("touchmove", handleTouchMove, { passive: true });
 
     return () => {
       window.removeEventListener("wheel", handleWheel);

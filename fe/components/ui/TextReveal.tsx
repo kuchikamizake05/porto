@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { m as motion } from "motion/react";
 
 export default function TextReveal({
   text,
@@ -48,11 +48,11 @@ export default function TextReveal({
       viewport={{ once: true }}
       className={className}
     >
-      {words.map((word, index) => (
+      {words.map((word) => (
         <motion.span
           variants={child}
           style={{ marginRight: "0.25em" }}
-          key={index}
+          key={word}
         >
           {word}
         </motion.span>
