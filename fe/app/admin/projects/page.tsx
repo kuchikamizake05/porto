@@ -1,6 +1,8 @@
 import prisma from "@/app/lib/db";
 import ProjectsClient from "./ProjectsClient";
 
+export const dynamic = "force-dynamic";
+
 export default async function AdminProjectsPage() {
   const projects = await prisma.project.findMany({
     orderBy: { id: "desc" },
