@@ -16,8 +16,13 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Kuchikamizake | Portfolio",
-  description: "Personal portfolio website",
+  metadataBase: new URL("https://kuchikamizake.me"),
+  title: "Faaid Sakhaa | Portfolio",
+  description:
+    "Portfolio of Faaid Sakhaa, a software engineer focused on performant, thoughtfully crafted web experiences.",
+  alternates: {
+    canonical: "/",
+  },
 };
 
 export default function RootLayout({
